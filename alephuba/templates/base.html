@@ -2,36 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Transdmin Light</title>
+<title>aleph uba</title>
 
 <!-- CSS -->
 <link href="{{ MEDIA_URL }}css/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
 <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="{{ MEDIA_URL }}css/ie6.css" /><![endif]-->
 <!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="{{ MEDIA_URL }}css/ie7.css" /><![endif]-->
 
+
 <!-- JavaScripts-->
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jNice.js"></script>
+
+{% block extra_head %}{% endblock %}
 </head>
 
 <body>
 	<div id="wrapper">
     	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
-    	<h1><a href="#"><span>Transdmin Light</span></a></h1>
+    	<h1><a href="#"><span>aleph uba</span></a></h1>
         
+        {% block nav %}
+        {% if user.is_authenticated %}
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
-        	<li><a href="#" class="active">DASHBOARD</a></li> <!-- Use the "active" class for the active menu item  -->
-        	<li><a href="#">ADMINISTRATION</a></li>
-        	<li><a href="#">DESIGN</a></li>
-        	<li><a href="#">OPTION</a></li>
-        	<li class="logout"><a href="#">LOGOUT</a></li>
+        	<li><a href="#" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
+        	<li><a href="#">Buscar contenido</a></li>
+        	<li><a href="#">Subir contenido</a></li>
+        	<li><a href="#">Mi cuenta</a></li>
+        	<li><a href="#">Administración</a></li>
+        	<li class="logout"><a href="#">Logout</a></li>
         </ul>
         <!-- // #end mainNav -->
+        {% endif %}
+        {% endblock %}
         
         <div id="containerHolder">
 			<div id="container">
         		<div id="sidebar">
+        		{% block sidebar %}
                 	<ul class="sideNav">
                     	<li><a href="#">Exchange</a></li>
                     	<li><a href="#" class="active">Print resources</a></li>
@@ -41,13 +50,17 @@
                     	<li><a href="#">Events</a></li>
                     </ul>
                     <!-- // .sideNav -->
+                {% endblock %}
                 </div>    
                 <!-- // #sidebar -->
-                
+               
+               	{% block breadcrumbs%}
                 <!-- h2 stays for breadcrumbs -->
                 <h2><a href="#">Dashboard</a> &raquo; <a href="#" class="active">Print resources</a></h2>
+                {% endblock %}
                 
                 <div id="main">
+                {% block content %}
                 	<form action="" class="jNice">
 					<h3>Sample section</h3>
                     	<table cellpadding="0" cellspacing="0">
@@ -90,6 +103,7 @@
                             <input type="submit" value="Submit Query" />
                         </fieldset>
                     </form>
+                {% endblock %}
                 </div>
                 <!-- // #main -->
                 
@@ -99,7 +113,7 @@
         </div>	
         <!-- // #containerHolder -->
         
-        <p id="footer">Feel free to use and customize it. <a href="http://www.perspectived.com">Credit is appreciated.</a></p>
+        <p id="footer">© 2011 chacholano. Template by <a href="http://www.perspectived.com">perspectived</a>.</p>
     </div>
     <!-- // #wrapper -->
 </body>
