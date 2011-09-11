@@ -202,6 +202,7 @@ h3 {
 	width: 100%;
 	margin: 0 0 7px 0;
 	line-height: 12px;
+	font-weight: bold;
 }
 
 #main fieldset .text-long {
@@ -270,6 +271,8 @@ h3 {
 	margin: 0 10px 0 15px;
 	line-height: 1.2;
 	}
+	
+#main a { text-decoration: none; color:#646464;}
 
 /* Footer ---------------------------------------- */
 

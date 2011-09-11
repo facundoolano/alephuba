@@ -9,6 +9,9 @@ TITULO_MAX_LENGTH = 80
 DOCUMENTO_CHOICES = (
     ('LIB', 'Libro'),
     ('APU', 'Apunte'),
+    ('RES', 'Resumen'),
+    ('INF', 'Informe'),
+    ('EXA', 'Examen'),
 )
 
 class Carrera(models.Model):
@@ -45,6 +48,7 @@ class Documento(models.Model):
     link = models.URLField()
     mirror = models.URLField(blank=True, null=True)
     subido_por = models.ForeignKey(AuthUser)
+    fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     
     def __unicode__(self):
         return self.titulo

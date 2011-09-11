@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}{% endblock %}
+
+{% load breadcrumbs %}
+
+{% block breadcrumbs %}
+	{{ block.super }}
+	{% breadcrumb_url 'Buscar Documentos' documentos %}	
+{% endblock %}
+
+{% block content %}
+<h3>Documentos</h3>
+<table cellpadding="0" cellspacing="0">
+    {% for documento in object_list %}
+		<tr {% cycle '' 'class="odd"' %}><td><a href="{% url documento documento.pk %}"><b>{{ documento.titulo }}</b></a>, {{ documento.autor }}</td></tr>
+	{% endfor %}                  
+</table>
+	
+{% endblock %}

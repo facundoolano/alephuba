@@ -1,0 +1,20 @@
+{% extends 'documento_list.html' %}
+
+{% block content %}
+
+<h3>Documento</h3>
+
+<fieldset>
+	<p><label>Título:</label> {{ documento.titulo }}</p>
+	<p><label>Autor:</label> {{ documento.autor }}</p>
+	<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
+	<p><label>Carrera:</label> {{ documento.carrera }}</p>
+	<p><label>Materia:</label> {{ documento.materia }}</p>
+	
+	<p><label>Link:</label><a href="{{ documento.link  }}">{{ documento.link  }}</a></p>
+	<p><label>Mirror:</label><a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p>
+	<p><label>Subido por:</label> {{ documento.subido_por }}</p>
+	
+	<p><label>Detalles:</label> {{ documento.detalles }}</p>
+</fieldset>
+{% endblock %}
