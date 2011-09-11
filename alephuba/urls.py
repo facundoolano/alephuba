@@ -10,7 +10,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     
     url(r'^$', direct_to_template, {'template': 'index.html'}, name='home'),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
     
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',

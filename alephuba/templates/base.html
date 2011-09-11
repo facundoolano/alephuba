@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,10 +29,10 @@
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
         	<li><a href="#" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
-        	<li><a href="#">Buscar contenido</a></li>
-        	<li><a href="#">Subir contenido</a></li>
+        	<li><a href="#">Buscar documento</a></li>
+        	<li><a href="#">Subir documento</a></li>
         	<li><a href="#">Mi cuenta</a></li>
-        	<li><a href="#">Administración</a></li>
+        	{% if user.is_staff %}<li><a href="{% url admin:index %}">Administración</a></li>{% endif %}
         	<li class="logout"><a href="#">Logout</a></li>
         </ul>
         <!-- // #end mainNav -->
@@ -54,10 +56,12 @@
                 </div>    
                 <!-- // #sidebar -->
                
+               	<div class="breadcrumb">
                	{% block breadcrumbs%}
                 <!-- h2 stays for breadcrumbs -->
-                <h2><a href="#">Dashboard</a> &raquo; <a href="#" class="active">Print resources</a></h2>
+                <a href="{% url home %}">Home</a>
                 {% endblock %}
+                </div>
                 
                 <div id="main">
                 {% block content %}
