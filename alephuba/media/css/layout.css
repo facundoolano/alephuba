@@ -22,16 +22,19 @@ h1 {
 	margin: 15px 0 10px 5px;
 	width: 225px;
 	height: 28px;
-	background: url(../img/transdmin-light.gif) no-repeat left top;
+	
 }
 
 h1 a {
 	display: block;
 	width: 225px;
 	height: 28px;
+	text-decoration: none;
+	font-size: 25px;
+	font-family: sans-serif;
+	color:#5494AF;
 }
 
-h1 span { display: none; }
 
 /* Main Navigation ---------------------------------------- */
 
@@ -114,7 +117,7 @@ h1 span { display: none; }
 
 #sidebar .sideNav li a.active, #sidebar .sideNav li a.active:hover {
 	background: #f0f7fa;
-	color: #c66653;
+	font-weight: bold;
 }
 
 /* Breadcrumb ---------------------------------------- */
@@ -182,9 +185,6 @@ h3 {
 }
 
 #main table tr .action a { margin: 0 0 0 10px; text-decoration: none; color: #9b9b9b; }
-#main table tr:hover .action .edit { color: #c5a059; }
-#main table tr:hover .action .delete { color: #a02b2b; }
-#main table tr:hover .action .view { color: #55a34a; }
 
 #main table tr:hover .action a:hover { text-decoration: underline; }
 
