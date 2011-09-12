@@ -3,6 +3,7 @@ from django.contrib import admin
 from alephuba import settings
 from django.views.generic.base import TemplateView
 from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail
+from aleph.views import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -14,6 +15,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^docs/$', DocumentoList.as_view(), name='documentos'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
+    url(r'^registration/$', views.registration, name='registration'),
     
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
