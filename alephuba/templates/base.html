@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>aleph uba</title>
+<title>Aleph UBA</title>
 
 <!-- CSS -->
 <link href="{{ MEDIA_URL }}css/transdmin.css" rel="stylesheet" type="text/css" media="screen" />
@@ -22,7 +22,7 @@
 <body>
 	<div id="wrapper">
     	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
-    	<h1><a href="{% url home %}">aleph uba</a></h1>
+    	<h1><a href="{% url home %}">Aleph UBA</a></h1>
         
         {% block nav %}
         {% if user.is_authenticated %}
@@ -33,9 +33,16 @@
         	<li><a href="#">Subir documento</a></li>
         	<li><a href="#">Mi cuenta</a></li>
         	{% if user.is_staff %}<li><a href="{% url admin:index %}">Administración</a></li>{% endif %}
-        	<li class="logout"><a href="#">Logout</a></li>
+        	<li class="logout"><a href="{% url logout %}">Logout</a></li>
         </ul>
-        <!-- // #end mainNav -->
+        
+        {% else %}
+        <ul id="mainNav">
+        	<li><a href="{% url home %}" class="active">Home</a></li>
+        	<li class="login"><a href="{% url login %}">Login</a></li>
+        	<li><a href="{% url registracion %}">Registrate</a></li>
+        </ul>
+        
         {% endif %}
         {% endblock %}
         
