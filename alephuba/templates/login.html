@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+	<p>Bienvenido {{ user.username }}. Gracias por logearte.</p>
+{% else %}
+    <p>Bienvenido.</p>
+    
+    <form action="" method="post">{% csrf_token %}
+		{{ form.as_table }}
+		<input type="submit" value="Log in">
+	</form>
+	
+	<a href="{% url registracion %}">No estas registrado?</a> 
+    
+{% endif %}
+
+{% endblock %}
