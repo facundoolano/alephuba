@@ -3,12 +3,7 @@
 {% block content %}
 
 	<h3>Regístrate:</h3>
-
-	<form action="" method="post">{% csrf_token %}
-		<fieldset>
-			{{ form.as_p }}
-			<input type="submit" value="Enviar">
-		</fieldset>
-	</form>
+	
+	{% include 'form.html' %}
 
 {% endblock %}

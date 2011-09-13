@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}{% endblock %}
+
+{% load breadcrumbs %}
+
+{% block breadcrumbs %}
+	{{ block.super }}
+	{% breadcrumb_url 'Subir documento' add_documento %}	
+{% endblock %}
+
+{% block content %}
+
+<h3>Subir documento</h3>
+
+{% with submit_value='Subir' %}
+	{% include 'form.html' %}
+{% endwith %}
+
+{% endblock %} 

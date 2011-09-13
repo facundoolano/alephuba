@@ -30,7 +30,7 @@
         <ul id="mainNav">
         	<li><a href="{% url home %}" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
         	<li><a href="{% url documentos %}">Buscar documento</a></li>
-        	<li><a href="#">Subir documento</a></li>
+        	<li><a href="{% url add_documento %}">Subir documento</a></li>
         	<li><a href="#">Mi cuenta</a></li>
         	{% if user.is_staff %}<li><a href="{% url admin:index %}">Administración</a></li>{% endif %}
         	<li class="logout"><a href="{% url logout %}">Logout</a></li>

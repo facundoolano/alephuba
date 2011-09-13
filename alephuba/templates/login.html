@@ -6,14 +6,11 @@
 	<p>Bienvenido {{ user.username }}. Gracias por logearte.</p>
 {% else %}
 
-	<h3>Ingresar a Aleph UBA:</h3>
-
-    <form action="" method="post">{% csrf_token %}
-    	<fieldset>
-			{{ form.as_p }}
-			<input type="submit" value="Ingresar">
-		</fieldset>
-	</form>
+	<h3>Ingresar a Aleph UBA</h3>
+	
+	{% with submit_value='Ingresar' %}
+		{% include 'form.html' %}
+	{% endwith %}
 	
 	<a href="{% url registracion %}">No estas registrado?</a> 
     
