@@ -274,6 +274,8 @@ h3 {
 	
 #main a { text-decoration: none; color:#646464;}
 
+#main #paginator{ background: #FFFFFF; color:#AAAAAA; text-align: right;}
+
 /* Footer ---------------------------------------- */
 
 #footer {

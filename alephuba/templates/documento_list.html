@@ -14,7 +14,29 @@
 <table cellpadding="0" cellspacing="0">
     {% for documento in object_list %}
 		<tr {% cycle '' 'class="odd"' %}><td><a href="{% url documento documento.pk %}"><b>{{ documento.titulo }}</b></a>, {{ documento.autor }}</td></tr>
-	{% endfor %}                  
+	{% endfor %}
+	
+	<tr><td id="paginator">
+		{{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ paginator.count }} documento{{ paginator.count|pluralize }} |
+		
+		{% if page_obj.has_previous %}<a href="./?{{ request.GET.urlencode }}&page=1">&lt;&lt;</a>{% endif %}
+		{% if page_obj.has_previous %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">previa</a>{% endif %}
+
+		{% if page_obj.number|add:"-3" > 0 %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"-3" }}">{{ page_obj.number|add:"-3" }}</a>{% endif %}
+		{% if page_obj.number|add:"-2" > 0 %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"-2" }}">{{ page_obj.number|add:"-2" }}</a>{% endif %}
+		{% if page_obj.number|add:"-1" > 0 %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"-1" }}">{{ page_obj.number|add:"-1" }}</a>{% endif %}
+		{% if page_obj.paginator.num_pages > 1 %}{{ page_obj.number }}{% endif %}
+		{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"1" }}">{{ page_obj.number|add:"1" }}</a>{% endif %}
+		{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"2" }}">{{ page_obj.number|add:"2" }}</a>{% endif %}
+		{% if page_obj.number|add:"3" <= page_obj.paginator.num_pages %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"3" }}">{{ page_obj.number|add:"3" }}</a>{% endif %}
+		
+		
+		{% if page_obj.has_next %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}"> próxima</a>{% endif %}
+		{% if page_obj.has_next %}<a href="./?{{ request.GET.urlencode }}&page={{ page_obj.paginator.num_pages }}"> &gt;&gt;</a>{% endif %}
+		
+	</td></tr>
+	
+	
 </table>
 	
 {% endblock %}

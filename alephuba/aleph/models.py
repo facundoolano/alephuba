@@ -36,8 +36,8 @@ class Documento(models.Model):
                               unique=True)
     autor = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     
-    carrera = models.ForeignKey(Carrera, blank=True, null=True)
-    materia = models.ForeignKey(Materia, blank=True, null=True)
+    carrera = models.ManyToManyField(Carrera, blank=True, null=True)
+    materia = models.ManyToManyField(Materia, blank=True, null=True)
     
     detalles = models.TextField(blank=True, null=True)
     

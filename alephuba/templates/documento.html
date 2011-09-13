@@ -8,8 +8,8 @@
 	<p><label>Título:</label> {{ documento.titulo }}</p>
 	<p><label>Autor:</label> {{ documento.autor }}</p>
 	<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
-	<p><label>Carrera:</label> {{ documento.carrera }}</p>
-	<p><label>Materia:</label> {{ documento.materia }}</p>
+	<p><label>Carrera:</label>{% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>
+	<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>
 	
 	<p><label>Link:</label><a href="{{ documento.link  }}">{{ documento.link  }}</a></p>
 	<p><label>Mirror:</label><a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p>
