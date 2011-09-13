@@ -5,11 +5,14 @@
 {% if user.is_authenticated %}
 	<p>Bienvenido {{ user.username }}. Gracias por logearte.</p>
 {% else %}
-    <p>Bienvenido.</p>
-    
+
+	<h3>Ingresar a Aleph UBA:</h3>
+
     <form action="" method="post">{% csrf_token %}
-		{{ form.as_table }}
-		<input type="submit" value="Log in">
+    	<fieldset>
+			{{ form.as_p }}
+			<input type="submit" value="Ingresar">
+		</fieldset>
 	</form>
 	
 	<a href="{% url registracion %}">No estas registrado?</a> 
