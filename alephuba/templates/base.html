@@ -28,7 +28,7 @@
         {% if user.is_authenticated %}
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
-        	<li><a href="#" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
+        	<li><a href="{% url home %}" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
         	<li><a href="{% url documentos %}">Buscar documento</a></li>
         	<li><a href="#">Subir documento</a></li>
         	<li><a href="#">Mi cuenta</a></li>
