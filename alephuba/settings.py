@@ -106,6 +106,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'alephuba.urls'
+AUTH_PROFILE_MODULE = 'aleph.UserProfile'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),

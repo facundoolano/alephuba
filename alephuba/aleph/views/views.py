@@ -3,14 +3,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
-from django.contrib.auth.forms import UserCreationForm
+from aleph.model_forms import RegistrationForm
 
 def registration(request):
     
     if request.method == 'GET':
-        form = UserCreationForm()
+        form = RegistrationForm()
     else:
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         
         if form.is_valid():
             form.save()

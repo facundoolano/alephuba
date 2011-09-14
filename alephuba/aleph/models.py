@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User as AuthUser
+from django.contrib.auth.models import User as AuthUser, User
 
 NOMBRE_MAX_LENGTH = 80
 CODIGO_MATERIA_MAX_LENGTH = 10
@@ -52,4 +52,6 @@ class Documento(models.Model):
     
     def __unicode__(self):
         return self.titulo
-    
+
+class UserProfile(User):
+    carrera = models.ForeignKey(Carrera)
