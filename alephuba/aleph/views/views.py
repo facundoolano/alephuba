@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
-from aleph.model_forms import RegistrationForm
+from alephuba.aleph.model_forms import RegistrationForm
 
 def registration(request):
     
