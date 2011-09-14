@@ -97,12 +97,20 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+LOGIN_URL = '/login/'
+
+LOGIN_EXEMPT_URLS = (
+ r'^$',
+ r'^registracion/'
+) 
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'alephuba.aleph.login_required_middleware.LoginRequiredMiddleware',
 )
 
 ROOT_URLCONF = 'alephuba.urls'
