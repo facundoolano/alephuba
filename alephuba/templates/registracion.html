@@ -4,6 +4,12 @@
 
 	<h3>Regístrate:</h3>
 	
-	{% include 'form.html' %}
+	<form action="" method="post"  class="jNice">{% csrf_token %}
+   	<fieldset>
+		{{ form.as_p }}
+		{{ p_form.as_p }}
+		<input type="submit" value="{{ submit_value|default:'Enviar'}}">
+	</fieldset>
+</form>
 
 {% endblock %}

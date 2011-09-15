@@ -53,5 +53,8 @@ class Documento(models.Model):
     def __unicode__(self):
         return self.titulo
 
-class UserProfile(User):
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
     carrera = models.ForeignKey(Carrera)
+
+User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
