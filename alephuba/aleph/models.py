@@ -55,6 +55,6 @@ class Documento(models.Model):
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
-    carrera = models.ForeignKey(Carrera)
+    carrera = models.ForeignKey(Carrera, null=True)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

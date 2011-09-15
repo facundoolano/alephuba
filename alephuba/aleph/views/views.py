@@ -4,22 +4,16 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
 from alephuba.aleph.model_forms import UserForm
-from aleph.model_forms import UserProfileForm
 
 def registration(request):
     
     if request.method == 'GET':
-        user_form = UserForm()
-        user_profile_form = UserProfileForm()
+        form = UserForm()
     else:
-        user_form = UserForm(request.POST)
-        user_profile_form = UserProfileForm(request.POST)
+        form = UserForm(request.POST)
         
-        if user_form.is_valid() and user_profile_form.is_valid():
-            user = user_form.save()
-            user_profile = user_profile_form.save(commit = False)
-            user_profile.user = user
-            user_profile.save()
+        if form.is_valid():
+            form.save()
             
             user = authenticate(username=request.POST['username'],
                                 password=request.POST['password1'])
@@ -28,4 +22,4 @@ def registration(request):
             
             return HttpResponseRedirect('/')
     
-    return render_to_response('registracion.html', {'form' : user_form, 'p_form' : user_profile_form}, context_instance=RequestContext(request))    
+    return render_to_response('registracion.html', {'form' : form}, context_instance=RequestContext(request))    
