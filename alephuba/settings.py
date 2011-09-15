@@ -101,7 +101,8 @@ LOGIN_URL = '/login/'
 
 LOGIN_EXEMPT_URLS = (
  r'^$',
- r'^registracion/'
+ r'^registracion/',
+ r'^media/',
 ) 
 
 MIDDLEWARE_CLASSES = (
