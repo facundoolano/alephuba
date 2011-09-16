@@ -22,7 +22,10 @@ urlpatterns = patterns('',
     url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'} , name='login'),
     url(r'^logout/$', django.contrib.auth.views.logout, {'template_name': 'index.html'}, name='logout'),
     url(r'^mi_cuenta/$', TemplateView.as_view(template_name='mi_cuenta.html'), name='mi_cuenta'),
-    
+    url(r'^cambio_contrasenia/$', django.contrib.auth.views.password_change,
+       {'template_name': 'cambio_contrasenia.html'}, name='cambio_contrasenia'),
+    url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'mi_cuenta.html'}), 
+
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
