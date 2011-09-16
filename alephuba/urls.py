@@ -7,8 +7,6 @@ from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail,\
 from aleph.views import views
 import django.contrib.auth.views
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -23,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^registracion/$', views.registration, name='registracion'),
     url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'} , name='login'),
     url(r'^logout/$', django.contrib.auth.views.logout, {'template_name': 'index.html'}, name='logout'),
+    url(r'^mi_cuenta/$', TemplateView.as_view(template_name='mi_cuenta.html'), name='mi_cuenta'),
     
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
