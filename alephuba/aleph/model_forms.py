@@ -6,6 +6,7 @@ from alephuba.aleph import models
 from django.contrib.auth.forms import UserCreationForm
 from alephuba.aleph.models import UserProfile
 from django.contrib.auth.models import User
+from aleph.models import Carrera
 
 class DocumentoModelForm(forms.ModelForm):
     
@@ -15,23 +16,15 @@ class DocumentoModelForm(forms.ModelForm):
         
 class UserForm(UserCreationForm):
     
-    def __init__(self, *args, **kw):
-        
-        super(UserCreationForm, self).__init__(*args, **kw)
-        
-        self.profile_form = UserProfileForm(*args, **kw)
-        self.fields.update(self.profile_form.fields)
-        self.initial.update(self.profile_form.initial)
-    
-    def clean(self):
-        cleaned_data = super(UserForm, self).clean()
-        self.errors.update(self.profile_form.errors)
-        return cleaned_data
+    carrera = forms.ModelChoiceField(queryset=Carrera.objects.all(), required=False)  
     
     def save(self, commit=True):
         user = super(UserForm, self).save(commit)
-        user_profile = self.profile_form.save(commit = False)
+        
+        user_profile = UserProfile()
+        user_profile.carrera = self.cleaned_data['carrera']
         user_profile.user = user
+        
         user_profile.save()
         
         return user
