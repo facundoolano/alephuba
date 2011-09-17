@@ -195,17 +195,21 @@ h3 {
 	background: #fbfbfb;
 }
 
-#main fieldset p { margin: 0 0 14px 0; float: left; width: 100%;  }
+#main fieldset p { margin: 0 0 8px 0; float: left; width: 100%;  }
 
 #main fieldset label {
 	display: block;
 	width: 100%;
-	margin: 0 0 7px 0;
+	margin: 0 0 0px 0;
 	line-height: 12px;
 	font-weight: bold;
 }
 
-#main fieldset .text-long {
+#main .optional {
+	font-weight: normal;
+}
+#main fieldset input[type=password],
+#main fieldset input[type=text]  {
 	border: 1px solid #ddd;
 	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
 	font: 11px Arial, Helvetica, sans-serif;
@@ -216,31 +220,9 @@ h3 {
 	margin: 0 10px 0 0;
 }
 
-#main fieldset .text-medium {
-	border: 1px solid #ddd;
-	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
-	font: 11px Arial, Helvetica, sans-serif;
-	color: #646464;
-	padding: 5px 7px;
-	width: 124px;
-	float: left;
-	margin: 0 10px 0 0;
-}
 
-#main fieldset .text-small {
-	border: 1px solid #ddd;
-	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
-	font: 11px Arial, Helvetica, sans-serif;
-	color: #646464;
-	padding: 5px 7px;
-	width: 44px;
-	float: left;
-	margin: 0 10px 0 0;
-}
-
-#main fieldset .text-long:focus, 
-#main fieldset .text-medium:focus,
-#main fieldset .text-small:focus,
+#main fieldset input[type=text]:focus, 
+#main fieldset input[type=password]:focus,
 #main fieldset textarea:focus { background: #fdfcf6 url(../img/input-shaddow-hover.gif) no-repeat left top; }
 
 #main fieldset textarea {
@@ -256,7 +238,7 @@ h3 {
 	overflow: hidden;
 }
 
-.button-submit {
+submit {
 	font: 11px Arial, Helvetica, sans-serif;
 	color: #646464;
 	width: 94px;
@@ -289,3 +271,26 @@ h3 {
 #footer a { color: #9B9B9B; }
 
 #footer a:hover { text-decoration: none; }
+
+/* Forms */
+
+#main fieldset .field_container {
+	margin-top: 10px;
+	 }
+
+.form_error {
+	font-weight: bold;
+	color: red;	
+}
+
+
+
+#main select {
+	border: 1px solid #ddd;
+	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #646464;
+	padding: 5px 7px;
+	float: left;
+	margin: 0 10px 0 0;
+}
