@@ -1,6 +1,16 @@
-<form action="" method="post"  class="jNice">{% csrf_token %}
+<form action="" method="post">{% csrf_token %}
    	<fieldset>
-		{{ form.as_p }}
-		<input type="submit" value="{{ submit_value|default:'Enviar'}}">
+		
+		{% if form.errors %}<span class="form_error">Por favor, corrija los errores indicados.</span>{% endif %}
+		{% for field in form %}
+		<div class="field_container">
+			<p><label {% if not field.field.required %} class="optional"{% endif %}for="id_{{ field.name}}">{{ field.label }}:</label></p>
+			{% if field.errors %}<p>{% for error in field.errors %}<span class="form_error">{{ error }}<br/></span>{% endfor %}</p>{% endif %}
+			<p>{{field}}</p>
+			{% if field.help_text %}<p>{{field.help_text}}</p>{% endif %}
+			<p/><p/>
+		</div>
+			{% endfor %}
+			<button class="" type="submit" name="" id=""><span><span>{{ submit_value|default:'Enviar'}}</span></span></button>
 	</fieldset>
 </form>

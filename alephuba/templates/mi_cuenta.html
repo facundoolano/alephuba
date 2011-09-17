@@ -5,12 +5,12 @@
 <h3>Mi cuenta:</h3>
 
 <fieldset>
-	<p><label>Usuario:</label> {{ user.username }}</p>
-	<p><label>Email:</label> {{ user.email }}</p>
+	<p><label>Usuario:</label></p><p>{{ user.username }}</p><p/>
+	<p><label>Email:</label></p><p>{{ user.email }}</p><p/>
 	{% if user.profile.carrera %} 
-		<p><label>Carrera:</label> {{ user.profile.carrera }}</p>
+		<p><label>Carrera:</label></p><p>{{ user.profile.carrera }}</p><p/>
 	{% else %}
-		<p><label>Carrera:</label>No tiene carrera asignada.</p>
+		<p><label>Carrera:</label></p><p>No tiene carrera asignada.</p><p/>
 	{% endif %}	
 </fieldset>
 
