@@ -1,8 +1,11 @@
 {% load comments %}
 
-<form action="{% comment_form_target %}" method="post" class="jNice"> {% csrf_token %}
+{% if form.errors %}<span class="form_error">Por favor, corrija los errores indicados.</span>{% endif %}
+
+<form action="{% comment_form_target %}" method="post"> {% csrf_token %}
 	<fieldset>
 		{% for field in form %}
+		<div class="field_container">
     		{% if field.is_hidden %}
         		{{ field }}
         	{% else %}
@@ -17,10 +20,11 @@
         	        {{ field.label_tag }} {{ field }}</p>
             	{% endif %}
         	{% endif %}
+        </div>
      	{% endfor %}
         
         <input type="hidden" name="next" value="{{ next }}">
-        
-		<input class="submit-post" name="post" type="submit" value="Enviar">
+
+		<button class="submit-post" name="post" type="submit"><span><span>{{ submit_value|default:'Enviar'}}</span></span></button>
 	</fieldset>
 </form>
