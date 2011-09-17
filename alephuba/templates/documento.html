@@ -1,8 +1,10 @@
 {% extends 'documento_list.html' %}
 
+{% load comments %}
+
 {% block content %}
 
-<h3>Documento</h3>
+<h3>Documento:</h3>
 
 <fieldset>
 	<p><label>Título:</label> {{ documento.titulo }}</p>
@@ -17,4 +19,47 @@
 	
 	<p><label>Detalles:</label> {{ documento.detalles }}</p>
 </fieldset>
+
+<h3>Comentarios:</h3>
+
+<br/>
+
+{% get_comment_count for documento as number_of_comments %}
+
+<p>Este documento posee {{ number_of_comments }} comentarios.</p>
+
+<br/><br/>
+
+{% render_comment_list for documento %}
+
+<br/><br/>
+
+{% get_comment_form for documento as form %}
+
+<h3>Agregue un comentario:</h3>
+
+<form action="{% comment_form_target %}" method="post" class="jNice"> {% csrf_token %}
+	<fieldset>
+		{% for field in form %}
+    		{% if field.is_hidden %}
+        		{{ field }}
+        	{% else %}
+            	{% if field.name == "comment" or field.name == "honeypot" %}
+            		{% if field.errors %}
+	                	{{ field.errors }}
+    	            {% endif %}
+                   	
+                   	<p
+                   	{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                   	
+        	        {{ field.label_tag }} {{ field }}</p>
+            	{% endif %}
+        	{% endif %}
+     	{% endfor %}
+        
+     	<input type="hidden" name="next" value="{% url documento documento.pk %}">
+		<input class="submit-post" name="post" type="submit" value="Enviar">
+	</fieldset>
+</form>
+
 {% endblock %}
