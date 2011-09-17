@@ -114,6 +114,14 @@ MIDDLEWARE_CLASSES = (
     'alephuba.aleph.login_required_middleware.LoginRequiredMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+   'django.contrib.auth.context_processors.auth',
+   'django.core.context_processors.debug',
+   'django.core.context_processors.i18n',
+   'django.core.context_processors.media',
+   'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'alephuba.urls'
 AUTH_PROFILE_MODULE = 'aleph.UserProfile'
 

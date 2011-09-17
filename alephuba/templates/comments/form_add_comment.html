@@ -1,0 +1,26 @@
+{% load comments %}
+
+<form action="{% comment_form_target %}" method="post" class="jNice"> {% csrf_token %}
+	<fieldset>
+		{% for field in form %}
+    		{% if field.is_hidden %}
+        		{{ field }}
+        	{% else %}
+            	{% if field.name == "comment" or field.name == "honeypot" %}
+            		{% if field.errors %}
+	                	{{ field.errors }}
+    	            {% endif %}
+                   	
+                   	<p
+                   	{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                   	
+        	        {{ field.label_tag }} {{ field }}</p>
+            	{% endif %}
+        	{% endif %}
+     	{% endfor %}
+        
+        <input type="hidden" name="next" value="{{ next }}">
+        
+		<input class="submit-post" name="post" type="submit" value="Enviar">
+	</fieldset>
+</form>
