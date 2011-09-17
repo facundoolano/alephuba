@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User as AuthUser, User
+from django.db.models import Q
 
 NOMBRE_MAX_LENGTH = 80
 CODIGO_MATERIA_MAX_LENGTH = 10
@@ -31,7 +32,20 @@ class Materia(models.Model):
         return self.nombre
     
 
+class DocumentoManager(models.Manager):
+    
+    def busqueda_rapida(self, termino):
+        """
+        Devuelve un queryset de los documentos cuyo autor o título contiene
+        el termino especificado.
+        """
+        #se usan Q objects para hacer un OR en vez de AND
+        return self.filter(Q(autor__icontains=termino)|
+                                    Q(titulo__icontains=termino))
+
 class Documento(models.Model):
+    objects = DocumentoManager()
+    
     titulo = models.CharField('Título', max_length=TITULO_MAX_LENGTH, 
                               unique=True)
     autor = models.CharField(max_length=NOMBRE_MAX_LENGTH)

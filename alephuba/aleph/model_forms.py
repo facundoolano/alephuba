@@ -6,7 +6,7 @@ from alephuba.aleph import models
 from django.contrib.auth.forms import UserCreationForm
 from alephuba.aleph.models import UserProfile
 from django.contrib.auth.models import User
-from aleph.models import Carrera
+from alephuba.aleph.models import Carrera
 
 class DocumentoModelForm(forms.ModelForm):
     
@@ -33,8 +33,3 @@ class UserForm(UserCreationForm):
         model = User
         fields = ('username', 'email')
 
-class UserProfileForm(forms.ModelForm):
-    
-    class Meta:
-        model = UserProfile
-        exclude = ('user')
