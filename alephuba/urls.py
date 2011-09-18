@@ -26,6 +26,7 @@ urlpatterns = patterns('',
        {'template_name': 'cambio_contrasenia.html'}, name='cambio_contrasenia'),
     url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'mi_cuenta.html'}), 
     url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^autocomplete_documento/', views.autocomplete_documento),
 
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',

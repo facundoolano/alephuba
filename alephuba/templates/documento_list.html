@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+<script>
+	$(function() {
+
+		$( "#id_documento" ).autocomplete({
+			source: '/autocomplete_documento/',
+			minLength:2,
+		});
+	});
+</script>
+{% endblock %}
+
 {% block sidebar %}{% endblock %}
 
 {% load breadcrumbs %}
