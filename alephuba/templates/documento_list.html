@@ -5,7 +5,7 @@
 	$(function() {
 
 		$( "#id_documento" ).autocomplete({
-			source: '/autocomplete_documento/',
+			source: "{% url autocomplete_documento %}",
 			minLength:2,
 		});
 	});
