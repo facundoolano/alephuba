@@ -27,7 +27,6 @@ class DocumentoList(ListView):
         return models.Documento.objects.order_by('-fecha_subida')
         
     
-    
 class DocumentoDetail(DetailView):
     model = models.Documento
     template_name = 'documento.html'
