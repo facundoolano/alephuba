@@ -4,7 +4,7 @@ from alephuba import settings
 from django.views.generic.base import TemplateView
 from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail,\
     DocumentoCreate
-from aleph.views import views
+from aleph.views import views, json_views
 import django.contrib.auth.views
 
 admin.autodiscover()
@@ -26,6 +26,7 @@ urlpatterns = patterns('',
        {'template_name': 'cambio_contrasenia.html'}, name='cambio_contrasenia'),
     url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'mi_cuenta.html'}), 
     url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^autocomplete_documento/', json_views.autocomplete_documento, name='autocomplete_documento'),
 
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
