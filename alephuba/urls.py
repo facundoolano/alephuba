@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from alephuba import settings
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.base import TemplateView
 from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail,\
     DocumentoCreate
 from aleph.views import views, json_views

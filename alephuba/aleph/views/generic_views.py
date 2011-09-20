@@ -11,7 +11,7 @@ from alephuba.aleph.forms import BusquedaRapidaForm
 class DocumentoList(ListView):
     """ Listado de documentos, con busqueda rapida incorporada. """
     
-    template_name = 'documento_list.html'
+    template_name = 'documentos/documento_list.html'
     paginate_by=5
     
     def get_context_data(self, **kwargs):
@@ -29,11 +29,11 @@ class DocumentoList(ListView):
     
 class DocumentoDetail(DetailView):
     model = models.Documento
-    template_name = 'documento.html'
+    template_name = 'documentos/documento.html'
     context_object_name = 'documento'
 
 class DocumentoCreate(CreateView):
-    template_name = 'add_documento.html'
+    template_name = 'documentos/add_documento.html'
     form_class = DocumentoModelForm
     success_url = '/docs'
     

@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
+{% block sidebar %}
+	{% if user.is_authenticated %}
+	<ul class="sideNav">
+	   	<li><a class="active" href="#">Portada</a></li>
+	   	<li><a href="#">Preguntas frecuentes</a></li>
+	   	<li><a href="#">Acerca de</a></li>
+	   	<li><a href="#">Contacto</a></li>
+	</ul>
+	{% endif %}
+{% endblock %}
+
+
 {% block content %}
 {{ block.super }}
 
@@ -21,7 +33,3 @@
 	 </div>
 {% endif %}
 {% endblock %}
-
-{% block sidebar %}{% endblock %}
-
-
