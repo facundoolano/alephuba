@@ -3,13 +3,23 @@
 {% block content %}
 {{ block.super }}
 
-<h3>Subtitulo</h3>
+<h3>Bienvenido</h3>
 
 <div class="text">
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
 </div>
+
+{% if not user.is_authenticated %}
+<h3>Ingresar</h3>
+	
+	{% with submit_value='Ingresar' %}
+		{% include 'form.html' %}
+	{% endwith %}
+	
+	<div class="text">
+		<p><a href="{% url registracion %}">No estas registrado?</a></p>
+	 </div>
+{% endif %}
 {% endblock %}
 
 {% block sidebar %}{% endblock %}

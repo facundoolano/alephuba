@@ -34,13 +34,6 @@
         	<li><a href="{% url add_documento %}">Subir documento</a></li>
         </ul>
         
-        {% else %}
-        <ul id="mainNav">
-        	<li><a href="{% url home %}" class="active">Home</a></li>
-        	<li class="login"><a href="{% url login %}">Login</a></li>
-        	<li><a href="{% url registracion %}">Regístrate</a></li>
-        </ul>
-        
         {% endif %}
         {% endblock %}
         
@@ -48,6 +41,7 @@
 			<div id="container">
         		<div id="sidebar">
         		{% block sidebar %}
+        		<!-- 
                 	<ul class="sideNav">
                     	<li><a href="#">Exchange</a></li>
                     	<li><a href="#" class="active">Print resources</a></li>
@@ -56,6 +50,7 @@
                     	<li><a href="#">Safari books online</a></li>
                     	<li><a href="#">Events</a></li>
                     </ul>
+                     -->
                     <!-- // .sideNav -->
                 {% endblock %}
                 </div>    
