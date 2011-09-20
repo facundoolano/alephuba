@@ -12,15 +12,6 @@
 </script>
 {% endblock %}
 
-{% block sidebar %}{% endblock %}
-
-{% load breadcrumbs %}
-
-{% block breadcrumbs %}
-	{{ block.super }}
-	{% breadcrumb_url 'Buscar Documentos' documentos %}	
-{% endblock %}
-
 {% block content %}
 <h3>Búsqueda rápida</h3>
 {% with submit_value='Buscar' method='get' %}

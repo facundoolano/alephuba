@@ -334,5 +334,6 @@ font: 11px Arial, Helvetica, sans-serif;
 line-height: 29px;
 display: block;
 text-decoration: none;
+font-weight:bold;
 width: 50px;
 }
