@@ -285,6 +285,20 @@ h3 {
 	margin: 0 10px 0 0;
 }
 
+#logo{
+	float:left;
+	}
+
+#user_menu{
+	margin-right: 15px;
+	float:right;
+	vertical-align: baseline;
+	padding-top: 34px;
+	font-size: 14px;
+	font: status-bar;
+	
+	}
+
 /* -------------
 * Buttons
 * ------------- */

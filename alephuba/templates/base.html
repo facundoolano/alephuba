@@ -19,18 +19,19 @@
 <body>
 	<div id="wrapper">
     	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
-    	<h1><a href="{% url home %}">aleph uba</a></h1>
+    	<div id="heading">
+	    	<div id="logo"></di><h1><a href="{% url home %}">aleph uba</a></h1></div>
+	    	
+	    	{% if user.is_authenticated %}<div id="user_menu">Hola, <b>{{ user.username }}</b>. | <a href="{% url mi_cuenta %}">Mi cuenta</a> | {% if user.is_staff %}<a href="{% url admin:index %}">Admin</a> | {% endif %}<a href="{% url logout %}">Cerrar sesión</a></div>{% endif %}
+	    	<div style="clear:both;font-size:1px;line-height:0px;">&nbsp;</div>
+    	</div>
         
         {% block nav %}
         {% if user.is_authenticated %}
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
-        	<li><a href="{% url home %}" class="active">Home</a></li> <!-- Use the "active" class for the active menu item  -->
         	<li><a href="{% url documentos %}">Buscar documento</a></li>
         	<li><a href="{% url add_documento %}">Subir documento</a></li>
-        	<li><a href="{% url mi_cuenta %}">Mi cuenta</a></li>
-        	{% if user.is_staff %}<li><a href="{% url admin:index %}">Administración</a></li>{% endif %}
-        	<li class="logout"><a href="{% url logout %}">Logout</a></li>
         </ul>
         
         {% else %}
