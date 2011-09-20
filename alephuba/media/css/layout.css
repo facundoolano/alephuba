@@ -238,15 +238,7 @@ h3 {
 	overflow: hidden;
 }
 
-submit {
-	font: 11px Arial, Helvetica, sans-serif;
-	color: #646464;
-	width: 94px;
-	height: 29px;
-	cursor: pointer;
-	border: none;
-	background: url(../img/button-submit.gif) no-repeat left top;
-}
+
 
 #main .text p{
 	padding: 5px 7px;
@@ -283,8 +275,6 @@ submit {
 	color: red;	
 }
 
-
-
 #main select {
 	border: 1px solid #ddd;
 	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
@@ -293,4 +283,42 @@ submit {
 	padding: 5px 7px;
 	float: left;
 	margin: 0 10px 0 0;
+}
+
+/* -------------
+* Buttons
+* ------------- */
+
+button {
+margin: 0px;
+padding: 0px 0px;
+border: none;
+background-color: transparent;
+cursor: pointer;
+height: 29px;
+display: block;
+float: left;
+overflow: visible;
+}
+
+*:first-child+html button[type]{width: 1;} /* IE7 */
+
+button span {
+background: transparent url(../img/btn_left.gif) no-repeat scroll right top;
+display: block;
+padding: 0px 10px 0px 0px; /* sliding doors padding */
+margin: 0px;
+
+}
+
+button span span {
+background: transparent url(../img/btn_right.gif) no-repeat left top;
+color: #646464;
+margin: 0;
+padding: 0 0 0 10px;
+font: 11px Arial, Helvetica, sans-serif;
+line-height: 29px;
+display: block;
+text-decoration: none;
+width: 50px;
 }
