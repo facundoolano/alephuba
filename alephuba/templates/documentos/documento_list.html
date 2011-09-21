@@ -1,17 +1,5 @@
 {% extends 'base.html' %}
 
-{% block extra_head %}
-<script>
-	$(function() {
-
-		$( "#id_documento" ).autocomplete({
-			source: "{% url autocomplete_documento %}",
-			minLength:2,
-		});
-	});
-</script>
-{% endblock %}
-
 {% block sidebar %}
 	<ul class="sideNav">
 	   	<li><a href="#">Por materia</a></li>
@@ -22,11 +10,6 @@
 {% endblock %}
 
 {% block content %}
-<h3>Búsqueda rápida</h3>
-{% with submit_value='Buscar' method='get' %}
-	{% include 'form.html' %}
-{% endwith %}
-
 <h3>Documentos recientes</h3>
 <table cellpadding="0" cellspacing="0">
     {% for documento in object_list %}

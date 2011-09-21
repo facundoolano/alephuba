@@ -64,12 +64,6 @@ h1 a {
 	padding: 0 20px;
 }
 
-#mainNav li.logout {
-	float: right;
-	border-left: 1px solid #ddd;
-	border-right: none;
-}
-
 #mainNav li a:hover { background: #fdfcf6; }
 
 #mainNav li a.active, #mainNav li a.active {
@@ -208,6 +202,8 @@ h3 {
 #main .optional {
 	font-weight: normal;
 }
+
+
 #main fieldset input[type=password],
 #main fieldset input[type=text]  {
 	border: 1px solid #ddd;
@@ -336,4 +332,28 @@ display: block;
 text-decoration: none;
 font-weight:bold;
 width: 50px;
+}
+
+#mainNav li.quicksearch {
+	float: right;
+	border-right: none;
+	display: inline;
+}
+
+#mainNav li.quicksearch label {
+	font-weight:bold;
+	padding: 6px 1px;
+	float: left;
+	margin: 6px 10px 0 0;
+}
+
+#id_qs_documento{
+border: 1px solid #ddd;
+	background: #fff url(../img/input-shaddow.gif) no-repeat left top;
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #646464;
+	padding: 5px 7px;
+	width: 200px;
+	float: left;
+	margin: 6px 10px 0 0;
 }

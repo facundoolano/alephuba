@@ -6,25 +6,19 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from alephuba.aleph.model_forms import DocumentoModelForm
-from alephuba.aleph.forms import BusquedaRapidaForm
 
 class DocumentoList(ListView):
-    """ Listado de documentos, con busqueda rapida incorporada. """
+    """ 
+    Listado de documentos, con busqueda rapida incorporada. Se busca en GET
+    el termino por el que se filtra el listado.    
+    """
     
     template_name = 'documentos/documento_list.html'
     paginate_by=5
     
-    def get_context_data(self, **kwargs):
-        context = super(DocumentoList, self).get_context_data(**kwargs)
-        context.update({'form' : BusquedaRapidaForm()})
-        return context
-    
     def get_queryset(self):
-        doc = self.request.GET.get('documento') 
-        if doc:
-            return models.Documento.objects.busqueda_rapida(doc)
-        
-        return models.Documento.objects.order_by('-fecha_subida')
+        doc = self.request.GET.get('qs_documento') 
+        return models.Documento.objects.busqueda_rapida(doc)
         
     
 class DocumentoDetail(DetailView):

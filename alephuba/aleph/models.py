@@ -39,9 +39,14 @@ class DocumentoManager(models.Manager):
         Devuelve un queryset de los documentos cuyo autor o título contiene
         el termino especificado.
         """
+        
+        if not termino:
+            return self.order_by('-fecha_subida')
+        
         #se usan Q objects para hacer un OR en vez de AND
         return self.filter(Q(autor__icontains=termino)|
-                                    Q(titulo__icontains=termino))
+                           Q(titulo__icontains=termino)
+                           ).order_by('-fecha_subida')
 
 class Documento(models.Model):
     objects = DocumentoManager()
