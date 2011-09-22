@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^$', django.contrib.auth.views.login, {'template_name': 'index.html'}, name='home'),
     url(r'^admin/', include(admin.site.urls), name='admin'),
     
-    url(r'^docs/$', DocumentoList.as_view(), name='documentos'),
+    url(r'^docs/buscar/$', DocumentoList.as_view(), name='documentos'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
     url(r'^docs/add/$', DocumentoCreate.as_view(), name='add_documento'),
     
