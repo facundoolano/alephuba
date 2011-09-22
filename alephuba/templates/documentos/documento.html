@@ -30,7 +30,17 @@
 
 <br/><br/>
 
-{% render_comment_list for documento %}
+{% get_comment_list for documento as comment_list %}
+	
+{% for comment in comment_list %}
+	<hr>
+	<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
+	<p><em>{{ comment.comment|safe }}</em></p><br>
+	<p>{{ comment.submit_date|date:"D d M Y g:i a" }}</p><br>
+	
+	{% if forloop.last %}<hr>{% endif %}
+{% endfor %}
+
 
 <br/><br/>
 
