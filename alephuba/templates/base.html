@@ -1,4 +1,7 @@
+{% load active %}
 
+{% url documentos as url_busqueda_documentos %}
+{% url add_documento as url_agregar_documentos %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -48,8 +51,8 @@
         {% if user.is_authenticated %}
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
-        	<li><a href="{% url documentos %}">Buscar documento</a></li>
-        	<li><a href="{% url add_documento %}">Subir documento</a></li>
+        	<li><a class="{% active url_busqueda_documentos %}" href="{% url documentos %}">Buscar documento</a></li>
+        	<li><a class="{% active url_agregar_documentos %}" href="{% url add_documento %}">Subir documento</a></li>
         	<li class="quicksearch"><form id="qs_form" method="get" action="{% url documentos %}"><label for="id_{{ qs_form.qs_documento.name }}">Buscar:</label>{{ qs_form.qs_documento }}</form></li>
         </ul>
         
