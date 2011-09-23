@@ -51,9 +51,9 @@
         {% if user.is_authenticated %}
         <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
-        	<li><a class="{% active url_busqueda_documentos %}" href="{% url documentos %}">Buscar documento</a></li>
+        	<li><a class="{% active url_busqueda_documentos %}" href="{% url buscar %}">Buscar documento</a></li>
         	<li><a class="{% active url_agregar_documentos %}" href="{% url add_documento %}">Subir documento</a></li>
-        	<li class="quicksearch"><form id="qs_form" method="get" action="{% url documentos %}"><label for="id_{{ qs_form.qs_documento.name }}">Buscar:</label>{{ qs_form.qs_documento }}</form></li>
+        	<li class="quicksearch"><form id="qs_form" method="get" action="{% url buscar %}"><label for="id_{{ qs_form.qs_documento.name }}">Buscar:</label>{{ qs_form.qs_documento }}</form></li>
         </ul>
         
         {% endif %}

@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from alephuba import settings
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, RedirectView
 from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail,\
     DocumentoCreate
 from aleph.views import views, json_views
@@ -14,9 +14,10 @@ urlpatterns = patterns('',
     url(r'^$', django.contrib.auth.views.login, {'template_name': 'index.html'}, name='home'),
     url(r'^admin/', include(admin.site.urls), name='admin'),
     
-    url(r'^docs/buscar/$', DocumentoList.as_view(), name='documentos'),
+    url(r'^docs/$', RedirectView.as_view(url='buscar'), name='documentos'),
+    url(r'^docs/buscar/$', DocumentoList.as_view(), name='buscar'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
-    url(r'^docs/add/$', DocumentoCreate.as_view(), name='add_documento'),
+    url(r'^add/$', DocumentoCreate.as_view(), name='add_documento'),
     
     url(r'^registracion/$', views.registration, name='registracion'),
     url(r'^logout/$', django.contrib.auth.views.logout, {'next_page' : '/'}, name='logout'),
