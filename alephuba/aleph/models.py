@@ -15,6 +15,11 @@ DOCUMENTO_CHOICES = (
     ('EXA', 'Examen'),
 )
 
+SCORES = (
+    (u'+1', +1),
+    (u'-1', -1),
+)
+
 class Carrera(models.Model):
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH, unique=True)
     detalles = models.TextField(blank=True, null=True)
@@ -71,6 +76,23 @@ class Documento(models.Model):
     
     def __unicode__(self):
         return self.titulo
+
+class VoteManager(models.Manager):
+    
+    def record_vote(self, document_pk, user, vote_value):
+        
+        # TODO : Falta fijarse si ya existia el voto.
+        self.create(user=user, document=Documento.objects.get(pk=document_pk), vote_value=vote_value)
+
+class Vote(models.Model):
+    user = models.ForeignKey(User)
+    document = models.ForeignKey(Documento)
+    vote_value = models.SmallIntegerField(choices=SCORES)
+    
+    objects = VoteManager()
+    
+    def __unicode__(self):
+        return "%s, %s : %d" % (self.user, self.document, self.vote_value)
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)

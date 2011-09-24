@@ -20,6 +20,16 @@
 	<p><label>Detalles:</label></p><p>{{ documento.detalles }}</p><p/>
 </fieldset>
 
+<form action="upvote/" method="POST">{% csrf_token %}
+	<input type="image" src="{{ MEDIA_URL }}img/up_vote.png">
+</form>
+
+Aca iria el score en algun futuro...
+
+<form action="downvote/" method="POST">{% csrf_token %}
+	<input type="image" src="{{ MEDIA_URL }}img/down_vote.png">
+</form>
+
 <h3>Comentarios:</h3>
 
 <br/>

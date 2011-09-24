@@ -6,6 +6,7 @@ from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail,\
     DocumentoCreate
 from aleph.views import views, json_views
 import django.contrib.auth.views
+from aleph.views.views import vote_on_document
 
 admin.autodiscover()
 
@@ -17,6 +18,8 @@ urlpatterns = patterns('',
     url(r'^docs/$', RedirectView.as_view(url='buscar'), name='documentos'),
     url(r'^docs/buscar/$', DocumentoList.as_view(), name='buscar'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
+    url(r'^docs/(?P<document_pk>\d+)/(?P<direction>up|down)vote/?$', vote_on_document),
+
     url(r'^add/$', DocumentoCreate.as_view(), name='add_documento'),
     
     url(r'^registracion/$', views.registration, name='registracion'),
