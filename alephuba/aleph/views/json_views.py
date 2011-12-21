@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 
-from aleph.models import Documento, Vote
+from alephuba.aleph.models import Documento, Vote
 
 VOTE_DIRECTIONS = {'up' : 1, 'down' : -1}
 

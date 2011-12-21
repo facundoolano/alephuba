@@ -1,10 +1,11 @@
 '''
 Vistas genericas.
 '''
-from alephuba.aleph import models
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+
+from alephuba.aleph import models
 from alephuba.aleph.model_forms import DocumentoModelForm
 
 class DocumentoList(ListView):
