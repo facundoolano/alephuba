@@ -79,10 +79,16 @@ class Documento(models.Model):
 
 class VoteManager(models.Manager):
     
-    def record_vote(self, document_pk, user, vote_value):
+    def try_record_vote(self, document_pk, user, vote_value):
         
-        # TODO : Falta fijarse si ya existia el voto.
-        self.create(user=user, document=Documento.objects.get(pk=document_pk), vote_value=vote_value)
+        document = Documento.objects.get(pk=document_pk)
+        
+        if self.filter(user=user, document=document):
+            return False
+        
+        self.create(user=user, document=document, vote_value=vote_value)
+        
+        return True
 
 class Vote(models.Model):
     user = models.ForeignKey(User)

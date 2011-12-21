@@ -2,33 +2,60 @@
 
 {% load comments %}
 
+{% block extra_head %}
+	<script type="text/javascript">
+		$(function() {
+			
+			$("#vote_up").click(function(event) {
+				event.preventDefault();
+				
+				$.getJSON('upvote', function(exito) {
+					if (exito) {
+						dom_number_of_votes = $("#number_of_votes_up");
+						dom_number_of_votes.html(Number(dom_number_of_votes.text()) + 1);
+					}
+				});
+			});
+			
+			$("#vote_down").click(function(event) {
+				event.preventDefault();
+				
+				$.getJSON('downvote', function(exito) {
+					if (exito) {
+						dom_number_of_votes = $("#number_of_votes_down");
+						dom_number_of_votes.html(Number(dom_number_of_votes.text()) + 1);
+					}
+				});
+			});
+		});
+	</script>
+{% endblock %}
+
 {% block content %}
 
 <h3>Documento:</h3>
 
-<fieldset>
-	<p><label>Título:</label></p><p>{{ documento.titulo }}</p><p/>
-	<p><label>Autor:</label></p><p>{{ documento.autor }}</p><p/>
-	<p><label>Tipo de documento:</label></p><p>{{ documento.get_tipo_display }}</p><p/>
-	{% if documento.carrera.all %}<p><label>Carrera:</label></p><p>{% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
-	{% if documento.materia.all %}<p><label>Materia:</label></p><p>{% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
-	
-	<p><label>Link:</label></p><p><a href="{{ documento.link  }}">{{ documento.link  }}</a></p><p/>
-	{% if documento.mirror %}<p><label>Mirror:</label></p><p><a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p><p/>{% endif %}
-	<p><label>Subido por:</label></p><p>{{ documento.subido_por }}</p><p/>
-	
-	<p><label>Detalles:</label></p><p>{{ documento.detalles }}</p><p/>
-</fieldset>
+<div id="datos_documento">
+	<fieldset>
+		<p><label>Título:</label></p><p>{{ documento.titulo }}</p><p/>
+		<p><label>Autor:</label></p><p>{{ documento.autor }}</p><p/>
+		<p><label>Tipo de documento:</label></p><p>{{ documento.get_tipo_display }}</p><p/>
+		{% if documento.carrera.all %}<p><label>Carrera:</label></p><p>{% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
+		{% if documento.materia.all %}<p><label>Materia:</label></p><p>{% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
+		
+		<p><label>Link:</label></p><p><a href="{{ documento.link  }}">{{ documento.link  }}</a></p><p/>
+		{% if documento.mirror %}<p><label>Mirror:</label></p><p><a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p><p/>{% endif %}
+		<p><label>Subido por:</label></p><p>{{ documento.subido_por }}</p><p/>
+		
+		<p><label>Detalles:</label></p><p>{{ documento.detalles }}</p><p/>
+	</fieldset>
+</div>
 
-<form action="upvote/" method="POST">{% csrf_token %}
-	<input type="image" src="{{ MEDIA_URL }}img/up_vote.png">
-</form>
-
-Aca iria el score en algun futuro...
-
-<form action="downvote/" method="POST">{% csrf_token %}
-	<input type="image" src="{{ MEDIA_URL }}img/down_vote.png">
-</form>
+<div id="votacion">
+	<p id="number_of_votes_up">6</p> <a id="vote_up" href="#">Vote up</a>
+	<br/>
+	<p id="number_of_votes_down">5</p> <a id="vote_down" href="#">Vote down</a>
+</div>
 
 <h3>Comentarios:</h3>
 
@@ -40,17 +67,18 @@ Aca iria el score en algun futuro...
 
 <br/><br/>
 
-{% get_comment_list for documento as comment_list %}
-	
-{% for comment in comment_list %}
-	<hr>
-	<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
-	<p><em>{{ comment.comment|safe }}</em></p><br>
-	<p>{{ comment.submit_date|date:"D d M Y g:i a" }}</p><br>
-	
-	{% if forloop.last %}<hr>{% endif %}
-{% endfor %}
-
+<div id="comentarios">
+	{% get_comment_list for documento as comment_list %}
+		
+	{% for comment in comment_list %}
+		<hr>
+		<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
+		<p><em>{{ comment.comment|safe }}</em></p><br>
+		<p>{{ comment.submit_date|date:"D d M Y g:i a" }}</p><br>
+		
+		{% if forloop.last %}<hr>{% endif %}
+	{% endfor %}
+</div>
 
 <br/><br/>
 
