@@ -18,6 +18,6 @@ def get_OLID(isbn):
     js_dict = json.loads(response.read())
     key = 'ISBN:{isbn}'.format(isbn=isbn)
     if js_dict.has_key(key):
-        return js_dict[key]['identifiers']['openlibrary']
+        return js_dict[key]['identifiers']['openlibrary'][0]
         
     

@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 '''
 Forms para crear/editar modelos.
 '''
@@ -13,6 +14,16 @@ class DocumentoModelForm(forms.ModelForm):
     class Meta:
         model = models.Documento
         exclude = ('subido_por',)
+        
+    def clean_isbn(self):
+        isbn = self.cleaned_data.get('isbn')
+        
+        if isbn:
+            if (not isbn.isdigit()) or (len(isbn) != 10 and len(isbn) != 13):
+                raise forms.ValidationError(
+                        """El ISBN debe ser un número de 10 o 13 dígitos.""")
+        
+        return isbn
         
 class UserForm(UserCreationForm):
     

@@ -10,6 +10,7 @@
 	<p><label>Título:</label></p><p>{{ documento.titulo }}</p><p/>
 	<p><label>Autor:</label></p><p>{{ documento.autor }}</p><p/>
 	<p><label>Tipo de documento:</label></p><p>{{ documento.get_tipo_display }}</p><p/>
+	{% if documento.isbn %}<p><label>ISBN:</label></p><p>{{ documento.isbn }}</p><p/>{% endif %}
 	{% if documento.carrera.all %}<p><label>Carrera:</label></p><p>{% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 	{% if documento.materia.all %}<p><label>Materia:</label></p><p>{% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 	

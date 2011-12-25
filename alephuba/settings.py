@@ -138,7 +138,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.comments',
-    'aleph',    
+    'aleph',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -68,6 +68,8 @@ class Documento(models.Model):
     tipo = models.CharField('Tipo de documento', max_length=3, 
                                 choices=DOCUMENTO_CHOICES, default='LIB')
     
+    isbn = models.CharField('ISBN', max_length=13, blank=True, null=True)
+    olid = models.CharField('OLID', max_length=15, blank=True, null=True)
     
     link = models.URLField()
     mirror = models.URLField(blank=True, null=True)
