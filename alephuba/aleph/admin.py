@@ -1,7 +1,5 @@
 from django.contrib import admin
-from alephuba.aleph.models import Carrera, Materia, Documento
-from aleph.models import UserProfile, Vote
-
+from alephuba.aleph.models import Carrera, Materia, Documento, UserProfile, Vote
 
 admin.site.register(Carrera)
 admin.site.register(Materia)
