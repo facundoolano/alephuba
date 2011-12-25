@@ -8,6 +8,22 @@ from django.contrib.auth.models import User
 
 from alephuba.aleph.models import Documento, Carrera, UserProfile
 
+
+def is_valid_isbn10(isbn):
+    if len(isbn) != 10:
+        return False
+    
+    if not isbn[:9].isdigit():
+        return False
+    
+    if not isbn[9].isdigit() and isbn[9] != 'x':
+        return False
+    
+    return True
+
+def is_valid_isbn13(isbn):
+    return len(isbn) == 13 and isbn.isdigit()
+
 class DocumentoModelForm(forms.ModelForm):
     
     class Meta:
@@ -15,12 +31,11 @@ class DocumentoModelForm(forms.ModelForm):
         exclude = ('subido_por',)
         
     def clean_isbn(self):
-        isbn = self.cleaned_data.get('isbn')
+        isbn = self.cleaned_data.get('isbn').lower()
         
-        if isbn:
-            if (not isbn.isdigit()) or (len(isbn) != 10 and len(isbn) != 13):
-                raise forms.ValidationError(
-                        """El ISBN debe ser un número de 10 o 13 dígitos.""")
+        if isbn and not is_valid_isbn10(isbn) and not is_valid_isbn13(isbn):
+            raise forms.ValidationError(
+                    """El ISBN debe ser un número de 10 o 13 dígitos.""")
         
         return isbn
         

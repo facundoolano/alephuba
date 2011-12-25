@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView
 
 from alephuba.aleph import models
 from alephuba.aleph.model_forms import DocumentoModelForm
+from alephuba.aleph.isbn_utils import get_OLID
 
 class DocumentoList(ListView):
     """ 
@@ -35,5 +36,9 @@ class DocumentoCreate(CreateView):
     def form_valid(self, form):
         """ Agrega al usuario logueado como el que subio el documento. """
         
-        form.instance.subido_por = self.request.user        
+        form.instance.subido_por = self.request.user
+        
+        if form.instance.isbn:
+            form.instance.olid = get_OLID(form.instance.isbn)
+        
         return super(DocumentoCreate, self).form_valid(form)

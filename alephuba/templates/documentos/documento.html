@@ -1,6 +1,6 @@
 {% extends 'documentos/documento_list.html' %}
 
-{% load comments %}
+{% load comments documentostags %}
 
 {% block extra_head %}
 	<script type="text/javascript">
@@ -37,18 +37,28 @@
 
 <div id="datos_documento">
 	<fieldset>
-		<p><label>Título:</label></p><p>{{ documento.titulo }}</p><p/>
-		<p><label>Autor:</label></p><p>{{ documento.autor }}</p><p/>
-		<p><label>Tipo de documento:</label></p><p>{{ documento.get_tipo_display }}</p><p/>
-		{% if documento.isbn %}<p><label>ISBN:</label></p><p>{{ documento.isbn }}</p><p/>{% endif %}
-		{% if documento.carrera.all %}<p><label>Carrera:</label></p><p>{% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
-		{% if documento.materia.all %}<p><label>Materia:</label></p><p>{% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
-		
-		<p><label>Link:</label></p><p><a href="{{ documento.link  }}">{{ documento.link  }}</a></p><p/>
-		{% if documento.mirror %}<p><label>Mirror:</label></p><p><a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p><p/>{% endif %}
-		<p><label>Subido por:</label></p><p>{{ documento.subido_por }}</p><p/>
-		
-		<p><label>Detalles:</label></p><p>{{ documento.detalles }}</p><p/>
+		<div>
+			<div id="cover">
+				<img src="{{ documento|book_cover }}">
+			</div>
+			
+			<div id="details">
+				<p><label>Título:</label> {{ documento.titulo }}</p><p/>
+				<p><label>Autor:</label> {{ documento.autor }}</p><p/>
+				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p><p/>
+				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p><p/>{% endif %}
+				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
+				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
+				
+				<p><label>Link:</label> <a href="{{ documento.link  }}">{{ documento.link  }}</a></p><p/>
+				{% if documento.mirror %}<p><label>Mirror:</label> <a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p><p/>{% endif %}
+				<p><label>Subido por:</label> {{ documento.subido_por }}</p><p/>
+				
+				<p><label>Detalles:</label> {{ documento.detalles }}</p><p/>
+			
+			</div>
+			<div class="clear"></div>
+		</div>
 	</fieldset>
 </div>
 
