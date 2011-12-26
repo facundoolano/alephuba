@@ -4,10 +4,14 @@ Vistas genericas.
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
+from django.utils import simplejson as json
+from django import http
 
 from alephuba.aleph import models
 from alephuba.aleph.model_forms import DocumentoModelForm
 from alephuba.aleph.isbn_utils import get_OLID
+from django.template.loader import render_to_string
+
 
 class DocumentoList(ListView):
     """ 
@@ -22,7 +26,22 @@ class DocumentoList(ListView):
         doc = self.request.GET.get('qs_documento') 
         return models.Documento.objects.busqueda_rapida(doc)
         
+
+class AjaxDocumentoList(DocumentoList):
+    """
+    Vista para actualizar el listado de documentos sin tener que refrescar la 
+    pagina. 
+    """
     
+    template_name = 'documentos/documento_list_content.html'
+    
+    def render_to_response(self, context):
+        content = render_to_string(self.template_name, context)
+        
+        return http.HttpResponse(json.dumps({'content' : content}), 
+                                 content_type='application/json')
+
+
 class DocumentoDetail(DetailView):
     model = models.Documento
     template_name = 'documentos/documento.html'

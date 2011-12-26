@@ -372,6 +372,10 @@ border: 1px solid #ddd;
 	margin: 5px 0 5px;
 }
 
+.document_list .cover img{
+	width: 90px;
+}
+
 .document_list .details{
 	float:left;
 	margin: 5px 0 0 10px;
@@ -384,4 +388,8 @@ border: 1px solid #ddd;
 
 #main .document_list a:hover{
 	text-decoration: underline;
+}
+
+#paginator a:HOVER {
+	cursor: pointer;
 }

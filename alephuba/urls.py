@@ -2,7 +2,8 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.views.generic.base import TemplateView, RedirectView
 
-from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail, DocumentoCreate
+from alephuba.aleph.views.generic_views import DocumentoList, DocumentoDetail, DocumentoCreate,\
+    AjaxDocumentoList
 from alephuba.aleph.views import views, json_views
 from alephuba import settings
 
@@ -17,6 +18,7 @@ urlpatterns = patterns('',
     
     url(r'^docs/$', RedirectView.as_view(url='buscar'), name='documentos'),
     url(r'^docs/buscar/$', DocumentoList.as_view(), name='buscar'),
+    url(r'^docs/buscar/update/$', AjaxDocumentoList.as_view(), name='buscar_update'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
 
     url(r'^add/$', DocumentoCreate.as_view(), name='add_documento'),

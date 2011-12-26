@@ -28,7 +28,7 @@ class DocumentoModelForm(forms.ModelForm):
     
     class Meta:
         model = Documento
-        exclude = ('subido_por',)
+        exclude = ('subido_por', 'olid')
         
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn').lower()

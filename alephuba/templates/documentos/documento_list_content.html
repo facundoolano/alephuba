@@ -1,0 +1,42 @@
+{% load documentostags %}
+
+<table cellpadding="0" cellspacing="0" class="document_list">
+    {% for documento in object_list %}
+		<tr {% cycle '' 'class="odd"' %}>
+			<td>
+				<div>
+					<div class="cover">
+						<a href="{% url documento documento.pk %}"><img src="{{ documento|book_cover }}"></a>
+					</div>
+					<div class="details">
+						<div class="title"><a href="{% url documento documento.pk %}">{{ documento.titulo }}</a></div>
+						{{ documento.autor }}
+					</div> 
+					<div class="clear"></div>
+					
+				</div>
+			</td>
+		</tr>
+	{% endfor %}
+	
+	<tr><td id="paginator">
+		{{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ paginator.count }} documento{{ paginator.count|pluralize }} {% if page_obj.has_other_pages %}|{% endif %}
+		
+		{% if page_obj.has_previous %}<a href="#" onclick="get_pagina(1, '{{ request.GET.qs_documento|default:"" }}')">&lt;&lt;</a>{% endif %}
+		{% if page_obj.has_previous %}<a href="#" onclick="get_pagina({{ page_obj.previous_page_number }}, '{{ request.GET.qs_documento|default:"" }}')">previa</a>{% endif %}
+
+		{% if page_obj.number|add:"-3" > 0 %}<a onclick="get_pagina({{ page_obj.number|add:'-3' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-3" }}</a>{% endif %}
+		{% if page_obj.number|add:"-2" > 0 %}<a onclick="get_pagina({{ page_obj.number|add:'-2' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-2" }}</a>{% endif %}
+		{% if page_obj.number|add:"-1" > 0 %}<a onclick="get_pagina({{ page_obj.number|add:'-1' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-1" }}</a>{% endif %}
+		{% if page_obj.paginator.num_pages > 1 %}{{ page_obj.number }}{% endif %}
+		{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a onclick="get_pagina({{ page_obj.number|add:'1' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"1" }}</a>{% endif %}
+		{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a onclick="get_pagina({{ page_obj.number|add:'2' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"2" }}</a>{% endif %}
+		{% if page_obj.number|add:"3" <= page_obj.paginator.num_pages %}<a onclick="get_pagina({{ page_obj.number|add:'3' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"3" }}</a>{% endif %}
+		
+		
+		{% if page_obj.has_next %}<a onclick="get_pagina({{ page_obj.next_page_number }}, '{{ request.GET.qs_documento|default:"" }}')"> próxima</a>{% endif %}
+		{% if page_obj.has_next %}<a onclick="get_pagina({{ page_obj.paginator.num_pages }}, '{{ request.GET.qs_documento|default:"" }}')"> &gt;&gt;</a>{% endif %}
+		
+	</td></tr>
+	
+</table>
