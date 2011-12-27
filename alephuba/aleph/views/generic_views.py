@@ -36,7 +36,7 @@ class DocumentoDetail(DetailView):
         usuario_voto = models.Vote.objects.usuario_ha_votado(self.request.user, self.get_object())
 
         context['usuario_ya_voto'] = usuario_voto
-        context['promedio_rating'] = str(informacion[0]) # casteo feo, pero necesario
+        context['promedio_rating'] = str(round(informacion[0], 1)) # casteo feo, pero necesario
         context['cantidad_votos'] = informacion[1]
         
         return context
