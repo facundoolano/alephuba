@@ -23,3 +23,7 @@ def registration(request):
             return HttpResponseRedirect('/')
     
     return render_to_response('registracion.html', {'form' : form}, context_instance=RequestContext(request))
+
+def busqueda_por_materia(request):
+    
+    return render_to_response('documentos/busqueda_materia.html', {}, context_instance=RequestContext(request))

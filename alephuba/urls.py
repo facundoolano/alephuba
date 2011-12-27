@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^docs/buscar/$', DocumentoList.as_view(), name='buscar'),
     url(r'^docs/buscar/update/$', AjaxDocumentoList.as_view(), name='buscar_update'),
     url(r'^docs/(?P<pk>\d+)/$', DocumentoDetail.as_view(), name='documento'),
+    url(r'^docs/buscar/materia/$', views.busqueda_por_materia , name='busqueda_por_materia'),
 
     url(r'^add/$', DocumentoCreate.as_view(), name='add_documento'),
     
