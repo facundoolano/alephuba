@@ -78,9 +78,12 @@ class Documento(models.Model):
 class VoteManager(models.Manager):
      
     def obtener_informacion_documento(self, documento):
-        informacion = self.filter(document=documento).aggregate(Avg('vote_value'), Count('vote_value'))
+        informacion = self.filter(document=documento).aggregate(promedio_votos = Avg('vote_value'),
+                                                                cantidad_votos = Count('vote_value'))
         
-        return (int(informacion['vote_value__avg']), int(informacion['vote_value__count']))
+        promedio_votos = int(informacion['promedio_votos']) if informacion['promedio_votos'] else 0 
+
+        return (promedio_votos , int(informacion['cantidad_votos']))
     
     def try_record_vote(self, document_pk, user, vote_value):
         
