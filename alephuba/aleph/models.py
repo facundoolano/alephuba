@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User as AuthUser, User
 from django.db.models import Q
+from django.db.models.aggregates import Avg, Count
 
 NOMBRE_MAX_LENGTH = 80
 CODIGO_MATERIA_MAX_LENGTH = 10
@@ -13,11 +14,6 @@ DOCUMENTO_CHOICES = (
     ('RES', 'Resumen'),
     ('INF', 'Informe'),
     ('EXA', 'Examen'),
-)
-
-SCORES = (
-    (u'+1', +1),
-    (u'-1', -1),
 )
 
 class Carrera(models.Model):
@@ -78,6 +74,11 @@ class Documento(models.Model):
         return self.titulo
 
 class VoteManager(models.Manager):
+     
+    def obtener_informacion_documento(self, documento):
+        informacion = self.filter(document=documento).aggregate(Avg('vote_value'), Count('vote_value'))
+        
+        return (int(informacion['vote_value__avg']), int(informacion['vote_value__count']))
     
     def try_record_vote(self, document_pk, user, vote_value):
         
@@ -93,7 +94,7 @@ class VoteManager(models.Manager):
 class Vote(models.Model):
     user = models.ForeignKey(User)
     document = models.ForeignKey(Documento)
-    vote_value = models.SmallIntegerField(choices=SCORES)
+    vote_value = models.FloatField()
     
     objects = VoteManager()
     
