@@ -5,7 +5,13 @@
 {% block extra_head %}
 
 	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.raty.min.js"></script>
-
+	
+	<script type="text/javascript">
+		function on_cover_error(source) {
+			$(source).unbind("error").attr("src", "{{ MEDIA_URL }}img/Blank.jpg");
+		}
+	</script>
+	
 	<script type="text/javascript">
 		$(function() {
 			
@@ -41,7 +47,7 @@
 	<fieldset>
 		<div>
 			<div id="cover">
-				<img src="{{ documento|book_cover }}">
+				<img src="{{ documento|book_cover }}" onerror="on_cover_error(this)">
 			</div>
 			
 			<div id="details">
