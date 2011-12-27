@@ -13,8 +13,12 @@
 				path : '{{ MEDIA_URL }}img/',
 				half :  true,
 				hintList: ['','','','',''],
-				start : {{ promedio_rating }}, // Pincha porque el valor se representa 4.5
-				readOnly : false, // Ver si ya voto.
+				start : {{ promedio_rating }},
+				{% if usuario_ya_voto %}
+					readOnly : true,
+				{% else %}
+					readOnly : false,
+				{% endif %}
 				click : function(score, event) {
 				    $.ajax({
 				    	  url: "vote/" + score,
@@ -62,7 +66,9 @@
 
 <div id="star"></div>
 
-Valoracion: {{ promedio_rating }}/5 ({{ cantidad_votos }} votos)
+Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).
+
+{% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
 
 <h3>Comentarios:</h3>
 

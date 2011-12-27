@@ -81,15 +81,21 @@ class VoteManager(models.Manager):
         informacion = self.filter(document=documento).aggregate(promedio_votos = Avg('vote_value'),
                                                                 cantidad_votos = Count('vote_value'))
         
-        promedio_votos = int(informacion['promedio_votos']) if informacion['promedio_votos'] else 0 
+        promedio_votos = informacion['promedio_votos'] if informacion['promedio_votos'] else 0 
 
-        return (promedio_votos , int(informacion['cantidad_votos']))
+        return (promedio_votos , informacion['cantidad_votos'])
+    
+    def usuario_ha_votado(self, user, documento):
+        if self.filter(user=user, document=documento):
+            return True
+        
+        return False
     
     def try_record_vote(self, document_pk, user, vote_value):
         
         document = Documento.objects.get(pk=document_pk)
         
-        if self.filter(user=user, document=document):
+        if self.usuario_ha_votado(user, document):
             return False
         
         self.create(user=user, document=document, vote_value=vote_value)

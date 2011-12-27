@@ -33,8 +33,10 @@ class DocumentoDetail(DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         
         informacion = models.Vote.objects.obtener_informacion_documento(self.get_object())
-        
-        context['promedio_rating'] = informacion[0]
+        usuario_voto = models.Vote.objects.usuario_ha_votado(self.request.user, self.get_object())
+
+        context['usuario_ya_voto'] = usuario_voto
+        context['promedio_rating'] = str(informacion[0]) # casteo feo, pero necesario
         context['cantidad_votos'] = informacion[1]
         
         return context
