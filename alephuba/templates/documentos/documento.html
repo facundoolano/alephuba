@@ -3,29 +3,31 @@
 {% load comments documentostags %}
 
 {% block extra_head %}
+
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.raty.min.js"></script>
+
 	<script type="text/javascript">
 		$(function() {
 			
-			$("#vote_up").click(function(event) {
-				event.preventDefault();
-				
-				$.getJSON('upvote', function(exito) {
-					if (exito) {
-						dom_number_of_votes = $("#number_of_votes_up");
-						dom_number_of_votes.html(Number(dom_number_of_votes.text()) + 1);
-					}
-				});
-			});
-			
-			$("#vote_down").click(function(event) {
-				event.preventDefault();
-				
-				$.getJSON('downvote', function(exito) {
-					if (exito) {
-						dom_number_of_votes = $("#number_of_votes_down");
-						dom_number_of_votes.html(Number(dom_number_of_votes.text()) + 1);
-					}
-				});
+			$('#star').raty({
+				path : '{{ MEDIA_URL }}img/',
+				half :  true,
+				hintList: ['','','','',''],
+				start : {{ promedio_rating }},
+				{% if usuario_ya_voto %}
+					readOnly : true,
+				{% else %}
+					readOnly : false,
+				{% endif %}
+				click : function(score, event) {
+				    $.ajax({
+				    	  url: "vote/" + score,
+				    	  dataType: 'json',
+				    	  success: function(exito) {
+				    		  window.location = '';				    		  
+				    	  }
+				    });
+				},
 			});
 		});
 	</script>
@@ -62,11 +64,11 @@
 	</fieldset>
 </div>
 
-<div id="votacion">
-	<p id="number_of_votes_up">6</p> <a id="vote_up" href="#">Vote up</a>
-	<br/>
-	<p id="number_of_votes_down">5</p> <a id="vote_down" href="#">Vote down</a>
-</div>
+<div id="star"></div>
+
+Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).
+
+{% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
 
 <h3>Comentarios:</h3>
 

@@ -32,7 +32,7 @@ urlpatterns = patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     
     url(r'^autocomplete_documento/', json_views.autocomplete_documento, name='autocomplete_documento'),
-    url(r'^docs/(?P<document_pk>\d+)/(?P<direction>up|down)vote/?$', json_views.vote_on_document),
+    url(r'^docs/(?P<document_pk>\d+)/vote/(?P<vote>(\d+|\d+\.\d{1}))$', json_views.vote_on_document),
 
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',

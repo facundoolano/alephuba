@@ -3,8 +3,6 @@ from django.utils import simplejson
 
 from alephuba.aleph.models import Documento, Vote
 
-VOTE_DIRECTIONS = {'up' : 1, 'down' : -1}
-
 def autocomplete_documento(request):
 
     termino = request.REQUEST['term']
@@ -18,9 +16,8 @@ def autocomplete_documento(request):
 
     return HttpResponse(simplejson.dumps(list(set(opciones))), mimetype='application/json')
 
-def vote_on_document(request, document_pk, direction):
+def vote_on_document(request, document_pk, vote):
 
-    vote_value = VOTE_DIRECTIONS[direction]
-    sucess = Vote.objects.try_record_vote(document_pk, request.user, vote_value)
+    sucess = Vote.objects.try_record_vote(document_pk, request.user, vote)
 
     return HttpResponse(simplejson.dumps(sucess), mimetype='application/json')
