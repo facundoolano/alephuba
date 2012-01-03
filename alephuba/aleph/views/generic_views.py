@@ -9,9 +9,9 @@ from django import http
 
 from alephuba.aleph import models
 from alephuba.aleph.model_forms import DocumentoModelForm
-from alephuba.aleph.isbn_utils import get_OLID
+from alephuba.lib import openlibrary
 from django.template.loader import render_to_string
-from alephuba.aleph.ifileit import Ifileit
+from alephuba.lib.ifileit import Ifileit
 
 
 class DocumentoList(ListView):
@@ -82,7 +82,7 @@ class DocumentoCreate(CreateView):
         form.instance.subido_por = self.request.user
         
         if form.instance.isbn:
-            form.instance.olid = get_OLID(form.instance.isbn)
+            form.instance.olid = openlibrary.get_OLID(form.instance.isbn)
         
         #manejar upload
         doc_file = form.files['doc_file']
