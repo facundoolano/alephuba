@@ -6,7 +6,7 @@ class Entrada(models.Model):
     titulo = models.CharField(max_length=50)
     contenido = tinymce_models.HTMLField()
     autor = models.ForeignKey(AuthUser)
-    fechar = models.DateTimeField(auto_now_add=True)
+    fecha = models.DateTimeField(auto_now_add=True)
     
     def __unicode__(self):
         return self.titulo

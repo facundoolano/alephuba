@@ -5,6 +5,7 @@ from django.template.context import RequestContext
 
 from alephuba.aleph.model_forms import UserForm
 
+#FIXME usar class based form view
 def registration(request):
     
     if request.method == 'GET':

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+	<ul class="sideNav">
+	   	<li><a class="active" href="#">Portada</a></li>
+	   	<li><a href="#">Preguntas frecuentes</a></li>
+	   	<li><a href="#">Acerca de</a></li>
+	   	<li><a href="#">Contacto</a></li>
+	</ul>
+{% endblock %}
+
+
+{% block content %}
+{{ block.super }}
+
+<h3>Bienvenido</h3>
+
+<div class="text">
+<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
+</div>
+ 
+{% for noticia in object_list %}
+	<h3>{{ noticia.titulo }}</h3>
+	{{ noticia.fecha }} por {{ noticia.autor }}
+	{{ noticia.contenido|safe }}
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ block.super }}
+
+<h3>Bienvenido</h3>
+
+<div class="text">
+<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
+</div>
+
+<h3>Ingresar</h3>
+	
+	{% with submit_value='Ingresar' %}
+		{% include 'form.html' %}
+	{% endwith %}
+	
+	<div class="text">
+		<p><a href="{% url registracion %}">¿No estas registrado?</a></p>
+	 </div>
+{% endblock %}
