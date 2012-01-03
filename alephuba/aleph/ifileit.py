@@ -15,7 +15,6 @@ class Ifileit(object):
     FETCH_API_KEY_URL = 'https://secure.ifile.it/api-fetch_apikey.api'
     PING_URL = 'http://ifile.it/api-ping.api'
     
-    
     USER = ''
     PASSWORD = ''
     API_KEY = ''
@@ -90,7 +89,6 @@ class Ifileit(object):
             return {'akey' : cls.API_KEY }
         
         return {}
-    
 
 class IfileitApiError(Exception):
     pass
