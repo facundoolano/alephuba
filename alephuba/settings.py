@@ -138,8 +138,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.comments',
+    
     'aleph',
+    'noticias',
+    
     'south',
+    
 )
 
 # A sample logging configuration. The only tangible logging
@@ -164,3 +168,12 @@ LOGGING = {
         },
     }
 }
+
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_buttons1': "fontselect,fontsizeselect,bold,italic,underline,separator,link,separator,bullist,numlist,separator,undo,redo",
+    'theme_advanced_buttons2': "",
+    'theme_advanced_buttons3': "",
+}
+

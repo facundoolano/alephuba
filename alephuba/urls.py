@@ -15,6 +15,7 @@ urlpatterns = patterns('',
     
     url(r'^$', django.contrib.auth.views.login, {'template_name': 'index.html'}, name='home'),
     url(r'^admin/', include(admin.site.urls), name='admin'),
+    url(r'^tinymce/', include('tinymce.urls')),
     
     url(r'^docs/$', RedirectView.as_view(url='buscar'), name='documentos'),
     url(r'^docs/buscar/$', DocumentoList.as_view(), name='buscar'),
