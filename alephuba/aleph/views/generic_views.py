@@ -11,6 +11,7 @@ from alephuba.aleph import models
 from alephuba.aleph.model_forms import DocumentoModelForm
 from alephuba.aleph.isbn_utils import get_OLID
 from django.template.loader import render_to_string
+from alephuba.aleph.ifileit import Ifileit
 
 
 class DocumentoList(ListView):
@@ -65,12 +66,27 @@ class DocumentoCreate(CreateView):
     form_class = DocumentoModelForm
     success_url = '/docs'
     
+    
+    def get_context_data(self, **kwargs):
+        context = super(DocumentoCreate, self).get_context_data(**kwargs)
+        context['site_available'] = Ifileit.ping()
+        
+        return context
+    
     def form_valid(self, form):
-        """ Agrega al usuario logueado como el que subio el documento. """
+        """ 
+        Agrega al usuario logueado como el que subio el documento, setea el 
+        OLID e intenta hacer upload del archivo subido.
+        """
         
         form.instance.subido_por = self.request.user
         
         if form.instance.isbn:
             form.instance.olid = get_OLID(form.instance.isbn)
         
+        #manejar upload
+        doc_file = form.files['doc_file']
+        form.instance.link = Ifileit.upload(doc_file)
+        
         return super(DocumentoCreate, self).form_valid(form)
+    

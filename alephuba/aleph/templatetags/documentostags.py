@@ -1,8 +1,6 @@
 from django import template
 from alephuba.settings import MEDIA_URL
 from alephuba.aleph.isbn_utils import get_cover
-import urllib2
-import httplib
 
 register = template.Library()
 

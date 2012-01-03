@@ -58,8 +58,8 @@
 				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				
-				<p><label>Link:</label> <a href="{{ documento.link  }}">{{ documento.link  }}</a></p><p/>
-				{% if documento.mirror %}<p><label>Mirror:</label> <a href="{{ documento.mirror  }}">{{ documento.mirror  }}</a></p><p/>{% endif %}
+				<p><label>Link:</label> <a href="{{ documento.link  }}" target="_blank">{{ documento.link  }}</a></p><p/>
+				{% if documento.mirror %}<p><label>Mirror:</label> <a href="{{ documento.mirror  }}" target="_blank">{{ documento.mirror  }}</a></p><p/>{% endif %}
 				<p><label>Subido por:</label> {{ documento.subido_por }}</p><p/>
 				
 				<p><label>Detalles:</label> {{ documento.detalles }}</p><p/>

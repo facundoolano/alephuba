@@ -391,7 +391,3 @@ border: 1px solid #ddd;
 #main .document_list a:hover{
 	text-decoration: underline;
 }
-
-#paginator a:HOVER {
-	cursor: pointer;
-}
