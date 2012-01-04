@@ -41,7 +41,7 @@
 
 {% block content %}
 
-<h2>Documento</h2>
+<h2>{{ documento.titulo }}</h2>
 
 <div id="datos_documento">
 	<fieldset>
@@ -51,7 +51,6 @@
 			</div>
 			
 			<div id="details">
-				<p><label>Título:</label> {{ documento.titulo }}</p><p/>
 				<p><label>Autor:</label> {{ documento.autor }}</p><p/>
 				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p><p/>
 				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p><p/>{% endif %}
