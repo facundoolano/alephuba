@@ -13,17 +13,20 @@
 {% block content %}
 {{ block.super }}
 
-<h3>Bienvenido</h3>
+<h2>Bienvenido</h2>
 
 <div class="text">
 <p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
 </div>
  
+ <br/>
 {% for noticia in object_list %}
-	<h3>{{ noticia.titulo }}</h3>
-	{{ noticia.fecha }} por {{ noticia.autor }}
-	{{ noticia.contenido|safe }}
+	<div class="noticia">
+		<div class="titulo">{{ noticia.titulo }}</div>
+		<div class="contenido">{{ noticia.contenido|safe }}</div>
+		
+		<div class="detalle">{{ noticia.fecha|date:'d/m/y' }} por <b>{{ noticia.autor }}</b></div>
+	</div>
 {% endfor %}
-
 
 {% endblock %}

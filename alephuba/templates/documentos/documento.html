@@ -41,7 +41,7 @@
 
 {% block content %}
 
-<h3>Documento:</h3>
+<h2>Documento</h2>
 
 <div id="datos_documento">
 	<fieldset>
@@ -76,7 +76,7 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 
 {% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
 
-<h3>Comentarios:</h3>
+<h3>Comentarios</h3>
 
 <br/>
 
@@ -99,11 +99,9 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 	{% endfor %}
 </div>
 
-<br/><br/>
-
 {% get_comment_form for documento as form %}
 
-<h3>Agregue un comentario:</h3>
+<h3>Agregue un comentario</h3>
 
 {% include 'comments/form_add_comment.html' with next=request.path %}
 
