@@ -5,5 +5,5 @@ from alephuba.noticias import models
 class NoticiasView(ListView):
     
     template_name = 'home.html'
-    paginate_by=5
+    paginate_by=10
     queryset = models.Entrada.objects.order_by('-fecha')
