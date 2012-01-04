@@ -6,4 +6,4 @@ class NoticiasView(ListView):
     
     template_name = 'home.html'
     paginate_by=5
-    model = models.Entrada
+    queryset = models.Entrada.objects.order_by('-fecha')

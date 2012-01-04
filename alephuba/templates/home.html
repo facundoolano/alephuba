@@ -29,4 +29,9 @@
 	</div>
 {% endfor %}
 
+<div id="home_footer">
+{% if page_obj.has_previous %}<a class="previous" href="{% url home %}?page={{ page_obj.previous_page_number }}">Entradas recientes</a>{% endif %}
+{% if page_obj.has_next %}<a class="next" href="{% url home %}?page={{ page_obj.next_page_number }}">Entradas antiguas</a>{% endif %}
+</div>
+
 {% endblock %}
