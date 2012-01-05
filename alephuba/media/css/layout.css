@@ -150,9 +150,8 @@ h3 {
 	line-height: 14px;
 	font-weight: bold;
 	color: #5494af;
-	margin: 20px 0 10px;
+	margin: 10px 0 10px;
 }
-
 
 h2 {
 	font-size: 20px;
@@ -427,3 +426,24 @@ border: 1px solid #ddd;
 #main a:hover{
 	text-decoration: underline;
 }
+
+#documento_form h3 {
+	margin: 0px 0 15px;
+	}
+#documento_form fieldset {
+	border: 0;
+	background: #FFFFFF;
+	margin: 0 0 0px;
+	padding: 20px 20px 5px;
+	}
+
+#wizard_buttons {
+	padding: 10px 0px 10px;
+	float:right;
+	}
+
+#wizard_buttons input {
+	width: 90px;
+	border-radius: 4px 4px 4px 4px;
+	}
+

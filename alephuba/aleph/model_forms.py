@@ -26,7 +26,7 @@ def is_valid_isbn13(isbn):
 
 class DocumentoModelForm(forms.ModelForm):
     
-    doc_file = forms.FileField(label='Documento') 
+    doc_file = forms.FileField(label='Archivo') 
     
     class Meta:
         model = Documento

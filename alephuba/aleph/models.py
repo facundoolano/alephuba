@@ -68,7 +68,6 @@ class Documento(models.Model):
     olid = models.CharField('OLID', max_length=15, blank=True, null=True)
     
     link = models.URLField()
-    mirror = models.URLField(blank=True, null=True)
     subido_por = models.ForeignKey(AuthUser)
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     

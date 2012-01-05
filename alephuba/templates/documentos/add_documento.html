@@ -7,10 +7,102 @@
 {% if not site_available %}
 <p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
 {% else %}
-	{% with submit_value='Subir' enctype='enctype="multipart/form-data"' %}
-		{% include 'form.html' %}
-	{% endwith %}
+	<form id="documento_form" action="" {{enctype|default:''}} method="{{ method|default:'post' }}">{% csrf_token %}
+   	
+   	<fieldset id="step_tipo" class="step">
+   		<h3>Paso 1 - Tipo de documento</h3>
+		<div class="field_container">
+			<p><label for="id_tipo">Tipo:</label></p>
+			<p>{{ form.tipo }}</p>
+			<p/>
+		</div>
+		
+		<div id="isbn_container" class="field_container">
+			<p><label class="optional" for="id_isbn">ISBN:</label></p>
+			<p>{{ form.isbn }}</p>
+			<p>Con el ISBN podemos obtener las portadas y completar automáticamente los datos de los libros.<p/>
+			<p/>
+		</div>
+	</fieldset>
+	
+	<fieldset id="step_datos" class="step">
+   		<h3>Paso 2 - Datos del documento</h3>
+		<div class="field_container">
+			<p><label for="id_titulo">Título:</label></p>
+			<p>{{ form.titulo }}</p>
+			<p/>
+		</div>
+		
+		<div class="field_container">
+			<p><label for="id_autor">Autor:</label></p>
+			<p>{{ form.autor }}</p>
+			<p/>
+		</div>
+	</fieldset>
+	
+	<fieldset id="step_detalles" class="step">
+   		<h3>Paso 3 - Detalles del documento</h3>
+		<div class="field_container">
+			<p><label class="optional" for="id_detalles">Detalles:</label></p>
+			<p>{{ form.detalles }}</p>
+			<p/>
+		</div>
+		
+		<div class="field_container">
+			<p><label class="optional" for="id_carrera">Carreras:</label></p>
+			<p>{{ form.carrera }}</p>
+			<p/>
+		</div>
+		
+		<div class="field_container">
+			<p><label class="optional" for="id_materia">Materias:</label></p>
+			<p>{{ form.materia }}</p>
+			<p/>
+		</div>
+	</fieldset>
+	
+	<fieldset id="step_archivo" class="step">
+   		<h3>Paso 4 - Archivo</h3>
+		<div class="field_container">
+			<p><label for="id_doc_file">Archivo:</label></p>
+			<p>{{ form.doc_file }}</p>
+			<p/>
+		</div>
+	</fieldset>
+	
+	<div id="wizard_buttons"> 							
+		<input class="navigation_button" id="back" value="Back" type="reset" />
+		<input class="navigation_button" id="next" value="Next" type="submit" />
+	</div>
+	
+</form>
 {% endif %}
 
+{% endblock %}
+ 
+{% block extra_head %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form.wizard-min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.validate.js"></script>
 
-{% endblock %} 
+
+<script type="text/javascript">
+			$(function(){
+				$("#documento_form").formwizard({
+					textSubmit : 'Subir',
+					textNext : 'Siguiente',
+					textBack : 'Anterior',
+				});
+				
+				$('#id_tipo').change(function(){
+					if ($(this).val() != 'LIB') {
+						$('#isbn_container').hide();
+					} else {
+						$('#isbn_container').show();
+					}
+				})
+				
+  		});
+    </script>
+
+{% endblock %}
