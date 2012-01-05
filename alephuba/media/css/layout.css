@@ -278,6 +278,12 @@ h2 {
 	margin-top: 10px;
 	 }
 
+.error {
+	font-weight: bold;
+	color: red;	
+}
+
+
 .form_error {
 	font-weight: bold;
 	color: red;	

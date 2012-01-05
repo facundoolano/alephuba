@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from alephuba.aleph.models import Documento, Carrera, UserProfile
+from django.http import HttpResponse
+import simplejson
 
 
 def is_valid_isbn10(isbn):
@@ -23,6 +25,20 @@ def is_valid_isbn10(isbn):
 
 def is_valid_isbn13(isbn):
     return len(isbn) == 13 and isbn.isdigit()
+
+
+#TODO json views?
+def validate_isbn(request):
+    isbn = request.POST['isbn']
+    valid = not isbn or is_valid_isbn10(isbn) or is_valid_isbn13(isbn)
+    
+    if valid:
+        #TODO autocompletar datos
+        pass
+    
+    result = {'valid' : valid}
+    
+    return HttpResponse(simplejson.dumps(result), mimetype='application/json')
 
 class DocumentoModelForm(forms.ModelForm):
     

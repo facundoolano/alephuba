@@ -88,15 +88,44 @@
 
 <script type="text/javascript">
 			$(function(){
+				
+				jQuery.validator.messages.required = 'Este campo es obligatorio.';
+				
 				$("#documento_form").formwizard({
+					validationEnabled: true,
 					textSubmit : 'Subir',
 					textNext : 'Siguiente',
 					textBack : 'Anterior',
+					
+					remoteAjax : {"step_tipo" : {
+						url : '{% url validate_isbn %}', 
+				 		dataType : 'json',
+				 		success : function(data){
+				 			
+				 			if(!data.valid) {
+				 				//Error label
+				 				$('<label for="id_isbn" generated="true" class="error">ISBN inválido.</label>').insertAfter('#id_isbn');
+				 				return false;
+				 			} else {
+				 				//setear datos
+				 				return true;
+				 			}
+				 			
+				 		},
+						}
+					}
+					
 				});
 				
+				$('#id_titulo').addClass('required');
+				$('#id_autor').addClass('required');
+				$('#id_doc_file').addClass('required');
+				
 				$('#id_tipo').change(function(){
+					
 					if ($(this).val() != 'LIB') {
 						$('#isbn_container').hide();
+						$('#id_isbn').val('');
 					} else {
 						$('#isbn_container').show();
 					}
