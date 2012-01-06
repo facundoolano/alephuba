@@ -7,7 +7,7 @@
 {% if not site_available %}
 <p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
 {% else %}
-	<form id="documento_form" action="" {{enctype|default:''}} method="{{ method|default:'post' }}">{% csrf_token %}
+	<form id="documento_form" action="" enctype="multipart/form-data" method="post">{% csrf_token %}
    	
    	<fieldset id="step_tipo" class="step">
    		<h3>Paso 1 - Tipo de documento</h3>
@@ -107,7 +107,8 @@
 				 				$('<label for="id_isbn" generated="true" class="error">ISBN inválido.</label>').insertAfter('#id_isbn');
 				 				return false;
 				 			} else {
-				 				//setear datos
+				 				$('#id_titulo').val(data.titulo);
+				 				$('#id_autor').val(data.autor);
 				 				return true;
 				 			}
 				 			

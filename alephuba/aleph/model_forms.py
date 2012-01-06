@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from alephuba.aleph.models import Documento, Carrera, UserProfile
 from django.http import HttpResponse
 import simplejson
+from alephuba.lib.openlibrary import get_author_and_title
 
 
 def is_valid_isbn10(isbn):
@@ -18,7 +19,7 @@ def is_valid_isbn10(isbn):
     if not isbn[:9].isdigit():
         return False
     
-    if not isbn[9].isdigit() and isbn[9] != 'x':
+    if not isbn[9].isdigit() and isbn[9] != 'X':
         return False
     
     return True
@@ -32,11 +33,9 @@ def validate_isbn(request):
     isbn = request.POST['isbn']
     valid = not isbn or is_valid_isbn10(isbn) or is_valid_isbn13(isbn)
     
-    if valid:
-        #TODO autocompletar datos
-        pass
-    
     result = {'valid' : valid}
+    if valid:
+        result['autor'], result['titulo'] = get_author_and_title(isbn)
     
     return HttpResponse(simplejson.dumps(result), mimetype='application/json')
 
@@ -49,7 +48,7 @@ class DocumentoModelForm(forms.ModelForm):
         exclude = ('subido_por', 'olid', 'link')
         
     def clean_isbn(self):
-        isbn = self.cleaned_data.get('isbn').lower()
+        isbn = self.cleaned_data.get('isbn').upper()
         
         if isbn and not is_valid_isbn10(isbn) and not is_valid_isbn13(isbn):
             raise forms.ValidationError(
