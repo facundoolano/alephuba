@@ -1,5 +1,6 @@
 # Django settings for alephuba project.
 import os.path
+from django.conf import global_settings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -177,3 +178,12 @@ TINYMCE_DEFAULT_CONFIG = {
     'theme_advanced_buttons3': "",
 }
 
+FILE_UPLOAD_HANDLERS = ('alephuba.aleph.uploadhandler.UploadProgressCachedHandler', ) \
+                        + global_settings.FILE_UPLOAD_HANDLERS
+                        
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}

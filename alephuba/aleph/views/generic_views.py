@@ -85,8 +85,9 @@ class DocumentoCreate(CreateView):
             form.instance.olid = openlibrary.get_OLID(form.instance.isbn)
         
         #manejar upload
-        doc_file = form.files['doc_file']
-        form.instance.link = Ifileit.upload(doc_file)
+        #doc_file = form.files['doc_file']
+        #form.instance.link = Ifileit.upload(doc_file)
+        form.instance.link='http://fake.com'
         
         return super(DocumentoCreate, self).form_valid(form)
     

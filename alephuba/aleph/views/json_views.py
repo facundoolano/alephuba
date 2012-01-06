@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.utils import simplejson
+from django.core.cache import cache
 
 from alephuba.aleph.models import Documento, Vote
 
@@ -21,3 +22,9 @@ def vote_on_document(request, document_pk, vote):
     sucess = Vote.objects.try_record_vote(document_pk, request.user, vote)
 
     return HttpResponse(simplejson.dumps(sucess), mimetype='application/json')
+
+
+def get_upload_progress(request):
+    cache_key = "%s_%s" % (request.META['REMOTE_ADDR'], request.GET['X-Progress-ID'])
+    data = cache.get(cache_key)
+    return HttpResponse(simplejson.dumps(data))

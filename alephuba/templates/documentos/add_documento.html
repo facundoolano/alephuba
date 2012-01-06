@@ -68,6 +68,9 @@
 			<p>{{ form.doc_file }}</p>
 			<p/>
 		</div>
+		
+		<div id="progressbar"></div>
+		
 	</fieldset>
 	
 	<div id="wizard_buttons"> 							
@@ -89,10 +92,16 @@
 <script type="text/javascript">
 			$(function(){
 				
-				jQuery.validator.messages.required = 'Este campo es obligatorio.';
-				
+				//Configuro el wizard
 				$("#documento_form").formwizard({
 					validationEnabled: true,
+					
+					formPluginEnabled : true,
+					formOptions : {
+						//NO SIRVE
+						beforeSubmit : trigger_progressbar,
+						url : '{% url add_documento %}?X-Progress-ID=HOLA',
+						},
 					textSubmit : 'Subir',
 					textNext : 'Siguiente',
 					textBack : 'Anterior',
@@ -103,25 +112,29 @@
 				 		success : function(data){
 				 			
 				 			if(!data.valid) {
-				 				//Error label
+				 				//Agrego error a mano si no es isbn valido
 				 				$('<label for="id_isbn" generated="true" class="error">ISBN inválido.</label>').insertAfter('#id_isbn');
 				 				return false;
 				 			} else {
+				 				//actualizo autor y titulo encontrados
 				 				$('#id_titulo').val(data.titulo);
 				 				$('#id_autor').val(data.autor);
 				 				return true;
 				 			}
 				 			
 				 		},
-						}
+						},
 					}
 					
 				});
 				
+				//Para validacion
+				jQuery.validator.messages.required = 'Este campo es obligatorio.';				
 				$('#id_titulo').addClass('required');
 				$('#id_autor').addClass('required');
 				$('#id_doc_file').addClass('required');
 				
+				//oculto isbn si no es libro
 				$('#id_tipo').change(function(){
 					
 					if ($(this).val() != 'LIB') {
@@ -131,8 +144,32 @@
 						$('#isbn_container').show();
 					}
 				})
-				
   		});
+			
+		
+		function trigger_progressbar() {
+			
+			
+			//mostrar barra
+			$('.field_container').hide();
+			$("#progressbar").hide();
+			$( "#progressbar" ).progressbar({
+				value: 0
+			});
+			$("#progressbar").fadeIn();
+			
+			setInterval(function() {
+			    $.getJSON("{% url upload_progress %}?X-Progress-ID=HOLA", 
+			    		progressbar_update);
+		  	}, 2000);
+			
+		}
+			
+		function progressbar_update(data) {
+			var percentage = Math.floor(100 * parseInt(data.uploaded) / parseInt(data.length));
+			//$("#progressbar").value(percentage);
+		}
+			
     </script>
 
 {% endblock %}
