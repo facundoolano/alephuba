@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from alephuba.aleph.models import Documento, Carrera, UserProfile
 from django.http import HttpResponse
-import simplejson
+import json
 from alephuba.lib.openlibrary import get_author_and_title
 
 
@@ -37,7 +37,7 @@ def validate_isbn(request):
     if valid:
         result['autor'], result['titulo'] = get_author_and_title(isbn)
     
-    return HttpResponse(simplejson.dumps(result), mimetype='application/json')
+    return HttpResponse(json.dumps(result), mimetype='application/json')
 
 class DocumentoModelForm(forms.ModelForm):
     
