@@ -7,7 +7,7 @@
 {% if not site_available %}
 <p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
 {% else %}
-	<form id="documento_form" action="" enctype="multipart/form-data" method="post">{% csrf_token %}
+	<form id="documento_form" action="?X-Progress-ID=HOLA" enctype="multipart/form-data" method="post">{% csrf_token %}
    	
    	<fieldset id="step_tipo" class="step">
    		<h3>Paso 1 - Tipo de documento</h3>
@@ -96,12 +96,6 @@
 				$("#documento_form").formwizard({
 					validationEnabled: true,
 					
-					formPluginEnabled : true,
-					formOptions : {
-						//NO SIRVE
-						beforeSubmit : trigger_progressbar,
-						url : '{% url add_documento %}?X-Progress-ID=HOLA',
-						},
 					textSubmit : 'Subir',
 					textNext : 'Siguiente',
 					textBack : 'Anterior',
@@ -119,6 +113,7 @@
 				 				//actualizo autor y titulo encontrados
 				 				$('#id_titulo').val(data.titulo);
 				 				$('#id_autor').val(data.autor);
+				 				
 				 				return true;
 				 			}
 				 			
@@ -144,9 +139,13 @@
 						$('#isbn_container').show();
 					}
 				})
+				
+				$('#documento_form').submit(trigger_progressbar);
   		});
-			
 		
+		
+		//url : '{% url add_documento %}?X-Progress-ID=HOLA',
+			
 		function trigger_progressbar() {
 			
 			//mostrar barra
@@ -157,10 +156,10 @@
 			});
 			$("#progressbar").fadeIn();
 			
-			setInterval(function() {
+			/* setInterval(function() {
 			    $.getJSON("{% url upload_progress %}?X-Progress-ID=HOLA", 
 			    		progressbar_update);
-		  	}, 2000);
+		  	}, 2000); */
 			
 		}
 			
