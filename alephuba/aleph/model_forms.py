@@ -10,6 +10,7 @@ from alephuba.aleph.models import Documento, Carrera, UserProfile
 from django.http import HttpResponse
 import json
 from alephuba.lib.openlibrary import get_author_and_title
+from alephuba import settings
 
 
 def is_valid_isbn10(isbn):
@@ -55,6 +56,19 @@ class DocumentoModelForm(forms.ModelForm):
                     """El ISBN debe ser un número de 10 o 13 dígitos.""")
         
         return isbn
+    
+    def clean_doc_file(self):
+        doc_file = self.cleaned_data['doc_file']
+        
+        if doc_file._size > settings.MAX_UPLOAD_SIZE:
+            raise forms.ValidationError(
+                    """El archivo no puede superar los 100mb.""")
+        
+        file_type = doc_file.name.split('.')[-1]
+        if file_type not in settings.UPLOAD_TYPES:
+            raise forms.ValidationError("""Formato no permitido.""")
+        
+        return doc_file 
         
 class UserForm(UserCreationForm):
     

@@ -179,3 +179,9 @@ TINYMCE_DEFAULT_CONFIG = {
 
 #Poner en false para no enviar los archivos a los servers al hacer upload
 UPLOAD_ACTIVADO = True
+
+#Maximo tamano de archivo permitido. Debe coincidir con el max body size configurado en nginx
+MAX_UPLOAD_SIZE = 104857600 #10MB
+
+#extensiones permitidas
+UPLOAD_TYPES = ['pdf', 'doc', 'chm', 'djvu', 'odt', 'jpg', 'png']
