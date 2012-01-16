@@ -75,26 +75,19 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 
 {% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
 
-<h3>Comentarios</h3>
-
-<br/>
 
 {% get_comment_count for documento as number_of_comments %}
 
-<p>Este documento posee {{ number_of_comments }} comentarios.</p>
-
-<br/><br/>
-
 <div id="comentarios">
+	<h3>Comentarios</h3>
 	{% get_comment_list for documento as comment_list %}
 		
 	{% for comment in comment_list %}
-		<hr>
-		<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
-		<p><em>{{ comment.comment|safe }}</em></p><br>
-		<p>{{ comment.submit_date|date:"d/m/y" }}</p><br>
-		
-		{% if forloop.last %}<hr>{% endif %}
+		<div class="comentario">
+			<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
+			<p><em>{{ comment.comment|safe }}</em></p><br>
+			<p>{{ comment.submit_date|date:"d/m/y" }}</p><br>
+		</div>
 	{% endfor %}
 </div>
 

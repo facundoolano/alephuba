@@ -453,3 +453,12 @@ border: 1px solid #ddd;
 	border-radius: 4px 4px 4px 4px;
 	}
 
+#comentarios {
+	padding-top: 15px;
+}
+
+.comentario {
+	border-bottom: 1px dotted #DDDDDD;
+	margin-left: 10px;
+	padding-top: 10px;
+}
