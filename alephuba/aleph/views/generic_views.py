@@ -12,6 +12,7 @@ from alephuba.aleph.model_forms import DocumentoModelForm
 from alephuba.lib import openlibrary
 from django.template.loader import render_to_string
 from alephuba.lib.ifileit import Ifileit
+from alephuba import settings
 
 
 class DocumentoList(ListView):
@@ -85,9 +86,11 @@ class DocumentoCreate(CreateView):
             form.instance.olid = openlibrary.get_OLID(form.instance.isbn)
         
         #manejar upload
-        #doc_file = form.files['doc_file']
-        #form.instance.link = Ifileit.upload(doc_file)
-        form.instance.link='http://fake.com'
+        if settings.UPLOAD_ACTIVADO:
+            doc_file = form.files['doc_file']
+            form.instance.link = Ifileit.upload(doc_file)
+        else:
+            form.instance.link='http://fake.com'
         
         return super(DocumentoCreate, self).form_valid(form)
     

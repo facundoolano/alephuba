@@ -15,8 +15,8 @@ class Ifileit(object):
     FETCH_API_KEY_URL = 'https://secure.ifile.it/api-fetch_apikey.api'
     PING_URL = 'http://ifile.it/api-ping.api'
     
-    USER = ''
-    PASSWORD = ''
+    USER = 'chacholano'
+    PASSWORD = 'dx9dx9'
     API_KEY = ''
     
     @classmethod

@@ -19,6 +19,5 @@ urlpatterns = patterns('',
             url(r'^autocomplete/', json_views.autocomplete_documento, name='autocomplete_documento'),
             url(r'^(?P<document_pk>\d+)/vote/(?P<vote>(\d+|\d+\.\d{1}))$', json_views.vote_on_document),
             url(r'^isbn/', validate_isbn, name='validate_isbn'),
-            url(r'^progress/', json_views.get_upload_progress, name='upload_progress'),
           
 )

@@ -7,7 +7,7 @@
 {% if not site_available %}
 <p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
 {% else %}
-	<form id="documento_form" action="?X-Progress-ID=HOLA" enctype="multipart/form-data" method="post">{% csrf_token %}
+	<form id="documento_form" action="" enctype="multipart/form-data" method="post">{% csrf_token %}
    	
    	<fieldset id="step_tipo" class="step">
    		<h3>Paso 1 - Tipo de documento</h3>
@@ -69,8 +69,6 @@
 			<p/>
 		</div>
 		
-		<div id="progressbar"></div>
-		
 	</fieldset>
 	
 	<div id="wizard_buttons"> 							
@@ -79,6 +77,13 @@
 	</div>
 	
 </form>
+
+
+<div id="dialog-modal" title="Subiendo">
+	<p>Por favor, espere mientras subimos el archivo.</p>
+	<br/>
+	<img src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
+</div>
 {% endif %}
 
 {% endblock %}
@@ -140,33 +145,23 @@
 					}
 				})
 				
-				$('#documento_form').submit(trigger_progressbar);
+				$( "#dialog-modal" ).dialog({
+					autoOpen: false,
+					height: 140,
+					modal: true,
+					closeOnEscape : false,
+					resizable : false,
+					open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+				});
+				
+				$('#documento_form').submit(trigger_wait_message);
   		});
 		
 		
-		//url : '{% url add_documento %}?X-Progress-ID=HOLA',
-			
-		function trigger_progressbar() {
-			
-			//mostrar barra
-			$('.field_container').hide();
-			$("#progressbar").hide();
-			$( "#progressbar" ).progressbar({
-				value: 0
-			});
-			$("#progressbar").fadeIn();
-			
-			/* setInterval(function() {
-			    $.getJSON("{% url upload_progress %}?X-Progress-ID=HOLA", 
-			    		progressbar_update);
-		  	}, 2000); */
-			
+		function trigger_wait_message() {
+			$( "#dialog-modal" ).dialog('open');
 		}
 			
-		function progressbar_update(data) {
-			var percentage = Math.floor(100 * parseInt(data.uploaded) / parseInt(data.length));
-			//$("#progressbar").value(percentage);
-		}
 			
     </script>
 
