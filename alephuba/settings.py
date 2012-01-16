@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.comments',
+    'django.contrib.humanize',
     
     'aleph',
     'noticias',

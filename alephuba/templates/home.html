@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load humanize %} 
+
 
 {% block sidebar %}
 	<ul class="sideNav">
@@ -20,7 +22,7 @@
 		<div class="titulo">{{ noticia.titulo }}</div>
 		<div class="contenido">{{ noticia.contenido|safe }}</div>
 		
-		<div class="detalle">{{ noticia.fecha|date:'d/m/y' }} por <b>{{ noticia.autor }}</b></div>
+		<div class="detalle">{{ noticia.fecha|naturalday:'d/m/y'|capfirst }} por <b>{{ noticia.autor }}</b></div>
 	</div>
 {% endfor %}
 

@@ -1,6 +1,6 @@
 {% extends 'documentos/documento_list.html' %}
 
-{% load comments documentostags %}
+{% load comments documentostags humanize %}
 
 {% block extra_head %}
 
@@ -61,7 +61,7 @@
 				{% if documento.mirror %}<p><label>Mirror:</label> <a href="{{ documento.mirror  }}" target="_blank">{{ documento.mirror  }}</a></p><p/>{% endif %}
 				<p><label>Subido por:</label> {{ documento.subido_por }}</p><p/>
 				
-				<p><label>Detalles:</label> {{ documento.detalles }}</p><p/>
+				{% if documento.detalles %}<p><label>Detalles:</label> {{ documento.detalles }}</p><p/>{% endif%}
 			
 			</div>
 			<div class="clear"></div>
@@ -92,7 +92,7 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 		<hr>
 		<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
 		<p><em>{{ comment.comment|safe }}</em></p><br>
-		<p>{{ comment.submit_date|date:"D d M Y g:i a" }}</p><br>
+		<p>{{ comment.submit_date|date:"d/m/y" }}</p><br>
 		
 		{% if forloop.last %}<hr>{% endif %}
 	{% endfor %}
