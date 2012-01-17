@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from alephuba.aleph.forms import UserForm
+from alephuba.aleph.forms import UserForm, MirrorModelForm
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -90,35 +90,32 @@ class DocumentoDetail(DetailView):
         
         return context
 
-class DocumentoCreate(CreateView):
-    template_name = 'documentos/add_documento.html'
-    form_class = DocumentoModelForm
-    success_url = '/docs'
-    
-    
+
+class ArchivoBaseView(CreateView):
+    """ Clase base para una view que crea una instancia de Archivo. """
+
     def get_context_data(self, **kwargs):
-        context = super(DocumentoCreate, self).get_context_data(**kwargs)
+        context = super(ArchivoBaseView, self).get_context_data(**kwargs)
         context['site_available'] = Ifileit.ping()
         
         return context
     
-    def _upload_archivo(self, doc_file, detalles):
+    def _get_upload_link(self, doc_file):
         """
         Si los uploads estan activados, envia el archivo a ifile.it y crea
         la instancia de Archivo.
         """
         
-        archivo = models.Archivo()
-        archivo.documento = self.object
-        archivo.subido_por = self.request.user
-        archivo.detalles = detalles
-        
         if settings.UPLOAD_ACTIVADO:
-            archivo.link = Ifileit.upload(doc_file)
-        else:
-            archivo.link = "http://fake.com"
+            return Ifileit.upload(doc_file)
         
-        archivo.save()
+        return "http://fake.com"
+    
+
+class DocumentoCreate(ArchivoBaseView):
+    template_name = 'documentos/add_documento.html'
+    form_class = DocumentoModelForm
+    success_url = '/docs'
     
     def form_valid(self, form):
         """ 
@@ -130,6 +127,33 @@ class DocumentoCreate(CreateView):
             
         response = super(DocumentoCreate, self).form_valid(form)
         
-        self._upload_archivo(form.files['doc_file'], form.cleaned_data['detalles'])
+        #FIXME refactorizar    
+        archivo = models.Archivo()
+        archivo.documento = self.object
+        archivo.detalles = form.cleaned_data['detalles']
+        archivo.subido_por = self.request.user
+        archivo.link = self._get_upload_link(form.files['doc_file'])
+        archivo.save()
         
         return response
+    
+
+class MirrorCreate(ArchivoBaseView):
+    template_name = 'documentos/add_mirror.html'
+    form_class = MirrorModelForm
+    
+    #FIXME volver al documento
+    success_url = '/docs'
+    
+    def form_valid(self, form):
+        
+        #FIXME refactorizar
+        archivo = form.instance
+        archivo.documento = models.Documento.objects.get(
+                                                id=self.kwargs['documento_id'])
+        archivo.subido_por = self.request.user
+        archivo.link = (form.cleaned_data['link'] or 
+                        self._get_upload_link(form.files['doc_file']))
+        
+        return super(MirrorCreate, self).form_valid(form)
+    

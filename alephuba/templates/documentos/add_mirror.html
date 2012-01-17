@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Agregar mirror</h3>
+
+{% with enctype='enctype="multipart/form-data"' %}
+	{% include 'form.html' %}
+{% endwith %}
+
+{% endblock %}

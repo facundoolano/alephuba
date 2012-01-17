@@ -79,6 +79,7 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 </fieldset>
 {% endfor %}
 
+<a href="{% url add_mirror documento.pk%}">Agregar mirror</a>
 
 {% get_comment_count for documento as number_of_comments %}
 
