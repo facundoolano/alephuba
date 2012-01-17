@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User as AuthUser, User
+from django.contrib.auth.models import User as AuthUser
 from django.db.models import Q
 from django.db.models.aggregates import Avg, Count
 
@@ -42,13 +42,13 @@ class DocumentoManager(models.Manager):
         """
         
         if not termino:
-            return self.order_by('-fecha_subida')
+            return self.all()
         
         #se usan Q objects para hacer un OR en vez de AND
         return self.filter(Q(autor__icontains=termino)|
                            Q(titulo__icontains=termino)
-                           ).order_by('-fecha_subida')
-
+                           )
+                           
 class Documento(models.Model):
     objects = DocumentoManager()
     
@@ -59,20 +59,27 @@ class Documento(models.Model):
     carrera = models.ManyToManyField(Carrera, blank=True, null=True)
     materia = models.ManyToManyField(Materia, blank=True, null=True)
     
-    detalles = models.TextField(blank=True, null=True)
-    
     tipo = models.CharField('Tipo de documento', max_length=3, 
                                 choices=DOCUMENTO_CHOICES, default='LIB')
     
     isbn = models.CharField('ISBN', max_length=13, blank=True, null=True)
     olid = models.CharField('OLID', max_length=15, blank=True, null=True)
     
+    def __unicode__(self):
+        return self.titulo
+
+
+class Archivo(models.Model):
+    """ Un archivo descargable correspondiente a un documento. """
+    
+    documento = models.ForeignKey(Documento)
+    
     link = models.URLField()
     subido_por = models.ForeignKey(AuthUser)
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     
-    def __unicode__(self):
-        return self.titulo
+    detalles = models.TextField(blank=True, null=True)
+
 
 class VoteManager(models.Manager):
      
@@ -102,7 +109,7 @@ class VoteManager(models.Manager):
         return True
 
 class Vote(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(AuthUser)
     document = models.ForeignKey(Documento)
     vote_value = models.FloatField()
     
@@ -112,7 +119,7 @@ class Vote(models.Model):
         return "%s, %s : %d" % (self.user, self.document, self.vote_value)
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
+    user = models.ForeignKey(AuthUser, unique=True)
     carrera = models.ForeignKey(Carrera, null=True)
 
-User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+AuthUser.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

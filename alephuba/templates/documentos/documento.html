@@ -57,12 +57,6 @@
 				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				
-				<p><label>Link:</label> <a href="{{ documento.link  }}" target="_blank">{{ documento.link  }}</a></p><p/>
-				{% if documento.mirror %}<p><label>Mirror:</label> <a href="{{ documento.mirror  }}" target="_blank">{{ documento.mirror  }}</a></p><p/>{% endif %}
-				<p><label>Subido por:</label> {{ documento.subido_por }}</p><p/>
-				
-				{% if documento.detalles %}<p><label>Detalles:</label> {{ documento.detalles }}</p><p/>{% endif%}
-			
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -73,7 +67,17 @@
 
 Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).
 
+
 {% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
+
+<h3>Archivos</h3>
+{% for archivo in documento.archivo_set.all %}
+<fieldset>
+	<p><label>Link:</label> <a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></p><p/>
+	<p><label>Subido por:</label> {{ archivo.subido_por }}</p><p/>
+	{% if archivo.detalles %}<p><label>Detalles:</label> {{ archivo.detalles }}</p><p/>{% endif%}
+</fieldset>
+{% endfor %}
 
 
 {% get_comment_count for documento as number_of_comments %}
