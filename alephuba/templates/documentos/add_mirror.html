@@ -9,3 +9,22 @@
 {% endwith %}
 
 {% endblock %}
+
+{% block extra_head %}
+<script type="text/javascript">
+	$(function(){
+		$('#id_fuente').change(mostrar_fuente);
+		mostrar_fuente();
+	});
+	
+	function mostrar_fuente() {
+		if($('#id_fuente').val() == 'ARC') {
+			$('#link_container').hide();
+			$('#doc_file_container').show();
+		} else if ($('#id_fuente').val() == 'URL') {
+			$('#link_container').show();
+			$('#doc_file_container').hide();
+		}
+	}
+</script>
+{% endblock %}

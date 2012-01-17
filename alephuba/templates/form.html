@@ -3,7 +3,7 @@
 		
 		{% if form.errors %}<span class="form_error">Por favor, corrija los errores indicados.</span>{% endif %}
 		{% for field in form %}
-		<div class="field_container">
+		<div class="field_container" id="{{ field.name}}_container">
 			<p><label {% if not field.field.required %} class="optional"{% endif %}for="id_{{ field.name}}">{{ field.label }}:</label></p>
 			{% if field.errors %}<p>{% for error in field.errors %}<span class="form_error">{{ error }}<br/></span>{% endfor %}</p>{% endif %}
 			<p>{{field}}</p>

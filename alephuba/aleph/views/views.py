@@ -16,6 +16,7 @@ from django.template.loader import render_to_string
 from alephuba.lib.ifileit import Ifileit
 from alephuba import settings
 from alephuba.aleph.forms import DocumentoModelForm
+from django.core.urlresolvers import reverse
 
 
 #FIXME usar class based form view
@@ -142,8 +143,9 @@ class MirrorCreate(ArchivoBaseView):
     template_name = 'documentos/add_mirror.html'
     form_class = MirrorModelForm
     
-    #FIXME volver al documento
-    success_url = '/docs'
+    
+    def get_success_url(self):
+        return reverse('documento', args=[self.kwargs['documento_id']])
     
     def form_valid(self, form):
         

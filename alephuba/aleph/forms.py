@@ -31,16 +31,15 @@ class ArchivoBaseForm(forms.ModelForm):
     def clean_doc_file(self):
         doc_file = self.cleaned_data['doc_file']
         
-        if not doc_file:
-            return doc_file
+        if doc_file:
         
-        if doc_file._size > settings.MAX_UPLOAD_SIZE:
-            raise forms.ValidationError(
-                    """El archivo no puede superar los 100mb.""")
-        
-        file_type = doc_file.name.split('.')[-1]
-        if file_type not in settings.UPLOAD_TYPES:
-            raise forms.ValidationError("""Formato no permitido.""")
+            if doc_file._size > settings.MAX_UPLOAD_SIZE:
+                raise forms.ValidationError(
+                        """El archivo no puede superar los 100mb.""")
+            
+            file_type = doc_file.name.split('.')[-1]
+            if file_type not in settings.UPLOAD_TYPES:
+                raise forms.ValidationError("""Formato no permitido.""")
         
         return doc_file 
 
@@ -68,6 +67,22 @@ class MirrorModelForm(ArchivoBaseForm):
     
     doc_file = forms.FileField(label='Archivo', required=False)
     link = forms.URLField(label='URL', required=False)
+    
+    def clean(self):
+        cleaned_data = super(MirrorModelForm, self).clean()
+        
+        if cleaned_data['fuente'] == 'ARC':
+            if not cleaned_data['doc_file']:
+                msg = u'Este campo es obligatorio'
+                self._errors['doc_file'] = self.error_class([msg])
+                del cleaned_data['doc_file']
+        else:
+            if not cleaned_data['link']:
+                msg = u'Este campo es obligatorio'
+                self._errors['link'] = self.error_class([msg])
+                del cleaned_data['link']
+        
+        return cleaned_data
     
     class Meta:
         model = Archivo
