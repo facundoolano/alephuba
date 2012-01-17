@@ -42,12 +42,12 @@ class DocumentoManager(models.Manager):
         """
         
         if not termino:
-            return self.all()
+            return self.all().order_by('-id')
         
         #se usan Q objects para hacer un OR en vez de AND
         return self.filter(Q(autor__icontains=termino)|
                            Q(titulo__icontains=termino)
-                           )
+                           ).order_by('-id')
                            
 class Documento(models.Model):
     objects = DocumentoManager()

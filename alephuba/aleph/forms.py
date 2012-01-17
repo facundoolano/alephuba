@@ -26,11 +26,12 @@ def is_valid_isbn13(isbn):
 
 class DocumentoModelForm(forms.ModelForm):
     
-    doc_file = forms.FileField(label='Archivo') 
+    doc_file = forms.FileField(label='Archivo')
+    detalles = forms.CharField(label='Detalles', widget=forms.Textarea())
     
     class Meta:
         model = Documento
-        exclude = ('subido_por', 'olid', 'link')
+        exclude = ('olid')
         
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn').upper()

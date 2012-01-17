@@ -102,22 +102,34 @@ class DocumentoCreate(CreateView):
         
         return context
     
-    def form_valid(self, form):
-        """ 
-        Agrega al usuario logueado como el que subio el documento, setea el 
-        OLID e intenta hacer upload del archivo subido.
+    def _upload_archivo(self, doc_file, detalles):
+        """
+        Si los uploads estan activados, envia el archivo a ifile.it y crea
+        la instancia de Archivo.
         """
         
-        form.instance.subido_por = self.request.user
+        archivo = models.Archivo()
+        archivo.documento = self.object
+        archivo.subido_por = self.request.user
+        archivo.detalles = detalles
+        
+        if settings.UPLOAD_ACTIVADO:
+            archivo.link = Ifileit.upload(doc_file)
+        else:
+            archivo.link = "http://fake.com"
+        
+        archivo.save()
+    
+    def form_valid(self, form):
+        """ 
+        Setea el OLID en base al ISBN y crea el archivo inlcuido en el form.
+        """
         
         if form.instance.isbn:
             form.instance.olid = openlibrary.get_OLID(form.instance.isbn)
+            
+        response = super(DocumentoCreate, self).form_valid(form)
         
-        #manejar upload
-        if settings.UPLOAD_ACTIVADO:
-            doc_file = form.files['doc_file']
-            form.instance.link = Ifileit.upload(doc_file)
-        else:
-            form.instance.link='http://fake.com'
+        self._upload_archivo(form.files['doc_file'], form.cleaned_data['detalles'])
         
-        return super(DocumentoCreate, self).form_valid(form)
+        return response

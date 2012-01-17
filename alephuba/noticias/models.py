@@ -15,7 +15,7 @@ class Entrada(models.Model):
 
 
 CONTENIDO_UPLOAD = "<p>El documento <b><a href='{url}'>{titulo}</a></b> \
-                    de <b>{autor}</b> fue subido por <b>{usuario}</b>.</p>"
+                    de <b>{autor}</b> fue subido.</p>"
                     
 def publicar_upload(sender, **kwargs):
     
@@ -28,8 +28,7 @@ def publicar_upload(sender, **kwargs):
                                         url=reverse('documento', 
                                                     args=[documento.pk]),
                                         titulo=documento.titulo,
-                                        autor=documento.autor,
-                                        usuario=documento.subido_por.username)
+                                        autor=documento.autor)
         entrada.save()
     
 
