@@ -8,12 +8,14 @@ body {
 	font-size: 12px;
 	color: #646464;
 	text-align: center;
+	overflow-y:scroll;
 }
 
 #wrapper {
 	text-align: left;
 	width: 930px;
 	margin: 0 auto;
+	
 }
 
 /* Logo  ---------------------------------------- */
@@ -80,38 +82,8 @@ h1 a {
 
 
 #container {
-	background: #fff url(../img/content.gif) repeat-y left top;
+	background: #fff;
 	border: 1px solid #ddd;
-	width: 918px;
-}
-
-/* Sidebar ---------------------------------------- */
-
-#sidebar {
-	width: 179px;
-	float: left;
-}
-
-#sidebar .sideNav { width: 179px; }
-
-#sidebar .sideNav li { border-bottom: 1px solid #ddd; width: 179px; }
-
-#sidebar .sideNav li a {
-	display: block;
-	color: #646464;
-	background: #f6f6f6;
-	text-decoration: none;
-	height: 29px;
-	line-height: 29px;
-	padding: 0 19px;
-	width: 141px;
-}
-
-#sidebar .sideNav li a:hover { background: #fdfcf6; }
-
-#sidebar .sideNav li a.active, #sidebar .sideNav li a.active:hover {
-	background: #f0f7fa;
-	font-weight: bold;
 }
 
 /* Breadcrumb ---------------------------------------- */
@@ -140,9 +112,7 @@ h1 a {
 /* Content ---------------------------------------- */
 
 #main {
-	width: 700px;
-	float: right;
-	padding: 0 19px 20px 0;
+	padding: 0 19px 20px 30px;
 }
 
 h3 {
@@ -161,7 +131,7 @@ h2 {
 
 #main table {
 	border-top: 1px solid #ddd;
-	width: 700px;
+	width: 100%;
 }
 
 #main table tr td {
@@ -261,16 +231,21 @@ h2 {
 /* Footer ---------------------------------------- */
 
 #footer {
+	float:right;
 	margin: 10px 0 30px 0;
-	font-size: 11px;
+	font-size: 100%;
 	line-height: 11px;
 	color: #9B9B9B;
-	padding: 0 0 0 5px;
+	padding: 0 5px 0 5px;
 }
 
-#footer a { color: #9B9B9B; }
+#footer a { 
+	color: #9B9B9B;
+	text-decoration: none; 
+	}
+	
+#footer a:hover { text-decoration: underline; }
 
-#footer a:hover { text-decoration: none; }
 
 /* Forms */
 
