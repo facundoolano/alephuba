@@ -118,6 +118,14 @@ class DocumentoCreate(ArchivoBaseView):
     form_class = DocumentoModelForm
     success_url = '/docs'
     
+    def _make_archivo(self, form):
+        archivo = models.Archivo()
+        archivo.documento = self.object
+        archivo.detalles = form.cleaned_data['detalles']
+        archivo.subido_por = self.request.user
+        archivo.link = self._get_upload_link(form.files['doc_file'])
+        archivo.save()
+    
     def form_valid(self, form):
         """ 
         Setea el OLID en base al ISBN y crea el archivo inlcuido en el form.
@@ -128,13 +136,7 @@ class DocumentoCreate(ArchivoBaseView):
             
         response = super(DocumentoCreate, self).form_valid(form)
         
-        #FIXME refactorizar    
-        archivo = models.Archivo()
-        archivo.documento = self.object
-        archivo.detalles = form.cleaned_data['detalles']
-        archivo.subido_por = self.request.user
-        archivo.link = self._get_upload_link(form.files['doc_file'])
-        archivo.save()
+        self._make_archivo(form)
         
         return response
     
@@ -143,13 +145,11 @@ class MirrorCreate(ArchivoBaseView):
     template_name = 'documentos/add_mirror.html'
     form_class = MirrorModelForm
     
-    
     def get_success_url(self):
         return reverse('documento', args=[self.kwargs['documento_id']])
     
     def form_valid(self, form):
         
-        #FIXME refactorizar
         archivo = form.instance
         archivo.documento = models.Documento.objects.get(
                                                 id=self.kwargs['documento_id'])

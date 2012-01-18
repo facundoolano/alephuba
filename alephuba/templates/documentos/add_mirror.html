@@ -4,9 +4,19 @@
 
 <h3>Agregar mirror</h3>
 
-{% with enctype='enctype="multipart/form-data"' %}
-	{% include 'form.html' %}
-{% endwith %}
+	{% if not site_available %}
+		<p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
+	{% else %}
+		{% with enctype='enctype="multipart/form-data"' %}
+			{% include 'form.html' %}
+		{% endwith %}
+	{% endif %}
+	
+	<div id="dialog-modal" title="Subiendo">
+		<p>Por favor, espere mientras subimos el archivo.</p>
+		<br/>
+		<img src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
+	</div>
 
 {% endblock %}
 
@@ -15,7 +25,27 @@
 	$(function(){
 		$('#id_fuente').change(mostrar_fuente);
 		mostrar_fuente();
+		
+		//FIXME copy paste
+		$( "#dialog-modal" ).dialog({
+			autoOpen: false,
+			height: 140,
+			modal: true,
+			closeOnEscape : false,
+			resizable : false,
+			open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
+		});
+		
+		$('form').submit(trigger_wait_message);
+		
+		
 	});
+	
+	function trigger_wait_message() {
+		if($('#id_fuente').val() == 'ARC') {
+			$( "#dialog-modal" ).dialog('open');
+		}
+	}
 	
 	function mostrar_fuente() {
 		if($('#id_fuente').val() == 'ARC') {
