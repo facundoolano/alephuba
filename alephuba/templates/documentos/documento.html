@@ -44,7 +44,7 @@
 <h2>{{ documento.titulo }}</h2>
 
 <div id="datos_documento">
-	<fieldset>
+	<fieldset class="display-fieldset">
 		<div>
 			<div id="cover">
 				<img src="{{ documento|book_cover }}" onerror="on_cover_error(this)">
@@ -72,7 +72,7 @@ Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad
 
 <h3>Archivos</h3>
 {% for archivo in documento.archivo_set.all %}
-<fieldset>
+<fieldset class="display-fieldset">
 	<p><label>Link:</label> <a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></p><p/>
 	<p><label>Subido por:</label> {{ archivo.subido_por }}</p><p/>
 	{% if archivo.detalles %}<p><label>Detalles:</label> {{ archivo.detalles }}</p><p/>{% endif%}
