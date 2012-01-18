@@ -163,7 +163,14 @@ h2 {
 	padding: 20px 20px 5px;
 }
 
-#main fieldset p { margin: 0 0 8px 0; float: left; width: 100%;  }
+#main fieldset p { 
+	margin: 0 0 8px 0; 
+	float: left; 
+	width: 100%;
+	font-size: 13px;
+	padding-bottom: 0px;
+	
+	  }
 
 #main fieldset label {
 	width: 100%;
@@ -293,26 +300,22 @@ h2 {
 * ------------- */
 
 .noticia .titulo {
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 14px;
 	font-weight: bold;
 	color: #5494af;
-	margin: 20px 0 5px;
+	margin: 30px 0 5px;
 	}
-
-.noticia .contenido {
-	margin: 5px 0 10px;
+#main .noticia .contenido p{
+	font-size: 13px;
 	}
-
 
 .noticia .detalle {
 	color : #b1b1b1;
-	margin: 5px 0 5px;
+	margin: 5px 0;
 	}
 
-#home_footer {
-	margin: 30px 0 0 0;	
-}
+
 
 #home_footer .next {
 	float: right;
@@ -409,4 +412,14 @@ input[type=submit] {
 	padding: 19px;
 	margin: 0 0 20px 0;
 	background: #fbfbfb;
+	}
+	
+#main p {
+	padding-bottom: 10px;
+	line-height: 1.4em;
+	font-size: 14px;
+	}
+
+#main a{
+	color: #2f3dc9;
 	}

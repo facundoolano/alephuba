@@ -1,14 +1,5 @@
 {% extends 'base.html' %}
 
-{% block sidebar %}
-	<ul class="sideNav">
-	   	<li><a href="{% url busqueda_por_materia %}">Por materia</a></li>
-	   	<li><a href="{% url buscar %}" class="active">Más recientes</a></li>
-	   	<li><a href="#">Más populares</a></li>
-	   	<li><a href="#">Búsqueda avanzada</a></li>
-	</ul>
-{% endblock %}
-
 {% block content %}
 <h2>Documentos recientes</h2>
 

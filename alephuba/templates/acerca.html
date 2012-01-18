@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Acerca de aleph uba</h2>
+
+<p><b>aleph uba</b> es un proyecto de software libre desarrollado por alumnos de Ingeniería en Informática de la UBA. 
+Su objetivo es, por un lado, proveer un lugar centralizado donde guardar y compartir los libros y apuntes necesarios para
+las cursadas de las materias. Por otro lado, fue una excusa para poner en práctica herramientas y técnicas de programación
+que nos interesan.</p>
+
+<p><b>No alojamos en nuestros servidores ninguno de los contenidos accesibles desde el sitio</b>, sólo proveemos una forma
+de organizar los archivos subidos por los usuarios, y no nos responsabilizamos por lo que ellos publiquen. 
+Si sos autor o posees los derechos de cualquier material publicado en el sitio y querés que sea retirado, 
+por favor <a href="#">ponete en contacto con nosotros.</a></p>
+
+<p><b>aleph uba</b> está desarrollado con el lenguaje de programación <a href="http://python.org/">Python</a> 
+y el framework web <a href="https://www.djangoproject.com/">django</a>. 
+Para buscar la información de los libros y sus portadas usamos la <a href="http://openlibrary.org/developers/api">API</a> de <a href="http://openlibrary.org">Open Library</a>.
+
+<h3>Como colaborar</h3>
+<p>Como usuario podés colaborar subiendo material, reportando los links caídos, erróneos, etc. 
+También podés comentarnos acerca de errores que encuentres, o mejoras que pensas serían útiles para el sitio.
+Podés hacerlo <a href="#">mandándonos un mail.</a></p>
+
+<p>Si sos programador o diseñador web podes colaborar mejorando el código, arreglando bugs o implementando nueva funcionalidad.
+El proyecto está disponible en <a href="https://github.com/facundoolano/alephuba">GitHub</a>, si querés colaborar hacé un fork y un pull request.</p>
+{% endblock %}
