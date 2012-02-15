@@ -119,8 +119,8 @@ class ArchivoBaseView(CreateView):
         la instancia de Archivo.
         """
         
-        self._scramble_name(doc_file)
         if settings.UPLOAD_ACTIVADO:
+            self._scramble_name(doc_file)
             return Ifileit.upload(doc_file)
         
         return "http://fake.com"
