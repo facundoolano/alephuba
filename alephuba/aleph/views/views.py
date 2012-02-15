@@ -17,6 +17,7 @@ from alephuba.lib.ifileit import Ifileit
 from alephuba import settings
 from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
+from random import shuffle
 
 
 #FIXME usar class based form view
@@ -101,12 +102,24 @@ class ArchivoBaseView(CreateView):
         
         return context
     
+    def _scramble_name(self, doc_file):
+        """ Separa nombre y extension, y mezcla el nombre. """
+        
+        terms = doc_file.name.split('.')
+        extension = terms.pop()
+        
+        name_list = list('.'.join(terms))
+        shuffle(name_list)
+        
+        doc_file.name = ''.join(name_list) + '.' + extension
+    
     def _get_upload_link(self, doc_file):
         """
         Si los uploads estan activados, envia el archivo a ifile.it y crea
         la instancia de Archivo.
         """
         
+        self._scramble_name(doc_file)
         if settings.UPLOAD_ACTIVADO:
             return Ifileit.upload(doc_file)
         
