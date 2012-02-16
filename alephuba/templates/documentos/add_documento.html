@@ -30,7 +30,7 @@
 		<div class="field_container">
 			<p><label for="id_titulo">Título:</label></p>
 			<p>{{ form.titulo }}</p>
-			<p/>
+			{% if form.titulo.errors %}{% for error in form.titulo.errors %}<label for="id_titulo" class="form_error">{{ error }}</label>{% endfor %}{% endif %}
 		</div>
 		
 		<div class="field_container">
@@ -60,6 +60,7 @@
 		<div class="field_container">
 			<p><label for="id_doc_file">Archivo:</label></p>
 			<p>{{ form.doc_file }}</p>
+			{% if form.doc_file.errors %}{% for error in form.doc_file.errors %}<label for="id_doc_file" class="form_error">{{ error }}</label>{% endfor %}{% endif %}
 			<p/>
 		</div>
 		
