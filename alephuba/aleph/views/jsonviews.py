@@ -35,3 +35,7 @@ def validate_isbn(request):
         result['autor'], result['titulo'] = get_author_and_title(isbn)
     
     return HttpResponse(json.dumps(result), mimetype='application/json')
+
+def validate_doc_unicity(request):
+    pass
+

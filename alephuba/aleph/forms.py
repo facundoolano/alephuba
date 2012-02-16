@@ -29,7 +29,7 @@ class ArchivoBaseForm(forms.ModelForm):
     doc_file = forms.FileField(label='Archivo')
     
     def clean_doc_file(self):
-        doc_file = self.cleaned_data['doc_file']
+        doc_file = self.files.get('doc_file')
         
         if doc_file:
         
@@ -45,7 +45,8 @@ class ArchivoBaseForm(forms.ModelForm):
 
 class DocumentoModelForm(ArchivoBaseForm):
     
-    detalles = forms.CharField(label='Detalles', widget=forms.Textarea())
+    detalles = forms.CharField(label='Detalles', required=False, 
+                               widget=forms.Textarea())
     
     class Meta:
         model = Documento
@@ -72,10 +73,9 @@ class MirrorModelForm(ArchivoBaseForm):
         cleaned_data = super(MirrorModelForm, self).clean()
         
         if cleaned_data['fuente'] == 'ARC':
-            if not cleaned_data['doc_file']:
+            if not self.files.get('doc_file'):
                 msg = u'Este campo es obligatorio'
                 self._errors['doc_file'] = self.error_class([msg])
-                del cleaned_data['doc_file']
         else:
             if not cleaned_data['link']:
                 msg = u'Este campo es obligatorio'

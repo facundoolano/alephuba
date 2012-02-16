@@ -93,6 +93,7 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form.js"></script>
 <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.validate.js"></script>
 
+<script type="text/javascript" src="{{ MEDIA_URL }}js/archivos.js"></script>
 
 <script type="text/javascript">
 			$(function(){
@@ -105,26 +106,15 @@
 					textNext : 'Siguiente',
 					textBack : 'Anterior',
 					
-					remoteAjax : {"step_tipo" : {
-						url : '{% url validate_isbn %}', 
-				 		dataType : 'json',
-				 		success : function(data){
-				 			
-				 			if(!data.valid) {
-				 				//Agrego error a mano si no es isbn valido
-				 				$('<label for="id_isbn" generated="true" class="error">ISBN inválido.</label>').insertAfter('#id_isbn');
-				 				return false;
-				 			} else {
-				 				//actualizo autor y titulo encontrados
-				 				$('#id_titulo').val(data.titulo);
-				 				$('#id_autor').val(data.autor);
-				 				
-				 				return true;
-				 			}
-				 			
-				 		},
-						},
-					}
+					remoteAjax : {"step_tipo" : validation_ajax(
+										'{% url validate_isbn %}', 
+										'#id_isbn', 
+										'ISBN inválido.', 
+										function(data){
+											$('#id_titulo').val(data.titulo);
+									 		$('#id_autor').val(data.autor);
+										})
+								}
 					
 				});
 				
@@ -145,21 +135,27 @@
 					}
 				})
 				
-				$( "#dialog-modal" ).dialog({
-					autoOpen: false,
-					height: 140,
-					modal: true,
-					closeOnEscape : false,
-					resizable : false,
-					open: function(event, ui) { $(".ui-dialog-titlebar-close").hide(); }
-				});
-				
-				$('#documento_form').submit(trigger_wait_message);
+				init_dialog();
   		});
 		
-		
-		function trigger_wait_message() {
-			$( "#dialog-modal" ).dialog('open');
+		/* Return validation ajax dict to use with the remoteAjax option*/
+		function validation_ajax(url, field_selector, error_msg, on_success){
+			return {
+					url : url, 
+			 		dataType : 'json',
+			 		success : function(data){
+			 			
+			 			if(!data.valid) {
+			 				//Agrego el error despues del field
+			 				$('<label for="id_isbn" generated="true" class="error">' + 
+			 						error_msg + '</label>').insertAfter(field_selector);
+			 				return false;
+			 			} else {
+			 				on_success(data)
+			 				return true;
+			 			}
+			 		},
+				}
 		}
 			
 			
