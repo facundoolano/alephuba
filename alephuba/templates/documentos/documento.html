@@ -57,29 +57,31 @@
 				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
 				
+				<div id="star"></div>
+				<p>Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).</p>
 			</div>
+
 			<div class="clear"></div>
 		</div>
 	</fieldset>
 </div>
 
-<div id="star"></div>
-
-Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).
-
-
-{% if usuario_ya_voto %}Usted ya ha votado.{% endif %}
 
 <h3>Archivos</h3>
+<table>
+<thead><tr><th>Archivo</th><th>Subido por</th><th/></tr></thead>
 {% for archivo in documento.archivo_set.all %}
-<fieldset class="display-fieldset">
-	<p><label>Link:</label> <a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></p><p/>
-	<p><label>Subido por:</label> {{ archivo.subido_por }}</p><p/>
-	{% if archivo.detalles %}<p><label>Detalles:</label> {{ archivo.detalles }}</p><p/>{% endif%}
-</fieldset>
+<tr {% cycle 'class="odd"' '' %}>
+	<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
+	<td>{{ archivo.subido_por }}</td>
+	<td class="actions"><a href="javascript:void(0)">Reportar</a></td>
+</tr>
 {% endfor %}
+<tr>
+	<td colspan=3 id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
+</tr>
+</table>
 
-<a href="{% url add_mirror documento.pk%}">Agregar mirror</a>
 
 {% get_comment_count for documento as number_of_comments %}
 
