@@ -68,7 +68,7 @@
 
 
 <h3>Archivos</h3>
-<table>
+<table id="archivos_table">
 <thead><tr><th>Archivo</th><th>Subido por</th><th/></tr></thead>
 {% for archivo in documento.archivo_set.all %}
 <tr {% cycle 'class="odd"' '' %}>
@@ -86,21 +86,22 @@
 {% get_comment_count for documento as number_of_comments %}
 
 <div id="comentarios">
-	<h3>Comentarios</h3>
+	<h3>Comentarios ({{number_of_comments}})</h3>
 	{% get_comment_list for documento as comment_list %}
 		
 	{% for comment in comment_list %}
 		<div class="comentario">
-			<p><strong>{{ comment.user_name }}</strong> dice:</p><br>
-			<p><em>{{ comment.comment|safe }}</em></p><br>
-			<p>{{ comment.submit_date|date:"d/m/y" }}</p><br>
+			<div class="header">
+				<div class="nombre"><strong>{{ comment.user_name }}</strong> escribió:</div>
+				<div class="fecha">{{ comment.submit_date|date:"d/m/y" }}</div>
+				<div class="clear"></div>
+			</div>
+			<div class="contenido">{{ comment.comment|safe }}</div>
 		</div>
 	{% endfor %}
 </div>
 
 {% get_comment_form for documento as form %}
-
-<h3>Agregue un comentario</h3>
 
 {% include 'comments/form_add_comment.html' with next=request.path %}
 

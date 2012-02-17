@@ -236,6 +236,10 @@ h2 {
 #paginator{ background: #FFFFFF; color:#AAAAAA; text-align: right;}
 thead{ background: #FFFFFF;}
 
+#archivos_table {
+	margin-left: 10px;
+	}
+
 #main th {
 	vertical-align: top;
 	padding: 0px 20px;
@@ -412,10 +416,26 @@ input[type=submit] {
 }
 
 .comentario {
-	border-bottom: 1px dotted #DDDDDD;
 	margin-left: 10px;
 	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 14px;
+	line-height: 1.4em;
 }
+
+.comentario .header {
+	border-bottom: 1px solid #DDDDDD;
+	font-size: 12px;
+	margin-bottom: 5px;
+	}
+
+.comentario .header .nombre {
+	float: left;
+	}
+
+.comentario .header .fecha {
+	float: right;
+	}
 
 #main .display-fieldset {
 	border: 1px solid #ddd;
