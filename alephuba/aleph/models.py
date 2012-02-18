@@ -30,7 +30,7 @@ class Materia(models.Model):
     detalles = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
-        return self.nombre
+        return '%s %s' % (self.codigo, self.nombre)
     
 
 class DocumentoManager(models.Manager):
@@ -79,6 +79,9 @@ class Archivo(models.Model):
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     
     detalles = models.TextField(blank=True, null=True)
+    
+    def __unicode__(self):
+        return self.documento.titulo
 
 
 class VoteManager(models.Manager):
