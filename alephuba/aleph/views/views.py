@@ -78,20 +78,26 @@ class DocumentoPorMateriaList(ListView):
         return models.Documento.objects.filtrar_materias(carreras, materias)
     
 
-#TODO hacer mixin
-class AjaxDocumentoList(DocumentoList):
+class JSONResponseMixin(object):
     """
-    Vista para actualizar el listado de documentos sin tener que refrescar la 
-    pagina. 
+    Mixin que renderiza a string un template y lo responde como json 
     """
-    
-    template_name = 'documentos/documento_list_content.html'
     
     def render_to_response(self, context):
         content = render_to_string(self.template_name, context)
         
         return http.HttpResponse(json.dumps({'content' : content}), 
                                  content_type='application/json')
+
+class UpdateDocumentoList(JSONResponseMixin, DocumentoList):
+    """ Update de la lista de documentos para evitar refrescar. """
+    
+    template_name = 'documentos/documento_list_content.html'
+    
+class UpdateDocumentoPorMateriaList(JSONResponseMixin, DocumentoPorMateriaList):
+    """ Update de la lista de documentos por materia para evitar refrescar. """
+    
+    template_name = 'documentos/documento_list_content.html'
 
 
 class DocumentoDetail(DetailView):

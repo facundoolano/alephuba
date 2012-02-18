@@ -9,3 +9,24 @@
 {% endwith %}
 </div>
 {% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<script type="text/javascript">
+	
+	function get_pagina(page) {
+		
+		//necesario para que codifique bien la lista de valores
+		jQuery.ajaxSettings.traditional = true;
+		
+		data = {
+				'materias' : $('#id_materias').val() || [],
+				'carreras' : $('#id_carreras').val() || [],
+				'page' : page,}
+		
+		$.get('{% url filtrar_materia_update %}', data, update_pagina, "json");
+	}
+	
+</script>
+
+{% endblock %}

@@ -18,7 +18,8 @@
 		$(source).unbind("error").attr("src", "{{ MEDIA_URL }}img/Blank.jpg");
 	}
 
-	function get_pagina(page, qs_documento) {
+	function get_pagina(page) {
+		var qs_documento = '{{ request.GET.qs_documento|default:"" }}';
 		data = {'qs_documento' : qs_documento, 
 				'page' : page,}
 		

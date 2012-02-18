@@ -24,20 +24,20 @@
 	<tr><td id="paginator">
 		{{ page_obj.start_index }} - {{ page_obj.end_index }} de {{ paginator.count }} documento{{ paginator.count|pluralize }} {% if page_obj.has_other_pages %}|{% endif %}
 		
-		{% if page_obj.has_previous %}<a href="javascript:void(0);" onclick="get_pagina(1, '{{ request.GET.qs_documento|default:"" }}')">&lt;&lt;</a>{% endif %}
-		{% if page_obj.has_previous %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.previous_page_number }}, '{{ request.GET.qs_documento|default:"" }}')">previa</a>{% endif %}
+		{% if page_obj.has_previous %}<a href="javascript:void(0);" onclick="get_pagina(1)">&lt;&lt;</a>{% endif %}
+		{% if page_obj.has_previous %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.previous_page_number }})">previa</a>{% endif %}
 
-		{% if page_obj.number|add:"-3" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-3' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-3" }}</a>{% endif %}
-		{% if page_obj.number|add:"-2" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-2' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-2" }}</a>{% endif %}
-		{% if page_obj.number|add:"-1" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-1' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"-1" }}</a>{% endif %}
+		{% if page_obj.number|add:"-3" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-3' }})">{{ page_obj.number|add:"-3" }}</a>{% endif %}
+		{% if page_obj.number|add:"-2" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-2' }})">{{ page_obj.number|add:"-2" }}</a>{% endif %}
+		{% if page_obj.number|add:"-1" > 0 %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'-1' }})">{{ page_obj.number|add:"-1" }}</a>{% endif %}
 		{% if page_obj.paginator.num_pages > 1 %}{{ page_obj.number }}{% endif %}
-		{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'1' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"1" }}</a>{% endif %}
-		{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'2' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"2" }}</a>{% endif %}
-		{% if page_obj.number|add:"3" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'3' }}, '{{ request.GET.qs_documento|default:"" }}')">{{ page_obj.number|add:"3" }}</a>{% endif %}
+		{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'1' }})">{{ page_obj.number|add:"1" }}</a>{% endif %}
+		{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'2' }})">{{ page_obj.number|add:"2" }}</a>{% endif %}
+		{% if page_obj.number|add:"3" <= page_obj.paginator.num_pages %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.number|add:'3' }})">{{ page_obj.number|add:"3" }}</a>{% endif %}
 		
 		
-		{% if page_obj.has_next %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.next_page_number }}, '{{ request.GET.qs_documento|default:"" }}')"> próxima</a>{% endif %}
-		{% if page_obj.has_next %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.paginator.num_pages }}, '{{ request.GET.qs_documento|default:"" }}')"> &gt;&gt;</a>{% endif %}
+		{% if page_obj.has_next %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.next_page_number }})"> próxima</a>{% endif %}
+		{% if page_obj.has_next %}<a href="javascript:void(0);" onclick="get_pagina({{ page_obj.paginator.num_pages }})"> &gt;&gt;</a>{% endif %}
 		
 	</td></tr>
 	
