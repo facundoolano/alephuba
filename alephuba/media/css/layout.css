@@ -421,7 +421,13 @@ input[type=submit] {
 	padding-bottom: 10px;
 	font-size: 14px;
 	line-height: 1.4em;
+	color: #999999;
 }
+
+#send_comentario {
+	margin-bottom: 15px;
+	color: #646464;
+	}
 
 .comentario .header {
 	border-bottom: 1px solid #DDDDDD;
@@ -435,6 +441,24 @@ input[type=submit] {
 
 .comentario .header .fecha {
 	float: right;
+	}
+
+#main .comentario fieldset {
+	padding: 0 20px 0 5px;
+	}
+
+#main .comentario .buttons_container 
+{
+	padding: 0 10px 0 0;
+	}
+
+#main .comentario .contenido {
+	color: #000000;
+	}
+
+#main .comentario textarea {
+	width: 100%;
+	height: 50px;
 	}
 
 #main .display-fieldset {

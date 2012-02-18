@@ -17,7 +17,7 @@
                    	<p
                    	{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
                    	
-        	        {{ field.label_tag }} {{ field }}</p>
+        	         {{ field }}</p>
             	{% endif %}
         	{% endif %}
         </div>
@@ -25,6 +25,8 @@
         
         <input type="hidden" name="next" value="{{ next }}">
 
-		<button class="submit-post" name="post" type="submit"><span><span>{{ submit_value|default:'Enviar'}}</span></span></button>
 	</fieldset>
+        <div class="buttons_container">
+			<input class="ui-state-active" type="submit" value="Enviar"/>
+		</div>
 </form>

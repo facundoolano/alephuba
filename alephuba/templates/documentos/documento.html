@@ -89,7 +89,17 @@
 	<h3>Comentarios ({{number_of_comments}})</h3>
 	{% get_comment_list for documento as comment_list %}
 		
-	{% for comment in comment_list %}
+	<div id="send_comentario" class="comentario">
+			<div class="header">
+				<div class="nombre"><strong>Dejar un comentario:</strong></div>
+				<div class="clear"></div>
+			</div>
+			
+			{% get_comment_form for documento as form %}
+			{% include 'comments/form_add_comment.html' with next=request.path %}
+	</div>
+	
+	{% for comment in comment_list reversed %}
 		<div class="comentario">
 			<div class="header">
 				<div class="nombre"><strong>{{ comment.user_name }}</strong> escribió:</div>
@@ -99,10 +109,9 @@
 			<div class="contenido">{{ comment.comment|safe }}</div>
 		</div>
 	{% endfor %}
+	
 </div>
 
-{% get_comment_form for documento as form %}
 
-{% include 'comments/form_add_comment.html' with next=request.path %}
 
 {% endblock %}
