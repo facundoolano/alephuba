@@ -4,15 +4,37 @@
 
 {% block filter_form %}
 <div id="filter_form">
-{% with submit_value='Filtrar' method='get' %}
-	{% include 'form.html' %}
-{% endwith %}
+
+	<form class="ui-formwizard ui-helper-reset ui-widget ui-widget-content ui-corner-all" action="">{% csrf_token %}
+		<fieldset class="ui-corner-all">
+			<div id="filtro_carreras">
+			<p><label class="optional" for="id_carreras">{{ form.carreras.label }}:</label></p>
+			<p>{{ form.carreras }}</p>
+			</div>
+			
+			<div id="filtro_materias">
+			<p><label class="optional" for="id_materias">{{ form.materias.label }}:</label></p>
+			<p>{{ form.materias }}</p>
+			</div>
+			<p>Seleccione los filtros a aplicar. Puede elegir varios con la tecla Ctrl.</p>
+			
+		</fieldset>
+	</form>
+
 </div>
 {% endblock %}
 
 {% block extra_head %}
 {{ block.super }}
 <script type="text/javascript">
+	$(function(){
+		$('#id_materias').change(function(){
+			get_pagina(1);
+		})
+		$('#id_carreras').change(function(){
+			get_pagina(1);
+		})
+	});
 	
 	function get_pagina(page) {
 		

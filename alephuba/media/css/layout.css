@@ -294,6 +294,13 @@ thead{ background: #FFFFFF;}
 	margin: 0 10px 0 0;
 }
 
+#main select[multiple=multiple]
+{
+	height : 150px;
+	font-size: 13px;
+	max-width: 480px;
+	}
+
 #logo{
 	float:left;
 	}
@@ -483,5 +490,18 @@ tr .actions {
 	}
 
 #filter_form {
-	padding-bottom: 50px;	
+	padding-bottom: 10px;
 }
+
+
+#filtro_carreras {
+	width: 30%;
+	float:left;
+	}
+
+#filtro_materias {
+	width :70%;
+	float:right;
+}
+
+
