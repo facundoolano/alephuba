@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     
     'aleph',
     'noticias',
+    'alertas',
     
     'south',
     

@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     
     (r'^docs/', include('aleph.urls')),
     (r'^noticias/', include('noticias.urls')),
+    (r'^alertas/', include('alertas.urls')),
     
     url(r'^admin/', include(admin.site.urls), name='admin'),
     url(r'^tinymce/', include('tinymce.urls')),

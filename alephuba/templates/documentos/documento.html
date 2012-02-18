@@ -74,7 +74,7 @@
 <tr {% cycle 'class="odd"' '' %}>
 	<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
 	<td>{{ archivo.subido_por }}</td>
-	<td class="actions"><a href="javascript:void(0)">Reportar</a></td>
+	<td class="actions"><a href="{% url reportar archivo.pk %}">Reportar</a></td>
 </tr>
 {% endfor %}
 <tr>
