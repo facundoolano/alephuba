@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Documentos recientes</h2>
+<h2>{% block section_title%}Documentos recientes{% endblock %}</h2>
+
+{% block filter_form %}{% endblock %}
 
 <div id="list_container">
 	{% include 'documentos/documento_list_content.html' %}

@@ -4,7 +4,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from alephuba.aleph.models import Documento, Carrera, UserProfile, Archivo
+from alephuba.aleph.models import Documento, Carrera, UserProfile, Archivo,\
+    Materia
 from alephuba import settings
 
 
@@ -116,3 +117,8 @@ def quick_search(request):
     paginas.
     """
     return {'qs_form' : BusquedaRapidaForm()}
+
+class BusquedaMateriaForm(forms.Form):
+    carreras = forms.ModelMultipleChoiceField(queryset=Carrera.objects.all(), required=False)
+    materias = forms.ModelMultipleChoiceField(queryset=Materia.objects.all(), required=False)
+    

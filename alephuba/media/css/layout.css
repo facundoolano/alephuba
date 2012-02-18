@@ -481,3 +481,7 @@ input[type=submit] {
 tr .actions {
 	text-align: right;
 	}
+
+#filter_form {
+	padding-bottom: 50px;	
+}

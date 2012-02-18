@@ -1,6 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'documentos/documento_list.html' %}
 
-{% block content %}
+{% block section_title%}Búsqueda por materia{% endblock %}
 
-<h2>Búsqueda por Materia</h2>
-{% endblock %} 
+{% block filter_form %}
+<div id="filter_form">
+{% with submit_value='Filtrar' method='get' %}
+	{% include 'form.html' %}
+{% endwith %}
+</div>
+{% endblock %}

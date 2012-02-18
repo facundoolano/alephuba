@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from alephuba.aleph.forms import UserForm, MirrorModelForm
+from alephuba.aleph.forms import UserForm, MirrorModelForm, BusquedaMateriaForm
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -40,11 +40,6 @@ def registration(request):
     
     return render_to_response('registracion.html', {'form' : form}, context_instance=RequestContext(request))
 
-def busqueda_por_materia(request):
-    
-    return render_to_response('documentos/busqueda_materia.html', {}, context_instance=RequestContext(request))
-
-
 class DocumentoList(ListView):
     """ 
     Listado de documentos, con busqueda rapida incorporada. Se busca en GET
@@ -57,8 +52,33 @@ class DocumentoList(ListView):
     def get_queryset(self):
         doc = self.request.GET.get('qs_documento') 
         return models.Documento.objects.busqueda_rapida(doc)
-        
 
+class DocumentoPorMateriaList(ListView):
+    """ 
+    Busqueda por materia y carrera.    
+    """
+    
+    template_name = 'documentos/busqueda_materia.html'
+    paginate_by=5
+    
+    def get_context_data(self, **kwargs):
+
+        context = super(DocumentoPorMateriaList, self).get_context_data(**kwargs)
+        context.update({'form' : BusquedaMateriaForm(self.request.GET) })
+        
+        return context
+    
+    def get_queryset(self):
+        
+        form = BusquedaMateriaForm(self.request.GET)
+        form.is_valid()
+        carreras = form.cleaned_data['carreras']
+        materias = form.cleaned_data['materias']
+        
+        return models.Documento.objects.filtrar_materias(carreras, materias)
+    
+
+#TODO hacer mixin
 class AjaxDocumentoList(DocumentoList):
     """
     Vista para actualizar el listado de documentos sin tener que refrescar la 

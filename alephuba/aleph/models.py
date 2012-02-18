@@ -48,6 +48,20 @@ class DocumentoManager(models.Manager):
         return self.filter(Q(autor__icontains=termino)|
                            Q(titulo__icontains=termino)
                            ).order_by('-id')
+    
+    def filtrar_materias(self, carreras, materias):
+        """ 
+        Devuelve un queryset de documentos que pertenecen a las carreras  y 
+        materias especificadas.
+        """
+        result = self.all()
+        if carreras:
+            result = result.filter(carrera__in=carreras)
+        
+        if materias:
+            result = result.filter(materia__in=materias)
+        
+        return result
                            
 class Documento(models.Model):
     objects = DocumentoManager()
