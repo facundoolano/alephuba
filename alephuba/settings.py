@@ -130,6 +130,10 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+# Recaptcha keys
+RECAPTCHA_PUBLIC_KEY = '6LcV4M0SAAAAAGKWKvRDOKTjDa67KhOzjnCgKLZ0'
+RECAPTCHA_PRIVATE_KEY = ''
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',

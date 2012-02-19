@@ -2,3 +2,5 @@ Django>=1.3
 south
 requests
 django-tinymce
+recaptcha-client
+requests
