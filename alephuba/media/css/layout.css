@@ -504,4 +504,6 @@ tr .actions {
 	float:right;
 }
 
-
+li {
+	text-align: left;
+	}

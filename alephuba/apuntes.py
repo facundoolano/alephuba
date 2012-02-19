@@ -1,14 +1,9 @@
 import requests
 import StringIO
-from alephuba.lib.ifileit import Ifileit
+from alephuba.lib.ifileit import Ifileit, IfileitApiError
 from pyquery import PyQuery as pq
 from alephuba.aleph.models import Materia, Archivo, Documento, TITULO_MAX_LENGTH
 from django.contrib.auth.models import User
-
-#r = requests.get('http://apuntes.foros-fiuba.com.ar/apuntes/65/09/318-Ecuaciones_de_Redes_II.html')
-#sio = StringIO.StringIO(r.content)
-#sio.name = 'prueba.pdf'
-#print Ifileit.upload(sio)
 
 APUNTES_URL = 'http://apuntes.foros-fiuba.com.ar'
 
@@ -30,8 +25,15 @@ def get_archivos(url):
     
     return archivos
 
+def upload_archivo(nombre, link):
+    r = requests.get(link)
+    sio = StringIO.StringIO(r.content)
+    sio.name = nombre
+    return Ifileit.upload(sio)
 
 def guardar_archivo(materia, nombre, link):
+    
+    print "Procesando archivo", nombre
     
     doc = Documento()
     doc.titulo = nombre[:TITULO_MAX_LENGTH]
@@ -43,18 +45,22 @@ def guardar_archivo(materia, nombre, link):
     archivo = Archivo()
     archivo.documento = doc
     archivo.subido_por = User.objects.get(id=1)
-    archivo.link = link
+    
+    try:
+        archivo.link = upload_archivo(nombre, link)
+    except IfileitApiError as e:
+        print e
+        return
+    
     archivo.save()
 
 def load_apuntes():
-    
-    Documento.objects.all().delete()
     
     for depto in get_links('/apuntes'):
         for materia in get_links(depto):
             codigo = materia.split('/', 2)[2].replace('/', '.')[:-1]
             
-            print "procesando %s" % codigo
+            print "procesando", codigo
             m_model = Materia.objects.filter(codigo=codigo)
             if not m_model:
                 print "Materia no existente"
