@@ -24,7 +24,7 @@ class Carrera(models.Model):
         return self.nombre
     
 class Materia(models.Model):
-    nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH, unique=True)
+    nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     carrera = models.ForeignKey(Carrera, blank=True, null=True)
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
     detalles = models.TextField(blank=True, null=True)
@@ -66,9 +66,8 @@ class DocumentoManager(models.Manager):
 class Documento(models.Model):
     objects = DocumentoManager()
     
-    titulo = models.CharField('Título', max_length=TITULO_MAX_LENGTH, 
-                              unique=True)
-    autor = models.CharField(max_length=NOMBRE_MAX_LENGTH)
+    titulo = models.CharField('Título', max_length=TITULO_MAX_LENGTH)
+    autor = models.CharField(max_length=NOMBRE_MAX_LENGTH, blank=True, null=True)
     
     carrera = models.ManyToManyField(Carrera, blank=True, null=True)
     materia = models.ManyToManyField(Materia, blank=True, null=True)
