@@ -51,11 +51,11 @@
 			</div>
 			
 			<div id="details">
-				<p><label>Autor:</label> {{ documento.autor }}</p><p/>
-				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p><p/>
-				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p><p/>{% endif %}
-				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
-				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p><p/>{% endif %}
+				<p><label>Autor:</label> {{ documento.autor }}</p>
+				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
+				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p>{% endif %}
+				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 				
 				<div id="star"></div>
 				<p>Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).</p>
