@@ -92,7 +92,7 @@ class MirrorModelForm(ArchivoBaseForm):
 class UserForm(UserCreationForm):
     
     carrera = forms.ModelChoiceField(queryset=Carrera.objects.all(), required=False)
-    captcha = ReCaptchaField(label="Soy humano")
+    captcha = ReCaptchaField()
     
     def save(self, commit=True):
         user = super(UserForm, self).save(commit)

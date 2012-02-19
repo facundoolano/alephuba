@@ -128,12 +128,12 @@ h2 {
 	margin: 20px 0 10px;
 }
 
-#main table {
+#main table.aleph {
 	border-top: 1px solid #ddd;
 	width: 100%;
 }
 
-#main table tr td {
+#main table.aleph tr td {
 	background: #f6f6f6;
 	padding: 0px 20px;
 	height: 29px;
@@ -141,20 +141,20 @@ h2 {
 	border-bottom: 1px solid #ddd;
 }
 
-#main table tr.odd td {
+#main table.aleph tr.odd td {
 	background: #fbfbfb;
 }
 
-#main table tr:hover td { background: #fdfcf6; }
+#main table.aleph tr:hover td { background: #fdfcf6; }
 
-#main table .action {
+#main table.aleph .action {
 	text-align: right;
 	padding: 0 20px 0 10px;
 }
 
-#main table tr .action a { margin: 0 0 0 10px; text-decoration: none; color: #9b9b9b; }
+#main table.aleph tr .action a { margin: 0 0 0 10px; text-decoration: none; color: #9b9b9b; }
 
-#main table tr:hover .action a:hover { text-decoration: underline; }
+#main table.aleph tr:hover .action a:hover { text-decoration: underline; }
 
 #main fieldset {
 	border: 0;
