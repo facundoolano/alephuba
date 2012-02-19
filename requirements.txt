@@ -3,3 +3,4 @@ south
 poster
 django-tinymce
 recaptcha-client
+requests
