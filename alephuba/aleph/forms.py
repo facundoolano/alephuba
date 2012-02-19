@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from alephuba.aleph.models import Documento, Carrera, UserProfile, Archivo,\
     Materia
 from alephuba import settings
-
+from alephuba.aleph.fields import ReCaptchaField
 
 def is_valid_isbn10(isbn):
     if len(isbn) != 10:
@@ -91,7 +91,8 @@ class MirrorModelForm(ArchivoBaseForm):
 
 class UserForm(UserCreationForm):
     
-    carrera = forms.ModelChoiceField(queryset=Carrera.objects.all(), required=False)  
+    carrera = forms.ModelChoiceField(queryset=Carrera.objects.all(), required=False)
+    captcha = ReCaptchaField(label="Soy humano")
     
     def save(self, commit=True):
         user = super(UserForm, self).save(commit)
