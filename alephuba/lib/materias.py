@@ -3,8 +3,8 @@ Crawler para obtener las materias del wiki de Foros-Fiuba. Requiere los paquetes
 '''
 import requests
 from pyquery import PyQuery as pq
-from alephuba.aleph.models import Materia
 from django.db.utils import IntegrityError
+from alephuba.aleph.models import Materia
 
 WIKI_URL = 'http://wiki.foros-fiuba.com.ar'
 

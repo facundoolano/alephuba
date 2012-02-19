@@ -15,7 +15,7 @@ class Entrada(models.Model):
 
 
 CONTENIDO_UPLOAD = "<p>El documento <b><a href='{url}'>{titulo}</a></b> \
-                    de <b>{autor}</b> fue subido.</p>"
+                    {autor} fue subido.</p>"
                     
 def publicar_upload(sender, **kwargs):
     
@@ -24,11 +24,14 @@ def publicar_upload(sender, **kwargs):
         
         entrada = Entrada()
         entrada.titulo = documento.titulo
+        
+        autor = 'de <b>{autor}</b>'.format(documento.autor) if documento.autor else ''
+        
         entrada.contenido = CONTENIDO_UPLOAD.format(
                                         url=reverse('documento', 
                                                     args=[documento.pk]),
                                         titulo=documento.titulo,
-                                        autor=documento.autor)
+                                        autor=autor)
         entrada.save()
     
 

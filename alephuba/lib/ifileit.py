@@ -1,11 +1,8 @@
 '''
-Wrapper for the ifile.it API. Uses the poster api.
+Wrapper for the ifile.it API. Uses the requests api.
 '''
-import urllib2
+import requests
 import json
-from poster.encode import multipart_encode
-from poster.streaminghttp import register_openers
-import urllib
 
 class Ifileit(object):
     """ Wrapper class for the ifile.it API. """
@@ -33,16 +30,9 @@ class Ifileit(object):
         object as required by poster. 
         """
         
-        #Needed by poster
-        register_openers()
-    
-        post_data = {'Filedata' : the_file}
-        post_data.update(cls._get_akey())
-        datagen, headers = multipart_encode(post_data)
-        
-        request = urllib2.Request(cls._determine_upload_url(), 
-                                                    datagen, headers)
-        response = cls._open_and_check(request) 
+        data = cls._get_akey()
+        response = cls._open_and_check(cls._determine_upload_url(), data=data,
+                                                    files={'Filedata' : the_file})
         
         return cls.UPOLOADED_FILE_URL.format(ukey=response['ukey'])
     
@@ -53,22 +43,24 @@ class Ifileit(object):
         return cls._open_and_check(cls.GET_UPLOAD_URL)['upload_url']
     
     @classmethod
-    def _open_and_check(cls, url, data=None):
+    def _open_and_check(cls, url, **kwargs):
         """ 
         Opens the given url string or Request object and checks for the status
         parameter in the response.  If it's 'ok' returns a dict with the 
         response. otherwise raises IfileitApiError.
         
-        Data should be a dictionary of POST arguments or None for a GET request.
+        kwargs can contain data or files as used by requests post method.
         """
         
-        if data:
-            data = urllib.urlencode(data)
-        
-        response = json.loads(urllib2.urlopen(url, data).read())
+        if kwargs:
+            response = requests.post(url, **kwargs)
+        else:
+            response = requests.get(url)
+            
+        response = json.loads(response.text)
     
         if response['status'] != 'ok':
-            raise IfileitApiError()
+            raise IfileitApiError(response['message'])
         
         return response
     
@@ -82,8 +74,8 @@ class Ifileit(object):
         if cls.USER and cls.PASSWORD:
             if not cls.API_KEY:
                 response = cls._open_and_check(cls.FETCH_API_KEY_URL, 
-                                               {'username' : cls.USER,
-                                                'password' : cls.PASSWORD})
+                                               data={'username' : cls.USER,
+                                                     'password' : cls.PASSWORD})
                 cls.API_KEY = response['akey']
             
             return {'akey' : cls.API_KEY }
