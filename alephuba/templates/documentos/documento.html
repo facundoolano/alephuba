@@ -47,7 +47,7 @@
 	<fieldset class="display-fieldset">
 		<div>
 			<div id="cover">
-				<img alt="{{ documento.titulo }}" src="{{ documento|book_cover }}" onerror="on_cover_error(this)">
+				<img alt="{{ documento.titulo }}" src="{{ documento|book_cover }}" onerror="on_cover_error(this)"/>
 			</div>
 			
 			<div id="details">
@@ -86,7 +86,7 @@
 			</tr>
 		{% endfor %}
 		<tr>
-			<td colspan=3 id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
+			<td colspan="3" id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
 		</tr>
 	</tbody>
 </table>
