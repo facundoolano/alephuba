@@ -237,7 +237,7 @@ thead{ background: #FFFFFF;}
 
 #archivos_table {
 	margin-left: 10px;
-	}
+}
 
 #main th {
 	vertical-align: top;
@@ -245,7 +245,7 @@ thead{ background: #FFFFFF;}
 	height: 29px;
 	line-height: 29px;
 	border-bottom: 1px solid #ddd;
-	}
+}
 
 /* Footer ---------------------------------------- */
 

@@ -69,17 +69,26 @@
 
 <h3>Archivos</h3>
 <table id="archivos_table" class="aleph">
-<thead><tr><th>Archivo</th><th>Subido por</th><th/></tr></thead>
-{% for archivo in documento.archivo_set.all %}
-<tr {% cycle 'class="odd"' '' %}>
-	<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
-	<td>{{ archivo.subido_por }}</td>
-	<td class="actions"><a href="{% url reportar archivo.pk %}">Reportar</a></td>
-</tr>
-{% endfor %}
-<tr>
-	<td colspan=3 id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
-</tr>
+	<thead>
+		<tr>
+			<th style="width: 60%">Archivo</th>
+			<th style="width: 30%">Subido por</th>
+			<th style="width: 10%"></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for archivo in documento.archivo_set.all %}
+			<tr {% cycle 'class="odd"' '' %}>
+				<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
+				<td>{{ archivo.subido_por }}</td>
+				<td class="actions"><a href="{% url reportar archivo.pk %}">Reportar</a></td>
+			</tr>
+		{% endfor %}
+		<tr>
+			<td colspan=3 id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
+		</tr>
+	</tbody>
 </table>
 
 
