@@ -17,7 +17,9 @@ def autocomplete_documento(request):
         result = documento.titulo if termino.lower() in documento.titulo.lower() else documento.autor 
         opciones.append(result)
 
-    return HttpResponse(simplejson.dumps(list(set(opciones))), mimetype='application/json')
+    opciones = list(set(opciones))[0:7]
+
+    return HttpResponse(simplejson.dumps(opciones), mimetype='application/json')
 
 def vote_on_document(request, document_pk, vote):
 
