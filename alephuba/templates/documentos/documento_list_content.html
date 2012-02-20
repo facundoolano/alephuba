@@ -1,12 +1,12 @@
 {% load documentostags %}
 
-<table cellpadding="0" cellspacing="0" class="document_list aleph">
+<table class="document_list aleph">
     {% for documento in object_list %}
 		<tr {% cycle '' 'class="odd"' %}>
 			<td>
 				<div>
 					<div class="cover">
-						<a href="{% url documento documento.pk %}"><img onerror="on_cover_error(this)" src="{{ documento|book_cover }}"></a>
+						<a href="{% url documento documento.pk %}"><img alt="{{ documento.titulo }}" onerror="on_cover_error(this)" src="{{ documento|book_cover }}"></a>
 						{% comment %}
 						{% endcomment %}
 					</div>

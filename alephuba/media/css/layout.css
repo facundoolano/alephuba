@@ -378,6 +378,7 @@ border: 1px solid #ddd;
 
 .document_list .cover img{
 	width: 90px;
+	height: 144px;
 }
 
 .document_list .details{

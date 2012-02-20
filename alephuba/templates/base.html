@@ -38,7 +38,9 @@
 	<div id="wrapper">
     	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
     	<div id="heading">
-	    	<div id="logo"></di><h1><a href="{% url home %}">aleph uba</a></h1></div>
+	    	<div id="logo">
+	    		<h1><a href="{% url home %}">aleph uba</a></h1>
+	    	</div>
 	    	
 	    	{% if user.is_authenticated %}<div id="user_menu">Hola, <b>{{ user.username }}</b>. | <a href="{% url mi_cuenta %}">Mi cuenta</a> | {% if user.is_staff %}<a href="{% url admin:index %}">Admin</a> | {% endif %}<a href="{% url logout %}">Cerrar sesión</a></div>{% endif %}
 	    	<div style="clear:both;font-size:1px;line-height:0px;">&nbsp;</div>
@@ -46,7 +48,6 @@
         
         {% block nav %}
         {% if user.is_authenticated %}
-        <!-- You can name the links with lowercase, they will be transformed to uppercase by CSS, we prefered to name them with uppercase to have the same effect with disabled stylesheet -->
         <ul id="mainNav">
         	<li><a href="{% url buscar %}">Recientes</a></li>
         	<li><a href="{% url busqueda_por_materia %}">Por materia</a></li>
@@ -68,17 +69,12 @@
                 -->
                 
                 <div id="main">
-                {% block content %}
-                	
-                {% endblock %}
+	                {% block content %}{% endblock %}
                 </div>
-                <!-- // #main -->
                 
                 <div class="clear"></div>
             </div>
-            <!-- // #container -->
-        </div>	
-        <!-- // #containerHolder -->
+        </div>
         
         <p id="footer">© 2012 be it. {% if user.is_authenticated %}<a href="{% url acerca %}">Acerca de alephuba</a> | <a href="mailto:info@be-it.com.ar">Contacto</a>{% endif %}</p>
         <!-- Template by <a href="http://www.perspectived.com">perspectived</a>. -->
