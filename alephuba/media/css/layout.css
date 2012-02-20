@@ -182,6 +182,11 @@ h2 {
 	float:left;
 }
 
+#main fieldset #cover img {
+	width: 180px;
+	height: 236px;
+}
+
 #main #details {
 	float:left;
 	width: 60%;
