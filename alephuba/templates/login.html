@@ -5,17 +5,22 @@
 
 <h2>Bienvenido</h2>
 
-<div class="text">
-<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
-</div>
-
-<h3>Ingresar</h3>
+{% if user.is_authenticated %}
+	<p>Ya te encuentras logeado.</p>
+{% else %}
+	<div class="text">
+	<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
+	</div>
+	
+	<h3>Ingresar</h3>
 	
 	{% with submit_value='Ingresar' %}
 		{% include 'form.html' %}
 	{% endwith %}
-	
+		
 	<div class="text">
 		<p><a href="{% url registracion %}">¿No estas registrado?</a></p>
-	 </div>
+	</div>
+{% endif%}
+
 {% endblock %}
