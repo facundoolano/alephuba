@@ -163,7 +163,7 @@ h2 {
 	padding: 20px 20px 5px;
 }
 
-#main fieldset p { 
+#main fieldset p.form-item, fieldset.step p { 
 	margin: 0 0 8px 0; 
 	float: left; 
 	width: 100%;
