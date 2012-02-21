@@ -146,15 +146,14 @@ class ArchivoBaseView(CreateView):
         atributos en el modelo pasado
         """
         
-        archivo.subido_por = self.request.user 
         archivo.tamanio = doc_file.size
         archivo.extension = doc_file.name.split('.')[-1][:EXTENSION_MAX_LENGTH]
         
         if settings.UPLOAD_ACTIVADO:
             self._scramble_name(doc_file)
             archivo.link = Ifileit.upload(doc_file)
-        
-        archivo.link = 'http://fake.com'
+        else:
+            archivo.link = 'http://fake.com'
         
 
 class DocumentoCreate(ArchivoBaseView):
@@ -165,6 +164,7 @@ class DocumentoCreate(ArchivoBaseView):
     def _make_archivo(self, form):
         archivo = models.Archivo()
         archivo.documento = self.object
+        archivo.subido_por = self.request.user
         archivo.detalles = form.cleaned_data['detalles']
         self._upload_file(form.files['doc_file'], archivo)
         archivo.save()
@@ -196,6 +196,8 @@ class MirrorCreate(ArchivoBaseView):
         archivo = form.instance
         archivo.documento = models.Documento.objects.get(
                                                 id=self.kwargs['documento_id'])
+        
+        archivo.subido_por = self.request.user
         
         if form.cleaned_data['link']:
             archivo.link = form.cleaned_data['link']

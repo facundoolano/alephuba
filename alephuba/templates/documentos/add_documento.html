@@ -32,7 +32,7 @@
 		</div>
 		
 		<div class="field_container">
-			<p><label for="id_autor">Autor:</label></p>
+			<p><label class="optional" for="id_autor">Autor:</label></p>
 			<p>{{ form.autor }}</p>
 		</div>
 	</fieldset>
@@ -115,7 +115,6 @@
 				//Para validacion
 				jQuery.validator.messages.required = 'Este campo es obligatorio.';				
 				$('#id_titulo').addClass('required');
-				$('#id_autor').addClass('required');
 				$('#id_doc_file').addClass('required');
 				
 				//oculto isbn si no es libro
@@ -128,6 +127,8 @@
 						$('#isbn_container').show();
 					}
 				})
+				
+				$('#id_tipo').trigger('change');
 				
 				init_dialog();
   		});

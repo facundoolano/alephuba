@@ -83,7 +83,7 @@
 		{% for archivo in documento.archivo_set.all %}
 			<tr {% cycle 'class="odd"' '' %}>
 				<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
-				<td><img src="{{ archivo|file_icon }}" title="{{archivo.extension}}"/></td>
+				<td><img src="{{ archivo|file_icon }}" title="{{archivo.extension|default:''}}"/></td>
 				<td>{{ archivo.tamanio|filesizeformat }}</td>
 				<td>{{ archivo.subido_por }}</td>
 				<td class="actions"><a href="{% url reportar archivo.pk %}">Reportar</a></td>
