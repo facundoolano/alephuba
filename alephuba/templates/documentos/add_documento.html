@@ -14,14 +14,12 @@
 		<div class="field_container">
 			<p><label for="id_tipo">Tipo de documento:</label></p>
 			<p>{{ form.tipo }}</p>
-			<p/>
 		</div>
 		
 		<div id="isbn_container" class="field_container">
 			<p><label class="optional" for="id_isbn">ISBN:</label></p>
 			<p>{{ form.isbn }}</p>
-			<p>Con el ISBN podemos obtener las portadas y completar automáticamente los datos de los libros.<p/>
-			<p/>
+			<p>Con el ISBN podemos obtener las portadas y completar automáticamente los datos de los libros.</p>
 		</div>
 	</fieldset>
 	
@@ -36,7 +34,6 @@
 		<div class="field_container">
 			<p><label for="id_autor">Autor:</label></p>
 			<p>{{ form.autor }}</p>
-			<p/>
 		</div>
 	</fieldset>
 	
@@ -45,13 +42,11 @@
 		<div class="field_container">
 			<p><label class="optional" for="id_carrera">Carreras:</label></p>
 			<p>{{ form.carrera }}</p>
-			<p/>
 		</div>
 		
 		<div class="field_container">
 			<p><label class="optional" for="id_materia">Materias:</label></p>
 			<p>{{ form.materia }}</p>
-			<p/>
 		</div>
 	</fieldset>
 	
@@ -61,13 +56,11 @@
 			<p><label for="id_doc_file">Archivo:</label></p>
 			<p>{{ form.doc_file }}</p>
 			{% if form.doc_file.errors %}{% for error in form.doc_file.errors %}<label for="id_doc_file" class="form_error">{{ error }}</label>{% endfor %}{% endif %}
-			<p/>
 		</div>
 		
 		<div class="field_container">
 			<p><label class="optional" for="id_detalles">Detalles:</label></p>
 			<p>{{ form.detalles }}</p>
-			<p/>
 		</div>
 		
 	</fieldset>
@@ -83,7 +76,7 @@
 <div id="dialog-modal" title="Subiendo">
 	<p>Por favor, espere mientras subimos el archivo.</p>
 	<br/>
-	<img src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
+	<img alt="Cargando" src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
 </div>
 {% endif %}
 

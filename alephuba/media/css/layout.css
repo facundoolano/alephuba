@@ -163,14 +163,13 @@ h2 {
 	padding: 20px 20px 5px;
 }
 
-#main fieldset p { 
+#main fieldset p.form-item, fieldset.step p { 
 	margin: 0 0 8px 0; 
 	float: left; 
 	width: 100%;
 	font-size: 13px;
 	padding-bottom: 0px;
-	
-	  }
+}
 
 #main fieldset label {
 	width: 100%;
@@ -181,6 +180,11 @@ h2 {
 
 #main fieldset #cover {
 	float:left;
+}
+
+#main fieldset #cover img {
+	width: 180px;
+	height: 236px;
 }
 
 #main #details {
@@ -238,7 +242,7 @@ thead{ background: #FFFFFF;}
 
 #archivos_table {
 	margin-left: 10px;
-	}
+}
 
 #main th {
 	vertical-align: top;
@@ -246,7 +250,7 @@ thead{ background: #FFFFFF;}
 	height: 29px;
 	line-height: 29px;
 	border-bottom: 1px solid #ddd;
-	}
+}
 
 /* Footer ---------------------------------------- */
 
@@ -379,6 +383,7 @@ border: 1px solid #ddd;
 
 .document_list .cover img{
 	width: 90px;
+	height: 144px;
 }
 
 .document_list .details{
