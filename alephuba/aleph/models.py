@@ -7,6 +7,7 @@ from django.db.models.aggregates import Avg, Count
 NOMBRE_MAX_LENGTH = 80
 CODIGO_MATERIA_MAX_LENGTH = 10
 TITULO_MAX_LENGTH = 80
+EXTENSION_MAX_LENGTH = 5
 
 DOCUMENTO_CHOICES = (
     ('LIB', 'Libro'),
@@ -88,6 +89,8 @@ class Archivo(models.Model):
     documento = models.ForeignKey(Documento)
     
     link = models.URLField()
+    extension = models.CharField(max_length=EXTENSION_MAX_LENGTH, blank=True, null=True)
+    tamanio = models.BigIntegerField('Tamaño', blank=True, null=True)
     subido_por = models.ForeignKey(AuthUser)
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
     

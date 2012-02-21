@@ -18,6 +18,7 @@ from alephuba import settings
 from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
 from random import shuffle
+from alephuba.aleph.models import EXTENSION_MAX_LENGTH
 
 
 #FIXME usar class based form view
@@ -139,18 +140,21 @@ class ArchivoBaseView(CreateView):
         
         doc_file.name = ''.join(name_list) + '.' + extension
     
-    def _get_upload_link(self, doc_file):
+    def _upload_file(self, doc_file, archivo):
         """
-        Si los uploads estan activados, envia el archivo a ifile.it y crea
-        la instancia de Archivo.
+        Si los uploads estan activados, envia el archivo a ifile.it y guarda los
+        atributos en el modelo pasado
         """
+        
+        archivo.tamanio = doc_file.size
+        archivo.extension = doc_file.name.split('.')[-1][:EXTENSION_MAX_LENGTH]
         
         if settings.UPLOAD_ACTIVADO:
             self._scramble_name(doc_file)
-            return Ifileit.upload(doc_file)
+            archivo.link = Ifileit.upload(doc_file)
+        else:
+            archivo.link = 'http://fake.com'
         
-        return "http://fake.com"
-    
 
 class DocumentoCreate(ArchivoBaseView):
     template_name = 'documentos/add_documento.html'
@@ -160,9 +164,9 @@ class DocumentoCreate(ArchivoBaseView):
     def _make_archivo(self, form):
         archivo = models.Archivo()
         archivo.documento = self.object
-        archivo.detalles = form.cleaned_data['detalles']
         archivo.subido_por = self.request.user
-        archivo.link = self._get_upload_link(form.files['doc_file'])
+        archivo.detalles = form.cleaned_data['detalles']
+        self._upload_file(form.files['doc_file'], archivo)
         archivo.save()
     
     def form_valid(self, form):
@@ -192,9 +196,13 @@ class MirrorCreate(ArchivoBaseView):
         archivo = form.instance
         archivo.documento = models.Documento.objects.get(
                                                 id=self.kwargs['documento_id'])
+        
         archivo.subido_por = self.request.user
-        archivo.link = (form.cleaned_data['link'] or 
-                        self._get_upload_link(form.files['doc_file']))
+        
+        if form.cleaned_data['link']:
+            archivo.link = form.cleaned_data['link']
+        else:
+            self._upload_file(form.files['doc_file'], archivo)
         
         return super(MirrorCreate, self).form_valid(form)
     

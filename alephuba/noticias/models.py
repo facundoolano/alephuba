@@ -25,7 +25,7 @@ def publicar_upload(sender, **kwargs):
         entrada = Entrada()
         entrada.titulo = documento.titulo
         
-        autor = 'de <b>{autor}</b>'.format(documento.autor) if documento.autor else ''
+        autor = 'de <b>{autor}</b>'.format(autor=documento.autor) if documento.autor else ''
         
         entrada.contenido = CONTENIDO_UPLOAD.format(
                                         url=reverse('documento', 
