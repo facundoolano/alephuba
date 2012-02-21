@@ -31,7 +31,7 @@ class Materia(models.Model):
     detalles = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
-        return '%s %s' % (self.codigo, self.nombre)
+        return u'%s %s' % (self.codigo, self.nombre)
     
 
 class DocumentoManager(models.Manager):
@@ -135,7 +135,7 @@ class Vote(models.Model):
     objects = VoteManager()
     
     def __unicode__(self):
-        return "%s, %s : %d" % (self.user, self.document, self.vote_value)
+        return u"%s, %s : %d" % (self.user, self.document, self.vote_value)
 
 class UserProfile(models.Model):
     user = models.ForeignKey(AuthUser, unique=True)
