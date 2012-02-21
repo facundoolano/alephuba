@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 import re
 
 APUNTES_URL = 'http://apuntes.foros-fiuba.com.ar'
+INCREMENTAL = True
 
 def get_links(url):
     d = pq(requests.get(APUNTES_URL + url).text)
@@ -40,10 +41,14 @@ def upload_archivo(link, archivo):
     archivo.link = Ifileit.upload(sio)
     
     archivo.extension = sio.name.split('.')[-1][:EXTENSION_MAX_LENGTH]
-    archivo.tamanio = int(request.headers['Content-Length'])
+    archivo.tamanio = int(request.headers.get('Content-Length', 0))
     
 
 def guardar_archivo(materia, nombre, link):
+    
+    if INCREMENTAL and Documento.objects.filter(materia=materia, 
+                                titulo=nombre[:TITULO_MAX_LENGTH]):
+        return
     
     print "Procesando archivo", nombre
     
@@ -68,8 +73,9 @@ def guardar_archivo(materia, nombre, link):
 
 def load_apuntes():
     
-    Documento.objects.all().delete()
-    Archivo.objects.all().delete()
+    if not INCREMENTAL:
+        Documento.objects.all().delete()
+        Archivo.objects.all().delete()
     
     for depto in get_links('/apuntes'):
         for materia in get_links(depto):
