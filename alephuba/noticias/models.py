@@ -14,7 +14,7 @@ class Entrada(models.Model):
         return self.titulo
 
 
-CONTENIDO_UPLOAD = "<p>El documento <b><a href='{url}'>{titulo}</a></b> \
+CONTENIDO_UPLOAD = u"<p>El documento <b><a href='{url}'>{titulo}</a></b> \
                     {autor} fue subido.</p>"
                     
 def publicar_upload(sender, **kwargs):
@@ -25,7 +25,7 @@ def publicar_upload(sender, **kwargs):
         entrada = Entrada()
         entrada.titulo = documento.titulo
         
-        autor = 'de <b>{autor}</b>'.format(autor=documento.autor) if documento.autor else ''
+        autor = u'de <b>{autor}</b>'.format(autor=documento.autor) if documento.autor else ''
         
         entrada.contenido = CONTENIDO_UPLOAD.format(
                                         url=reverse('documento', 
