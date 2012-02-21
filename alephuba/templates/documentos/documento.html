@@ -83,14 +83,14 @@
 		{% for archivo in documento.archivo_set.all %}
 			<tr {% cycle 'class="odd"' '' %}>
 				<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
-				<td><img src="{{ archivo|file_icon }}" title="{{archivo.extension|default:''}}"/></td>
+				<td class="icon-td"><img src="{{ archivo|file_icon }}" title="{{archivo.extension|default:''}}"/></td>
 				<td>{{ archivo.tamanio|filesizeformat }}</td>
 				<td>{{ archivo.subido_por }}</td>
-				<td class="actions"><a href="{% url reportar archivo.pk %}">Reportar</a></td>
+				<td class="actions icon-td"><a href="{% url reportar archivo.pk %}"><img src="{{ MEDIA_URL }}img/icons/exclamation.png" title="Reportar archivo"/></a></td>
 			</tr>
 		{% endfor %}
 		<tr>
-			<td colspan="5" id="paginator"><a href="{% url add_mirror documento.pk%}">Agregar mirror</a></td>
+			<td colspan="5" id="paginator" class="icon-td"><a href="{% url add_mirror documento.pk%}"><img src="{{ MEDIA_URL }}img/icons/add.png" title="Agregar mirror"/></a></td>
 		</tr>
 	</tbody>
 </table>

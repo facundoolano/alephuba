@@ -244,6 +244,10 @@ thead{ background: #FFFFFF;}
 	margin-left: 10px;
 }
 
+#main #archivos_table .icon-td {
+	vertical-align: middle;
+	}
+
 #main th {
 	vertical-align: top;
 	padding: 0px 20px;
