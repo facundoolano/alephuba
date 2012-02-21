@@ -4,6 +4,7 @@ from alephuba.lib.ifileit import Ifileit, IfileitApiError
 from pyquery import PyQuery as pq
 from alephuba.aleph.models import Materia, Archivo, Documento, TITULO_MAX_LENGTH
 from django.contrib.auth.models import User
+import re
 
 APUNTES_URL = 'http://apuntes.foros-fiuba.com.ar'
 
@@ -25,10 +26,15 @@ def get_archivos(url):
     
     return archivos
 
+
+def get_filename(request):
+    return re.findall("filename=(\S+)", request.headers['Content-Disposition']
+                      )[0].replace('"', '')
+
 def upload_archivo(nombre, link):
-    r = requests.get(link)
-    sio = StringIO.StringIO(r.content)
-    sio.name = nombre
+    request = requests.get(link)
+    sio = StringIO.StringIO(request.content)
+    sio.name = get_filename(request)
     return Ifileit.upload(sio)
 
 def guardar_archivo(materia, nombre, link):
@@ -55,6 +61,9 @@ def guardar_archivo(materia, nombre, link):
     archivo.save()
 
 def load_apuntes():
+    
+    Documento.objects.all().delete()
+    Archivo.objects.all().delete()
     
     for depto in get_links('/apuntes'):
         for materia in get_links(depto):
