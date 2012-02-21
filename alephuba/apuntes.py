@@ -2,7 +2,8 @@ import requests
 import StringIO
 from alephuba.lib.ifileit import Ifileit, IfileitApiError
 from pyquery import PyQuery as pq
-from alephuba.aleph.models import Materia, Archivo, Documento, TITULO_MAX_LENGTH
+from alephuba.aleph.models import Materia, Archivo, Documento, TITULO_MAX_LENGTH,\
+    EXTENSION_MAX_LENGTH
 from django.contrib.auth.models import User
 import re
 
@@ -31,11 +32,16 @@ def get_filename(request):
     return re.findall("filename=(\S+)", request.headers['Content-Disposition']
                       )[0].replace('"', '')
 
-def upload_archivo(nombre, link):
+def upload_archivo(link, archivo):
     request = requests.get(link)
+    
     sio = StringIO.StringIO(request.content)
     sio.name = get_filename(request)
-    return Ifileit.upload(sio)
+    archivo.link = Ifileit.upload(sio)
+    
+    archivo.extension = sio.name.split('.')[-1][:EXTENSION_MAX_LENGTH]
+    archivo.tamanio = int(request.headers['Content-Length'])
+    
 
 def guardar_archivo(materia, nombre, link):
     
@@ -53,7 +59,7 @@ def guardar_archivo(materia, nombre, link):
     archivo.subido_por = User.objects.get(id=1)
     
     try:
-        archivo.link = upload_archivo(nombre, link)
+        upload_archivo(link, archivo)
     except IfileitApiError as e:
         print e
         return
