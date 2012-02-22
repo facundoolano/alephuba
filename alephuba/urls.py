@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     #TODO no deberia ir en otra parte?
     url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^registracion/$', views.registration, name='registracion'),
-    url(r'^logout/$', django.contrib.auth.views.logout, {'next_page' : '/'}, name='logout'),
+    url(r'^logout/$', django.contrib.auth.views.logout, {'next_page' : '/noticias'}, name='logout'),
     url(r'^mi_cuenta/$', TemplateView.as_view(template_name='mi_cuenta.html'), name='mi_cuenta'),
     url(r'^cambio_contrasenia/$', django.contrib.auth.views.password_change,
        {'template_name': 'cambio_contrasenia.html'}, name='cambio_contrasenia'),

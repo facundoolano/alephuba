@@ -191,3 +191,5 @@ MAX_UPLOAD_SIZE = 104857600 #10MB
 
 #extensiones permitidas
 UPLOAD_TYPES = ['pdf', 'ps', 'doc', 'xls', 'rtf', 'tex', 'chm', 'djvu', 'odt', 'jpg', 'png', 'zip', 'rar', 'tar.gz', 'ppt', 'txt']
+
+LOGIN_REDIRECT_URL = '/noticias/'
