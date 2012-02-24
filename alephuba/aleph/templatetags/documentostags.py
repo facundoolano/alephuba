@@ -32,6 +32,7 @@ EXTENSION_MAP = {'pdf' : 'pdf.png',
                  'tar.gz' : 'zip.png', 
                  'ppt' : 'ppt.png', 
                  'txt' : 'txt.png',
+                 'link' : 'link.png'
                  }
 
 @register.filter

@@ -19,6 +19,7 @@ from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
 from random import shuffle
 from alephuba.aleph.models import EXTENSION_MAX_LENGTH
+import requests
 
 
 #FIXME usar class based form view
@@ -188,6 +189,19 @@ class MirrorCreate(ArchivoBaseView):
     template_name = 'documentos/add_mirror.html'
     form_class = MirrorModelForm
     
+    def _load_link(self, archivo, link):
+        """ Completa los campos del archivo con la informacion del link. """
+        
+        archivo.link = link
+        archivo.extension = 'link'
+        headers = requests.get(link).headers
+        
+        extension = headers['content-type'].split('/')[-1]
+        if extension in settings.UPLOAD_TYPES:
+            archivo.extension = extension
+            archivo.tamanio = int(headers['content-length'])
+            
+    
     def get_success_url(self):
         return reverse('documento', args=[self.kwargs['documento_id']])
     
@@ -200,7 +214,7 @@ class MirrorCreate(ArchivoBaseView):
         archivo.subido_por = self.request.user
         
         if form.cleaned_data['link']:
-            archivo.link = form.cleaned_data['link']
+            self._load_link(archivo, form.cleaned_data['link'])
         else:
             self._upload_file(form.files['doc_file'], archivo)
         
