@@ -17,7 +17,17 @@ DOCUMENTO_CHOICES = (
     ('EXA', 'Examen'),
 )
 
+class DocRelatedManager(models.Manager):
+    
+    def con_documentos(self):
+        """ 
+        Devuelve un qs de instancias que tienen asignado algun documento. 
+        """
+        return self.annotate(num_docs=Count('documento')).filter(num_docs__gt=0)
+
 class Carrera(models.Model):
+    objects = DocRelatedManager()
+    
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH, unique=True)
     detalles = models.TextField(blank=True, null=True)
     
@@ -25,6 +35,8 @@ class Carrera(models.Model):
         return self.nombre
     
 class Materia(models.Model):
+    objects = DocRelatedManager()
+    
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     carrera = models.ForeignKey(Carrera, blank=True, null=True)
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
