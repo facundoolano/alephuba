@@ -59,8 +59,10 @@ class DocumentoManager(models.Manager):
         
         #se usan Q objects para hacer un OR en vez de AND
         return self.filter(Q(autor__icontains=termino)|
-                           Q(titulo__icontains=termino)
-                           ).order_by('-id')
+                           Q(titulo__icontains=termino)|
+                           Q(materia__nombre__icontains=termino)|
+                           Q(materia__codigo__icontains=termino)
+                           ).distinct().order_by('-id')
     
     def filtrar_materias(self, carreras, materias):
         """ 
