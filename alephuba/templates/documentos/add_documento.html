@@ -118,6 +118,13 @@
 				$('#id_titulo').addClass('required');
 				$('#id_doc_file').addClass('required');
 				
+				//autocomplete autor
+				$('#id_autor').autocomplete({
+					source: "{% url autocomplete_autor %}",
+					minLength:2,
+				});
+				
+				
 				//oculto isbn si no es libro
 				$('#id_tipo').change(function(){
 					

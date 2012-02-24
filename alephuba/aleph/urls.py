@@ -18,6 +18,7 @@ urlpatterns = patterns('',
             url(r'^add/$', DocumentoCreate.as_view(), name='add_documento'),
             url(r'^mirror/(?P<documento_id>\d+)/$', MirrorCreate.as_view(), name='add_mirror'),
             url(r'^autocomplete/', jsonviews.autocomplete_documento, name='autocomplete_documento'),
+            url(r'^autocomplete_autor/', jsonviews.autocomplete_autor, name='autocomplete_autor'),
             url(r'^(?P<document_pk>\d+)/vote/(?P<vote>(\d+|\d+\.\d{1}))$', jsonviews.vote_on_document),
             url(r'^isbn/', jsonviews.validate_isbn, name='validate_isbn'),
           

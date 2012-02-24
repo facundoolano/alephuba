@@ -46,6 +46,12 @@ def autocomplete_documento(request):
         
     return HttpResponse(simplejson.dumps(opciones), mimetype='application/json')
 
+def autocomplete_autor(request):
+    termino = request.REQUEST['term'].lower()
+    autores = Documento.objects.filter(autor__icontains=termino).values_list('autor', flat=True).distinct()
+    
+    return HttpResponse(simplejson.dumps(list(autores)), mimetype='application/json')
+
 def vote_on_document(request, document_pk, vote):
 
     sucess = Vote.objects.try_record_vote(document_pk, request.user, vote)
