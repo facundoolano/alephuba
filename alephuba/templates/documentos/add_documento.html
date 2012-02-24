@@ -11,6 +11,7 @@
    	
    	<fieldset id="step_tipo" class="step">
    		<h3>Paso 1 - Tipo de documento</h3>
+   		{% if form.errors %}<label class="form_error">Por favor corrija los errores.</label>{% endif %}
 		<div class="field_container">
 			<p><label for="id_tipo">Tipo de documento:</label></p>
 			<p>{{ form.tipo }}</p>

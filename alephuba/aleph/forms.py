@@ -49,12 +49,15 @@ class DocumentoModelForm(ArchivoBaseForm):
     detalles = forms.CharField(label='Detalles', required=False, 
                                widget=forms.Textarea())
     
+    isbn = forms.CharField(label='ISBN', required=False, 
+                           widget=forms.TextInput(attrs={'maxlength' : 17}))
+    
     class Meta:
         model = Documento
         exclude = ('olid')
         
     def clean_isbn(self):
-        isbn = self.cleaned_data.get('isbn').upper()
+        isbn = self.cleaned_data.get('isbn').upper().strip().replace('-', '')
         
         if isbn and not is_valid_isbn10(isbn) and not is_valid_isbn13(isbn):
             raise forms.ValidationError(
