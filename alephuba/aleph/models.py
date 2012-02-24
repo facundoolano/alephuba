@@ -64,17 +64,18 @@ class DocumentoManager(models.Manager):
     
     def filtrar_materias(self, carreras, materias):
         """ 
-        Devuelve un queryset de documentos que pertenecen a las carreras  y 
+        Devuelve un queryset de documentos que pertenecen a las carreras  o 
         materias especificadas.
         """
-        result = self.all()
+        q = Q()
+        
         if carreras:
-            result = result.filter(carrera__in=carreras)
+            q = Q(carrera__in=carreras)
         
         if materias:
-            result = result.filter(materia__in=materias)
+            q = q | Q(materia__in=materias)
         
-        return result
+        return self.filter(q).distinct()
                            
 class Documento(models.Model):
     objects = DocumentoManager()
