@@ -30,6 +30,10 @@ def get_author_and_title(isbn):
     subtitle = info.get('subtitle', '')
     title = info.get('title', '') + (': ' + subtitle if subtitle else '')
     
+    #parche
+    if 'authors' not in info:
+        info = _get_book_data(isbn)
+    
     authors = info.get('authors')
     author = authors[0]['name'] if authors else ''
     
