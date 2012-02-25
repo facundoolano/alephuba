@@ -22,7 +22,7 @@ def get_suggestions(documento, term):
         
     for materia in documento.materia.all():
         if term in materia.nombre.lower() or term in materia.codigo.lower():
-            results.append(unicode(materia))
+            results.append(materia.nombre)
     
     return results
 
