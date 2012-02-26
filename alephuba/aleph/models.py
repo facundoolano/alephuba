@@ -69,15 +69,15 @@ class DocumentoManager(models.Manager):
         Devuelve un queryset de documentos que pertenecen a las carreras  o 
         materias especificadas.
         """
-        q = Q()
+        result = self.all()
         
         if carreras:
-            q = Q(carrera__in=carreras)
+            result = result.filter(carrera__in=carreras)
         
         if materias:
-            q = q | Q(materia__in=materias)
+            result = result.filter(materia__in=materias)
         
-        return self.filter(q).distinct()
+        return result.order_by('-id')
                            
 class Documento(models.Model):
     objects = DocumentoManager()
