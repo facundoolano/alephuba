@@ -179,6 +179,10 @@ LOGGING = {
     }
 }
 
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
 TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",
     'theme_advanced_toolbar_location' : "top",
