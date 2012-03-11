@@ -52,8 +52,15 @@
 			
 			<div id="details">
 				{% if documento.autor %}<p><label>Autor:</label> {{ documento.autor }}</p>{% endif %}
-				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
-				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+
+				{% with lista_materias=documento.materia.all %}
+					{% if lista_materias %}<p><label>Materia{{lista_materias|pluralize}}:</label> {% for materia in lista_materias %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+				{% endwith %}
+
+				{% with lista_documentos=documento.materia.all %}
+					{% if lista_documentos %}<p><label>Carrera{{lista_documentos|pluralize}}:</label> {% for carrera in lista_documentos %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+				{% endwith %}
+
 				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
 				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p>{% endif %}
 				
