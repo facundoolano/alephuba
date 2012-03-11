@@ -57,7 +57,7 @@
 					{% if lista_materias %}<p><label>Materia{{lista_materias|pluralize}}:</label> {% for materia in lista_materias %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 				{% endwith %}
 
-				{% with lista_documentos=documento.materia.all %}
+				{% with lista_documentos=documento.carrera.all %}
 					{% if lista_documentos %}<p><label>Carrera{{lista_documentos|pluralize}}:</label> {% for carrera in lista_documentos %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 				{% endwith %}
 
