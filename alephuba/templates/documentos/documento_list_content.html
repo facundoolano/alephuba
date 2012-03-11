@@ -15,7 +15,7 @@
 						{% if documento.autor %}{{ documento.autor }}<br/>{% endif %}
 						{% with lista_materias=documento.materia.all %}
 							{% if lista_materias %}{% for materia in lista_materias %} {{ materia }}{% if not forloop.last %}; {% endif %}{% endfor %}{% endif %}
-						{% endwith %}]
+						{% endwith %}
 					</div> 
 					<div class="clear"></div>
 					
