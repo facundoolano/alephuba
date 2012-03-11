@@ -12,9 +12,9 @@ EXTENSION_MAX_LENGTH = 5
 DOCUMENTO_CHOICES = (
     ('LIB', 'Libro'),
     ('APU', 'Apunte'),
-    ('RES', 'Resumen'),
     ('INF', 'Informe'),
     ('EXA', 'Examen'),
+    ('GEJ', 'Guia de Ejercicios'),
 )
 
 class DocRelatedManager(models.Manager):
