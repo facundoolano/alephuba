@@ -4,3 +4,4 @@ requests
 django-tinymce
 recaptcha-client
 requests
+django-debug-toolbar

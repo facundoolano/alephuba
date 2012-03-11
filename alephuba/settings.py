@@ -105,6 +105,8 @@ LOGIN_EXEMPT_URLS = (
  r'^media/',
 ) 
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -112,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'alephuba.aleph.login_required_middleware.LoginRequiredMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -150,7 +153,7 @@ INSTALLED_APPS = (
     'alertas',
     
     'south',
-    
+    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
