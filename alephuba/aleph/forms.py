@@ -123,6 +123,8 @@ def quick_search(request):
     return {'qs_form' : BusquedaRapidaForm()}
 
 class BusquedaMateriaForm(forms.Form):
-    carreras = forms.ModelMultipleChoiceField(queryset=Carrera.objects.con_documentos(), required=False)
-    materias = forms.ModelMultipleChoiceField(queryset=Materia.objects.con_documentos(), required=False)
+    buscar = forms.ChoiceField(label='Buscar por', choices=(('MAT', 'Materias'), 
+                                                  ('CAR', 'Carreras')))
+    carreras = forms.ModelChoiceField(queryset=Carrera.objects.con_documentos(), required=False)
+    materias = forms.ModelChoiceField(queryset=Materia.objects.con_documentos(), required=False)
     

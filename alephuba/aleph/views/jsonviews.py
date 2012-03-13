@@ -61,6 +61,7 @@ def vote_on_document(request, document_pk, vote):
 
 def validate_isbn(request):
     isbn = request.POST['isbn'].upper().strip().replace('-', '')
+    
     valid = not isbn or is_valid_isbn10(isbn) or is_valid_isbn13(isbn)
     
     result = {'valid' : valid}

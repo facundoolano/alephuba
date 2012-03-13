@@ -42,6 +42,9 @@ class Materia(models.Model):
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
     detalles = models.TextField(blank=True, null=True)
     
+    class Meta:
+        ordering = ('codigo',)
+    
     def __unicode__(self):
         return u'%s %s' % (self.codigo, self.nombre)
     
