@@ -168,7 +168,6 @@ class DocumentoCreate(ArchivoBaseView):
         archivo = models.Archivo()
         archivo.documento = self.object
         archivo.subido_por = self.request.user
-        archivo.detalles = form.cleaned_data['detalles']
         self._upload_file(form.files['doc_file'], archivo)
         archivo.save()
     
