@@ -503,6 +503,16 @@ tr .actions {
 }
 
 
+#filtro_buscar {
+	width: 30%;
+	float:left;
+	}
+
+#filtro_materias,#filtro_carreras {
+	width :70%;
+	float:right;
+}
+
 
 li {
 	text-align: left;

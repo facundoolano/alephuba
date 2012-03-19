@@ -21,10 +21,12 @@
 			<p><label class="optional" for="id_materias">{{ form.materias.label }}:</label></p>
 			<p>{{ form.materias }}</p>
 			</div>
+			<div class="clear"></div>
 			
-			<br/>
-			<p>Seleccione filtrar por carrera o materia. Sólo se muestran carreras y materias para las que hay
-			documentos cargados.</p>
+			<div class="filtro-help">
+			Seleccione filtrar por carrera o materia. Sólo se muestran carreras y materias para las que hay
+			documentos cargados.
+			</div>
 			
 		</fieldset>
 	</form>
@@ -38,7 +40,7 @@
 <style>
 .ui-button { margin-left: -1px; vertical-align: middle;}
 .ui-button-icon-only .ui-button-text { padding-top: 0.25em; height: 12px;} 
-.ui-autocomplete-input { margin: 2px 0; padding: 2px 3px; width:250px;
+.ui-autocomplete-input { margin: 2px 0; padding: 2px 3px; width:300px;
 border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 }
 </style>
