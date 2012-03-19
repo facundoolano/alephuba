@@ -40,3 +40,7 @@ def file_icon(archivo, arg=False):
     img_file = EXTENSION_MAP.get(archivo.extension, DEFAULT)
     
     return '{media}img/icons/{file}'.format(media=MEDIA_URL, file=img_file)
+
+@register.inclusion_tag('documentos/materia_list.html')
+def lista_materias(documento, show_label=False):
+    return {'materias' : documento.materia.all(), 'show_label' : show_label}

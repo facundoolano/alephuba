@@ -68,6 +68,10 @@ border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 			get_pagina(1);
 		})
 		
+		if($('#id_carreras').val()){
+			$('#id_buscar').val('CAR');
+		}
+		
 		$('#id_buscar').change(toggle_buscar);
 		toggle_buscar();
 		

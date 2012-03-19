@@ -1,0 +1,6 @@
+{% if materias %}
+<p>{% if show_label %}<label>Materia{{materias|pluralize}}:</label>{% endif %}
+	{% for materia in materias %}<a href="{% url busqueda_por_materia %}?materias={{ materia.id }}">{{ materia  }}</a>{% if not forloop.last %}; {% endif %}
+	{% endfor %}
+</p>
+{% endif %}
