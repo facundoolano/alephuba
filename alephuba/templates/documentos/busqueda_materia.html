@@ -43,6 +43,15 @@
 .ui-autocomplete-input { margin: 2px 0; padding: 2px 3px; width:300px;
 border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 }
+.ui-widget .ui-widget {font-size: 0.8em}
+.ui-autocomplete {
+	max-height: 350px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	/* add padding to account for vertical scrollbar */
+	padding-right: 20px;
+}
 </style>
 
 <script type="text/javascript" src="{{ MEDIA_URL }}js/combo_box.js"></script>
