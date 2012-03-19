@@ -71,21 +71,6 @@ class DocumentoManager(models.Manager):
                            Q(materia__codigo__icontains=termino)
                            ).distinct().order_by('-id')
     
-    def filtrar_materias(self, carreras, materias):
-        """ 
-        Devuelve un queryset de documentos que pertenecen a las carreras  o 
-        materias especificadas.
-        """
-        result = self.all()
-        
-        if carreras:
-            result = result.filter(carrera__in=carreras)
-        
-        if materias:
-            result = result.filter(materia__in=materias)
-        
-        return result.order_by('-id')
-                           
 class Documento(models.Model):
     objects = DocumentoManager()
     

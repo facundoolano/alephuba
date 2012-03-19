@@ -503,15 +503,6 @@ tr .actions {
 }
 
 
-#filtro_carreras {
-	width: 30%;
-	float:left;
-	}
-
-#filtro_materias {
-	width :70%;
-	float:right;
-}
 
 li {
 	text-align: left;

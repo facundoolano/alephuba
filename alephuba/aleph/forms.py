@@ -121,7 +121,9 @@ def quick_search(request):
 
 class BusquedaMateriaForm(forms.Form):
     buscar = forms.ChoiceField(label='Buscar por', choices=(('MAT', 'Materias'), 
-                                                  ('CAR', 'Carreras')))
-    carreras = forms.ModelChoiceField(queryset=Carrera.objects.con_documentos(), required=False)
-    materias = forms.ModelChoiceField(queryset=Materia.objects.con_documentos(), required=False)
+                                                  ('CAR', 'Carreras')), required=False)
+    carreras = forms.ModelChoiceField(queryset=Carrera.objects.con_documentos(), 
+                                      required=False, empty_label='')
+    materias = forms.ModelChoiceField(queryset=Materia.objects.con_documentos(),
+                                      required=False, empty_label='')
     

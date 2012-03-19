@@ -74,10 +74,16 @@ class DocumentoPorMateriaList(ListView):
         
         form = BusquedaMateriaForm(self.request.GET)
         form.is_valid()
-        carreras = form.cleaned_data['carreras']
-        materias = form.cleaned_data['materias']
         
-        return models.Documento.objects.filtrar_materias(carreras, materias)
+        carrera = form.cleaned_data['carreras']
+        materia = form.cleaned_data['materias']
+        
+        if materia:
+            return models.Documento.objects.filter(materia=materia)
+        elif carrera:
+            return models.Documento.objects.filter(carrera=carrera)
+        
+        return models.Documento.objects.all()
     
 
 class JSONResponseMixin(object):

@@ -7,6 +7,11 @@
 
 	<form class="ui-formwizard ui-helper-reset ui-widget ui-widget-content ui-corner-all" action="">{% csrf_token %}
 		<fieldset class="ui-corner-all">
+			<div id="filtro_buscar">
+			<p><label for="id_buscar">{{ form.buscar.label }}:</label></p>
+			<p>{{ form.buscar }}</p>
+			</div>
+			
 			<div id="filtro_carreras">
 			<p><label class="optional" for="id_carreras">{{ form.carreras.label }}:</label></p>
 			<p>{{ form.carreras }}</p>
@@ -16,7 +21,10 @@
 			<p><label class="optional" for="id_materias">{{ form.materias.label }}:</label></p>
 			<p>{{ form.materias }}</p>
 			</div>
-			<p>Seleccione los filtros a aplicar. Puede elegir varios con la tecla Ctrl.</p>
+			
+			<br/>
+			<p>Seleccione filtrar por carrera o materia. Sólo se muestran carreras y materias para las que hay
+			documentos cargados.</p>
 			
 		</fieldset>
 	</form>
@@ -26,24 +34,54 @@
 
 {% block extra_head %}
 {{ block.super }}
+
+<style>
+.ui-button { margin-left: -1px; vertical-align: middle;}
+.ui-button-icon-only .ui-button-text { padding-top: 0.25em; height: 12px;} 
+.ui-autocomplete-input { margin: 2px 0; padding: 2px 3px; width:250px;
+border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
+}
+</style>
+
+<script type="text/javascript" src="{{ MEDIA_URL }}js/combo_box.js"></script>
 <script type="text/javascript">
 	$(function(){
+		
+		$('#id_materias').combobox();
+		$('#id_carreras').combobox();
+		
 		$('#id_materias').change(function(){
 			get_pagina(1);
 		})
 		$('#id_carreras').change(function(){
 			get_pagina(1);
 		})
+		
+		$('#id_buscar').change(toggle_buscar);
+		toggle_buscar();
+		
 	});
+	
+	function toggle_buscar() {
+		
+		if($('#id_buscar').val() == 'MAT') {
+			setComboOption('#id_carreras', '', '');
+			$('#filtro_carreras').hide();
+			$('#filtro_materias').show();
+		} else if ($('#id_buscar').val() == 'CAR') {
+			setComboOption('#id_materias', '', '');
+			$('#filtro_materias').hide();
+			$('#filtro_carreras').show();
+		}
+		
+	}
 	
 	function get_pagina(page) {
 		
 		//necesario para que codifique bien la lista de valores
-		jQuery.ajaxSettings.traditional = true;
-		
 		data = {
-				'materias' : $('#id_materias').val() || [],
-				'carreras' : $('#id_carreras').val() || [],
+				'materias' : $('#id_materias').val(),
+				'carreras' : $('#id_carreras').val(),
 				'page' : page,}
 		
 		$.get('{% url filtrar_materia_update %}', data, update_pagina, "json");
