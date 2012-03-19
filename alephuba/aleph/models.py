@@ -12,9 +12,15 @@ EXTENSION_MAX_LENGTH = 5
 DOCUMENTO_CHOICES = (
     ('LIB', 'Libro'),
     ('APU', 'Apunte'),
-    ('RES', 'Resumen'),
     ('INF', 'Informe'),
     ('EXA', 'Examen'),
+    ('GEJ', 'Guia de Ejercicios'),
+)
+
+IDIOMA_DOCUMENTO_CHOICES = (
+    ('ES', 'Español'),
+    ('EN', 'Ingles'),
+    ('OT', 'Otro')
 )
 
 class DocRelatedManager(models.Manager):
@@ -29,8 +35,7 @@ class Carrera(models.Model):
     objects = DocRelatedManager()
     
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH, unique=True)
-    detalles = models.TextField(blank=True, null=True)
-    
+
     def __unicode__(self):
         return self.nombre
     
@@ -40,7 +45,6 @@ class Materia(models.Model):
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     carrera = models.ForeignKey(Carrera, blank=True, null=True)
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
-    detalles = models.TextField(blank=True, null=True)
     
     class Meta:
         ordering = ('codigo',)
@@ -87,6 +91,7 @@ class Documento(models.Model):
     
     titulo = models.CharField('Título', max_length=TITULO_MAX_LENGTH)
     autor = models.CharField(max_length=NOMBRE_MAX_LENGTH, blank=True, null=True)
+    idioma = models.CharField(max_length=2, choices=IDIOMA_DOCUMENTO_CHOICES, default='ES')
     
     carrera = models.ManyToManyField(Carrera, blank=True, null=True)
     materia = models.ManyToManyField(Materia, blank=True, null=True)
@@ -111,8 +116,6 @@ class Archivo(models.Model):
     tamanio = models.BigIntegerField('Tamaño', blank=True, null=True)
     subido_por = models.ForeignKey(AuthUser)
     fecha_subida = models.DateTimeField('Fecha de subida', auto_now_add=True)
-    
-    detalles = models.TextField(blank=True, null=True)
     
     def __unicode__(self):
         return self.documento.titulo

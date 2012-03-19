@@ -36,6 +36,11 @@
 			<p><label class="optional" for="id_autor">Autor:</label></p>
 			<p>{{ form.autor }}</p>
 		</div>
+
+		<div class="field_container">
+			<p><label class="optional" for="id_idioma">Idioma:</label></p>
+			<p>{{ form.idioma }}</p>
+		</div>
 	</fieldset>
 	
 	<fieldset id="step_detalles" class="step">
@@ -58,12 +63,6 @@
 			<p>{{ form.doc_file }}</p>
 			{% if form.doc_file.errors %}{% for error in form.doc_file.errors %}<label for="id_doc_file" class="form_error">{{ error }}</label>{% endfor %}{% endif %}
 		</div>
-		
-		<div class="field_container">
-			<p><label class="optional" for="id_detalles">Detalles:</label></p>
-			<p>{{ form.detalles }}</p>
-		</div>
-		
 	</fieldset>
 	
 	<div id="wizard_buttons" class="buttons_container"> 							

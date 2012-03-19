@@ -45,10 +45,7 @@ class ArchivoBaseForm(forms.ModelForm):
         return doc_file 
 
 class DocumentoModelForm(ArchivoBaseForm):
-    
-    detalles = forms.CharField(label='Detalles', required=False, 
-                               widget=forms.Textarea())
-    
+
     isbn = forms.CharField(label='ISBN', required=False, 
                            widget=forms.TextInput(attrs={'maxlength' : 17}))
     
@@ -90,7 +87,7 @@ class MirrorModelForm(ArchivoBaseForm):
     
     class Meta:
         model = Archivo
-        fields = ('fuente', 'doc_file', 'link', 'detalles')
+        fields = ('fuente', 'doc_file', 'link')
 
 class UserForm(UserCreationForm):
     

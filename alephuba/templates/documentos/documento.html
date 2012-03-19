@@ -52,8 +52,15 @@
 			
 			<div id="details">
 				{% if documento.autor %}<p><label>Autor:</label> {{ documento.autor }}</p>{% endif %}
-				{% if documento.materia.all %}<p><label>Materia:</label> {% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
-				{% if documento.carrera.all %}<p><label>Carrera:</label> {% for carrera in documento.carrera.all %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+
+				{% with lista_materias=documento.materia.all %}
+					{% if lista_materias %}<p><label>Materia{{lista_materias|pluralize}}:</label> {% for materia in lista_materias %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+				{% endwith %}
+
+				{% with lista_carreras=documento.carrera.all %}
+					{% if lista_carreras %}<p><label>Carrera{{lista_carreras|pluralize}}:</label> {% for carrera in lista_carreras %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+				{% endwith %}
+
 				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
 				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p>{% endif %}
 				
@@ -96,11 +103,10 @@
 </table>
 
 
-{% get_comment_count for documento as number_of_comments %}
+{% get_comment_list for documento as comment_list %}
 
 <div id="comentarios">
-	<h3>Comentarios ({{number_of_comments}})</h3>
-	{% get_comment_list for documento as comment_list %}
+	<h3>Comentarios ({{comment_list|length}})</h3>
 		
 	<div id="send_comentario" class="comentario">
 			<div class="header">

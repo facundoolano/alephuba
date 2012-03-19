@@ -111,8 +111,10 @@ class DocumentoDetail(DetailView):
 
         context = super(DetailView, self).get_context_data(**kwargs)
         
-        informacion = models.Vote.objects.obtener_informacion_documento(self.get_object())
-        usuario_voto = models.Vote.objects.usuario_ha_votado(self.request.user, self.get_object())
+        documento = self.object
+
+        informacion = models.Vote.objects.obtener_informacion_documento(documento)
+        usuario_voto = models.Vote.objects.usuario_ha_votado(self.request.user, documento)
 
         context['usuario_ya_voto'] = usuario_voto
         context['promedio_rating'] = str(round(informacion[0], 1)) # casteo feo, pero necesario
@@ -166,7 +168,6 @@ class DocumentoCreate(ArchivoBaseView):
         archivo = models.Archivo()
         archivo.documento = self.object
         archivo.subido_por = self.request.user
-        archivo.detalles = form.cleaned_data['detalles']
         self._upload_file(form.files['doc_file'], archivo)
         archivo.save()
     

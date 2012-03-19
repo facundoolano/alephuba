@@ -105,6 +105,8 @@ LOGIN_EXEMPT_URLS = (
  r'^media/',
 ) 
 
+INTERNAL_IPS = ('127.0.0.1',)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -112,6 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'alephuba.aleph.login_required_middleware.LoginRequiredMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -138,6 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
@@ -149,7 +153,7 @@ INSTALLED_APPS = (
     'alertas',
     
     'south',
-    
+    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -175,6 +179,10 @@ LOGGING = {
     }
 }
 
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+}
+
 TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",
     'theme_advanced_toolbar_location' : "top",
@@ -190,6 +198,6 @@ UPLOAD_ACTIVADO = True
 MAX_UPLOAD_SIZE = 104857600 #10MB
 
 #extensiones permitidas
-UPLOAD_TYPES = ['pdf', 'ps', 'doc', 'xls', 'rtf', 'tex', 'chm', 'djvu', 'odt', 'jpg', 'png', 'zip', 'rar', 'tar.gz', 'ppt', 'txt']
+UPLOAD_TYPES = ['pdf', 'dvi', 'ps', 'doc', 'xls', 'rtf', 'tex', 'chm', 'djvu', 'odt', 'jpg', 'png', 'zip', 'rar', 'tar.gz', 'ppt', 'txt']
 
 LOGIN_REDIRECT_URL = '/noticias/'

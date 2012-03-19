@@ -13,7 +13,9 @@
 					<div class="details">
 						<div class="title"><a href="{% url documento documento.pk %}">{{ documento.titulo }}</a></div>
 						{% if documento.autor %}{{ documento.autor }}<br/>{% endif %}
-						{% if documento.materia.all %}{% for materia in documento.materia.all %} {{ materia  }}{% if not forloop.last %}; {% endif %}{% endfor %}{% endif %}
+						{% with lista_materias=documento.materia.all %}
+							{% if lista_materias %}{% for materia in lista_materias %} {{ materia }}{% if not forloop.last %}; {% endif %}{% endfor %}{% endif %}
+						{% endwith %}
 					</div> 
 					<div class="clear"></div>
 					
