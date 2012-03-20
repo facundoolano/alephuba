@@ -61,6 +61,8 @@
 					{% if lista_carreras %}<p><label>Carrera{{lista_carreras|pluralize}}:</label> {% for carrera in lista_carreras %} {{ carrera }}{% if not forloop.last %}; {% endif %}{% endfor %}</p>{% endif %}
 				{% endwith %}
 
+				<p><label>Idioma:</label> {{ documento.get_idioma_display }}</p>
+
 				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
 				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p>{% endif %}
 				
