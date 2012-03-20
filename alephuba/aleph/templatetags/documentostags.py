@@ -4,17 +4,27 @@ from alephuba.lib import openlibrary
 
 register = template.Library()
 
+DOCUMENT_MAP = {
+    'LIB' : 'libro.png',
+    'APU' : 'apunte.png',
+    'INF' : 'informe.png',
+    'EXA' : 'examen.png',
+    'GEJ' : 'guia.png'
+}
+
 @register.filter
 def book_cover(documento, arg=False):
-    img_src = ''
+    img_src = '{media}img/tipos_documentos/'.format(media=MEDIA_URL) + DOCUMENT_MAP[documento.tipo]
+    olid = False
     
     if documento.olid:
         img_src = openlibrary.get_cover('olid', documento.olid, 'M')
+        olid = True
     
-    if not img_src and documento.isbn:
+    if not olid and documento.isbn:
         img_src = openlibrary.get_cover('isbn', documento.isbn, 'M')
     
-    return img_src or '{media}img/Blank.jpg'.format(media=MEDIA_URL)
+    return img_src
     
 
 DEFAULT = 'empty.png'
