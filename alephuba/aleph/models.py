@@ -55,6 +55,26 @@ class Materia(models.Model):
 
 class DocumentoManager(models.Manager):
     
+    def sugerencias(self, termino, limite):
+        """ 
+        Devuelve una lista de terminos sugeridos en base al termino provisto,
+        para ser usados en autocompletar. Se usa el mismo criterio que en la 
+        busqueda rapida.
+        """
+        #TODO limitar resultados
+        
+        resultado = list(self.filter(titulo__search=termino).values_list(
+                                                    'titulo', flat=True)[:limite])
+        resultado += list(self.filter(materia__nombre__search=termino).values_list(
+                                                    'materia__nombre', 
+                                                    flat=True)[:limite-len(resultado)])
+        resultado += list(self.filter(autor__search=termino).values_list(
+                                                    'autor', flat=True)[:limite-len(resultado)])
+        
+        return resultado
+        
+        
+    
     def busqueda_rapida(self, termino):
         """
         Devuelve un queryset de los documentos cuyo autor o título contiene
@@ -65,10 +85,10 @@ class DocumentoManager(models.Manager):
             return self.all().order_by('-id')
         
         #se usan Q objects para hacer un OR en vez de AND
-        return self.filter(Q(autor__icontains=termino)|
-                           Q(titulo__icontains=termino)|
-                           Q(materia__nombre__icontains=termino)|
-                           Q(materia__codigo__icontains=termino)
+        return self.filter(Q(autor__search=termino)|
+                           Q(titulo__search=termino)|
+                           Q(materia__nombre__search=termino)|
+                           Q(materia__codigo__search=termino)
                            ).distinct().order_by('-id')
     
 class Documento(models.Model):

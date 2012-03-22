@@ -6,44 +6,11 @@ from alephuba.lib.openlibrary import get_author_and_title
 from alephuba.aleph.forms import is_valid_isbn10, is_valid_isbn13
 import json
 
-
-def get_suggestions(documento, term):
-    """ 
-    Dado un documento, extrae los nombres que se deben mostrar como su 
-    sugerencia.
-    """
-    
-    results = []
-    if term in documento.titulo.lower():
-        results.append(documento.titulo)
-    
-    if documento.autor and term in documento.autor.lower():
-        results.append(documento.autor)
-        
-    for materia in documento.materia.all():
-        if term in materia.nombre.lower() or term in materia.codigo.lower():
-            results.append(materia.nombre)
-    
-    return results
-
-LIMITE_SUGERENCIAS = 7
-
 def autocomplete_documento(request):
 
-    termino = request.REQUEST['term'].lower()
-    lista_documentos = Documento.objects.busqueda_rapida(termino)
+    termino = request.REQUEST['term']
+    opciones = Documento.objects.sugerencias(termino, limite=7)
 
-    opciones = []
-
-    for documento in lista_documentos:
-        opciones += get_suggestions(documento, termino)
-        
-        #deja de iterar cuando alcanzo el limite
-        opciones = list(set(opciones))
-        if len(opciones) >= LIMITE_SUGERENCIAS:
-            opciones = opciones[:LIMITE_SUGERENCIAS]
-            break 
-        
     return HttpResponse(simplejson.dumps(opciones), mimetype='application/json')
 
 def autocomplete_autor(request):
