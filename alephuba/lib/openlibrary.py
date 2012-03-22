@@ -45,7 +45,12 @@ def get_OLID(isbn):
     Consulta en la API de OpenLibrary usando el ISBN indicado, y devuelve el
     OLID del libro.
     """ 
-    return _get_book_data(isbn)['identifiers']['openlibrary'][0]
+    
+    result = _get_book_data(isbn)
+    if result.has_key('identifiers'):
+        return result['identifiers']['openlibrary'][0]
+    
+    return None
     
 def get_cover(key, value, size):
     """ 
