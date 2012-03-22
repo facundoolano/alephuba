@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load humanize %} 
+{% load naturaltime %} 
 
 {% block content %}
 {{ block.super }}
@@ -11,7 +11,7 @@
 		<div class="titulo">{{ noticia.titulo }}</div>
 		<div class="contenido">{{ noticia.contenido|safe }}</div>
 		
-		<div class="detalle">{{ noticia.fecha|naturalday:'d/m/y'|capfirst }} por <b>{{ noticia.autor }}</b></div>
+		<div class="detalle">{{ noticia.fecha|naturaltime|capfirst }} por <b>{{ noticia.autor }}</b></div>
 	</div>
 {% endfor %}
 

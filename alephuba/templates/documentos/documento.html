@@ -1,6 +1,6 @@
 {% extends 'documentos/documento_list.html' %}
 
-{% load comments documentostags humanize %}
+{% load comments documentostags naturaltime %}
 
 {% block extra_head %}
 
@@ -123,7 +123,7 @@
 		<div class="comentario">
 			<div class="header">
 				<div class="nombre"><strong>{{ comment.user_name }}</strong> escribió:</div>
-				<div class="fecha">{{ comment.submit_date|date:"d/m/y" }}</div>
+				<div class="fecha">{{ comment.submit_date|naturaltime }}</div>
 				<div class="clear"></div>
 			</div>
 			<div class="contenido">{{ comment.comment|safe }}</div>
