@@ -13,7 +13,7 @@ from django import http
 from alephuba.aleph import models
 from alephuba.lib import openlibrary
 from django.template.loader import render_to_string
-from alephuba.lib.ifileit import Ifileit
+from alephuba.lib.ifileit import Ifileit, IfileitApiError
 from alephuba import settings
 from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
@@ -187,7 +187,11 @@ class DocumentoCreate(ArchivoBaseView):
             
         response = super(DocumentoCreate, self).form_valid(form)
         
-        self._make_archivo(form)
+        try:
+            self._make_archivo(form)
+        except IfileitApiError:
+            form.instance.delete()
+            return HttpResponseRedirect(reverse('upload_error'))
         
         return response
     
@@ -223,7 +227,10 @@ class MirrorCreate(ArchivoBaseView):
         if form.cleaned_data['link']:
             self._load_link(archivo, form.cleaned_data['link'])
         else:
-            self._upload_file(form.files['doc_file'], archivo)
+            try:
+                self._upload_file(form.files['doc_file'], archivo)
+            except:
+                return HttpResponseRedirect(reverse('upload_error'))
         
         return super(MirrorCreate, self).form_valid(form)
     
