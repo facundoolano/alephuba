@@ -64,12 +64,14 @@ class DocumentoManager(models.Manager):
         #TODO limitar resultados
         
         resultado = list(self.filter(titulo__search=termino).values_list(
-                                                    'titulo', flat=True)[:limite])
+                                                    'titulo', flat=True).distinct()[:limite])
         resultado += list(self.filter(materia__nombre__search=termino).values_list(
                                                     'materia__nombre', 
-                                                    flat=True)[:limite-len(resultado)])
+                                                    flat=True).distinct()
+                                                    [:limite-len(resultado)])
         resultado += list(self.filter(autor__search=termino).values_list(
-                                                    'autor', flat=True)[:limite-len(resultado)])
+                                                    'autor', flat=True).distinct()
+                                                    [:limite-len(resultado)])
         
         return resultado
         

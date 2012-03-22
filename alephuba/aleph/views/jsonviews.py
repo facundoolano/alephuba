@@ -8,7 +8,7 @@ import json
 
 def autocomplete_documento(request):
 
-    termino = request.REQUEST['term']
+    termino = request.REQUEST['term'] + '*'
     opciones = Documento.objects.sugerencias(termino, limite=7)
 
     return HttpResponse(simplejson.dumps(opciones), mimetype='application/json')
