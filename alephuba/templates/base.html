@@ -66,9 +66,9 @@
     	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
     	<div id="heading">
 	    	<div id="logo">
-	    		<h1><a href="{% url home %}">aleph uba</a></h1>
+	    		<h1><a href="{% url home %}">Aleph UBA</a></h1>
 	    	</div>
-	    	
+
 	    	{% if user.is_authenticated %}<div id="user_menu">Hola, <b>{{ user.username }}</b>. | <a href="{% url mi_cuenta %}">Mi cuenta</a> | {% if user.is_staff %}<a href="{% url admin:index %}">Admin</a> | {% endif %}<a href="{% url logout %}">Cerrar sesión</a></div>{% endif %}
 	    	<div style="clear:both;font-size:1px;line-height:0px;">&nbsp;</div>
     	</div>
