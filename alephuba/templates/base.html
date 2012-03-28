@@ -63,7 +63,6 @@
 
 <body>
 	<div id="wrapper">
-    	<!-- h1 tag stays for the logo, you can use the a tag for linking the index page -->
     	<div id="heading">
 	    	<div id="logo">
 	    		<h1><a href="{% url home %}">Aleph UBA</a></h1>
@@ -87,13 +86,6 @@
         
         <div id="containerHolder">
 			<div id="container">
-               <!-- 
-               	<div class="breadcrumb">
-               	{% block breadcrumbs%}
-                <a href="{% url home %}">Home</a>
-                {% endblock %}
-                </div>
-                -->
                 
                 <div id="main">
 	                {% block content %}{% endblock %}
@@ -104,8 +96,6 @@
         </div>
         
         <p id="footer">© 2012 be it. {% if user.is_authenticated %}<a href="{% url acerca %}">Acerca de alephuba</a> | <a href="mailto:info@be-it.com.ar">Contacto</a>{% endif %}</p>
-        <!-- Template by <a href="http://www.perspectived.com">perspectived</a>. -->
     </div>
-    <!-- // #wrapper -->
 </body>
 </html>
