@@ -19,7 +19,7 @@ DOCUMENTO_CHOICES = (
 
 IDIOMA_DOCUMENTO_CHOICES = (
     ('ES', 'Español'),
-    ('EN', 'Ingles'),
+    ('EN', 'Inglés'),
     ('OT', 'Otro')
 )
 
