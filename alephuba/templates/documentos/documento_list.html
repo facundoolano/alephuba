@@ -5,7 +5,7 @@
 {% block section_title%}
 	{% if request.GET.qs_documento %} 
 	<h2>Búsqueda rápida</h2>
-	<h3>"{{ request.GET.qs_documento }}"</h3>
+	<h3>{{ request.GET.qs_documento }}</h3>
 	{% else %}
 	<h2>Documentos recientes</h2>
 	{% endif %}

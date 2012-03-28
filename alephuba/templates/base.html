@@ -36,7 +36,7 @@
 			source: "{% url autocomplete_documento %}",
 			minLength:2,
 			select: function(event, ui){
-				$(this).val(ui.item.value);
+				$(this).val('"' + ui.item.value + '"');
 				$('#qs_form').submit();
 			}
 		});
