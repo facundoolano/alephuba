@@ -8,9 +8,9 @@
 <p>El servidor de subidas no se encuentra disponible en este momento. Vuelva a intentar más tarde.</p>
 {% else %}
 	<form id="documento_form" action="" enctype="multipart/form-data" method="post">{% csrf_token %}
-   	
    	<fieldset id="step_tipo" class="step">
    		<h3>Paso 1 - Tipo de documento</h3>
+   		<p class="help_text">Los campos en negrita son obligatorios.</p> 
    		{% if form.errors %}<label class="form_error">Por favor corrija los errores.</label>{% endif %}
 		<div class="field_container">
 			<p><label for="id_tipo">Tipo de documento:</label></p>
@@ -20,12 +20,14 @@
 		<div id="isbn_container" class="field_container">
 			<p><label class="optional" for="id_isbn">ISBN:</label></p>
 			<p>{{ form.isbn }}</p>
-			<p>Con el ISBN podemos obtener las portadas y completar automáticamente los datos de los libros.</p>
+			<p class="help_text">Con el ISBN podemos obtener las portadas y completar automáticamente los datos de los libros.</p>
 		</div>
 	</fieldset>
 	
 	<fieldset id="step_datos" class="step">
    		<h3>Paso 2 - Datos del documento</h3>
+   		<p class="help_text">Los campos en negrita son obligatorios.</p>
+   		
 		<div class="field_container">
 			<p><label for="id_titulo">Título:</label></p>
 			<p>{{ form.titulo }}</p>
@@ -45,6 +47,8 @@
 	
 	<fieldset id="step_detalles" class="step">
    		<h3>Paso 3 - Información de materias</h3>
+   		<p class="help_text">Los campos en negrita son obligatorios.</p>
+   		
 		<div class="field_container">
 			<p><label class="optional" for="id_carrera">Carreras:</label></p>
 			<p>{{ form.carrera }}</p>
@@ -58,6 +62,8 @@
 	
 	<fieldset id="step_archivo" class="step">
    		<h3>Paso 4 - Archivo</h3>
+   		<p class="help_text">Los campos en negrita son obligatorios.</p>
+   		
 		<div class="field_container">
 			<p><label for="id_doc_file">Archivo:</label></p>
 			<p>{{ form.doc_file }}</p>

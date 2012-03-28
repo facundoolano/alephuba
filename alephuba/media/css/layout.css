@@ -516,3 +516,7 @@ tr .actions {
 li {
 	text-align: left;
 	}
+	
+#documento_form .help_text{
+	font-size: 12px;
+	}
