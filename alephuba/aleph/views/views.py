@@ -41,7 +41,7 @@ def registration(request):
             
             return HttpResponseRedirect('/')
     
-    return render_to_response('registracion.html', {'form' : form}, context_instance=RequestContext(request))
+    return render_to_response('usuarios/registracion.html', {'form' : form}, context_instance=RequestContext(request))
 
 def contacto(request):
 

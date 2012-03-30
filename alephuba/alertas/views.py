@@ -14,7 +14,7 @@ class AlertaForm(forms.ModelForm):
 
 
 class ReportarView(CreateView):
-    template_name = 'reportar.html'
+    template_name = 'documentos/reportar.html'
     form_class = AlertaForm
     
     def get_success_url(self):
