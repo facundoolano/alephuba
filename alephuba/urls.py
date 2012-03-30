@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'mi_cuenta.html'}), 
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^acerca/$', TemplateView.as_view(template_name='acerca.html'), name='acerca'),
+    url(r'^contacto/$', views.contacto, name='contacto'),
     
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',

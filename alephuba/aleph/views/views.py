@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from alephuba.aleph.forms import UserForm, MirrorModelForm, BusquedaMateriaForm
+from alephuba.aleph.forms import UserForm, MirrorModelForm, BusquedaMateriaForm,\
+    ContactoForm
 
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -17,10 +18,10 @@ from alephuba.lib.ifileit import Ifileit, IfileitApiError
 from alephuba import settings
 from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
+from django.core.mail.message import EmailMessage
 from random import shuffle
 from alephuba.aleph.models import EXTENSION_MAX_LENGTH
 import requests
-
 
 #FIXME usar class based form view
 def registration(request):
@@ -41,6 +42,22 @@ def registration(request):
             return HttpResponseRedirect('/')
     
     return render_to_response('registracion.html', {'form' : form}, context_instance=RequestContext(request))
+
+def contacto(request):
+
+    if request.method == 'GET':
+        form = ContactoForm()
+    else:
+        form = ContactoForm(request.POST)
+
+        if form.is_valid():
+            email = EmailMessage(request.user.email + " : " + form.cleaned_data['tema'],
+                                 form.cleaned_data['mensaje'], to = settings.ADMINS_EMAILS)
+            email.send()
+
+            return render_to_response('exito_contacto.html', {}, context_instance=RequestContext(request))
+
+    return render_to_response('contacto.html', {'form' : form}, context_instance=RequestContext(request))
 
 class DocumentoList(ListView):
     """ 

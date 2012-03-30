@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/archivos.js"></script>
+	
+	<script type="text/javascript">
+	
+		$(function() {
+			init_dialog();
+		});
+	
+	</script>
+	
+{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+<h2>Contacto</h2>
+
+<div class="text">
+	<p>Contactate con nosotros! Cualquier duda, idea o aporte es bienvenido!</p>
+</div>
+
+{% with submit_value='Enviar' %}
+	{% include 'form.html' %}
+{% endwith %}
+
+<div id="dialog-modal" title="Contacto">
+	<p>Por favor, espere mientras enviamos el mail.</p>
+	<br/>
+	<img alt="Cargando" src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
+</div>
+
+{% endblock %}
