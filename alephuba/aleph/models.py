@@ -15,6 +15,8 @@ DOCUMENTO_CHOICES = (
     ('INF', 'Informe'),
     ('EXA', 'Examen'),
     ('GEJ', 'Guia de Ejercicios'),
+    ('TES', 'Tesis'),
+    ('PAP', 'Paper')
 )
 
 IDIOMA_DOCUMENTO_CHOICES = (
