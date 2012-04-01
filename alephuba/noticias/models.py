@@ -34,5 +34,5 @@ def publicar_upload(sender, **kwargs):
                                         autor=autor)
         entrada.save()
     
-
-post_save.connect(publicar_upload, Documento, dispatch_uid="publicar_upload")
+#desactivo noticias para subida de archivos.
+#post_save.connect(publicar_upload, Documento, dispatch_uid="publicar_upload")
