@@ -520,3 +520,16 @@ li {
 #documento_form .help_text{
 	font-size: 12px;
 	}
+
+#subidas {
+	float:left;
+	width: 60%;
+	}
+	
+#usuarios_activos {
+	float:right;
+	text-align: left;
+	width:auto;
+	}
+	
+

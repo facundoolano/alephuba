@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load naturaltime %} 
+{% load naturaltime truncate %} 
 
 {% block content %}
 {{ block.super }}
@@ -19,5 +19,55 @@
 {% if page_obj.has_previous %}<a class="previous" href="{% url home %}?page={{ page_obj.previous_page_number }}">Entradas recientes</a>{% endif %}
 {% if page_obj.has_next %}<a class="next" href="{% url home %}?page={{ page_obj.next_page_number }}">Entradas antiguas</a>{% endif %}
 </div>
+
+<h2>Actividad</h2>
+
+<div id="subidas">
+<h3>Últimas subidas</h3>
+<table class="aleph">
+	<thead>
+		<tr>
+			<th style="width: 65%">Documento</th>
+			<th>Subido por</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for archivo in archivos %}
+			<tr {% cycle 'class="odd"' '' %}>
+				<td><a href="#" target="_blank">{{ archivo.documento.titulo|truncatechars:35  }}</a></td>
+				<td>{{ archivo.subido_por }}</td>
+			</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="5" id="paginator" class="icon-td"></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div id="usuarios_activos">
+<h3>Usuarios más activos</h3>
+
+<table class="aleph">
+	<thead>
+		<tr>
+			<th style="width: 65%">Usuario</th>
+			<th>Subidas</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		{% for usuario in usuarios %}
+			<tr {% cycle 'class="odd"' '' %}>
+				<td>{{ usuario.username }}</td>
+				<td>{{ usuario.archivo__count }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+</div>
+
 
 {% endblock %}
