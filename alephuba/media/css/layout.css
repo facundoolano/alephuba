@@ -527,7 +527,8 @@ li {
 	}
 	
 #usuarios_activos {
-	float:right;
+	float:left;
+	padding-left: 15px;
 	text-align: left;
 	width:auto;
 	}
