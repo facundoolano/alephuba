@@ -4,6 +4,8 @@ from django import forms
 from alephuba.alertas.models import Alerta
 from alephuba.aleph.models import Archivo
 from django.core.urlresolvers import reverse
+from django.core.mail.message import EmailMessage
+from alephuba import settings
 
 class AlertaForm(forms.ModelForm):
     class Meta:
@@ -12,7 +14,7 @@ class AlertaForm(forms.ModelForm):
 
 
 class ReportarView(CreateView):
-    template_name = 'reportar.html'
+    template_name = 'documentos/reportar.html'
     form_class = AlertaForm
     
     def get_success_url(self):
@@ -22,7 +24,15 @@ class ReportarView(CreateView):
     
     def form_valid(self, form):
         
-        form.instance.archivo = Archivo.objects.get(
-                                                id=self.kwargs['archivo_id'])
+        form.instance.archivo = Archivo.objects.get(id=self.kwargs['archivo_id'])
         form.instance.autor = self.request.user
-        return super(ReportarView, self).form_valid(form)
+        is_valid = super(ReportarView, self).form_valid(form)
+
+        if is_valid:
+            mensaje = 'Mensaje del usuario %s :\n\n%s' % (self.request.user.username, form.cleaned_data['mensaje'])
+
+            email = EmailMessage("Alerta del documento '" + form.instance.archivo.documento.titulo + "'",
+                                 mensaje, to = settings.ADMINS_EMAILS)
+            email.send()
+
+        return is_valid

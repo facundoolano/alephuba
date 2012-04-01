@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="{{ MEDIA_URL }}js/archivos.js"></script>
+
+	<script type="text/javascript">
+
+		$(function() {
+			init_dialog();
+		});
+
+	</script>
+
+{% endblock %}
+
+{% block content %}
+
+<h3>Reportar archivo</h3>
+
+	{% include 'form.html' %}
+
+<div id="dialog-modal" title="Reporte">
+	<p>Por favor, espere mientras se procesa el reporte.</p>
+	<br/>
+	<img alt="Cargando" src="{{ MEDIA_URL }}img/ajax-loader.gif"/>
+</div>
+
+{% endblock %}

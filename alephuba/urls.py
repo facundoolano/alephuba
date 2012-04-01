@@ -21,15 +21,16 @@ urlpatterns = patterns('',
     url(r'^$', RedirectView.as_view(url='noticias/')),
     
     #TODO no deberia ir en otra parte?
-    url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^login/$', django.contrib.auth.views.login, {'template_name': 'usuarios/login.html'}, name='login'),
     url(r'^registracion/$', views.registration, name='registracion'),
     url(r'^logout/$', django.contrib.auth.views.logout, {'next_page' : '/noticias'}, name='logout'),
-    url(r'^mi_cuenta/$', TemplateView.as_view(template_name='mi_cuenta.html'), name='mi_cuenta'),
+    url(r'^mi_cuenta/$', TemplateView.as_view(template_name='usuarios/mi_cuenta.html'), name='mi_cuenta'),
     url(r'^cambio_contrasenia/$', django.contrib.auth.views.password_change,
-       {'template_name': 'cambio_contrasenia.html'}, name='cambio_contrasenia'),
-    url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'mi_cuenta.html'}), 
+       {'template_name': 'usuarios/cambio_contrasenia.html'}, name='cambio_contrasenia'),
+    url(r'cambio_contrasenia/done/$', django.contrib.auth.views.password_change_done, {'template_name': 'usuarios/mi_cuenta.html'}), 
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^acerca/$', TemplateView.as_view(template_name='acerca.html'), name='acerca'),
+    url(r'^contacto/$', views.contacto, name='contacto'),
     
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',

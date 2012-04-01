@@ -8,6 +8,7 @@ from alephuba.aleph.models import Documento, Carrera, UserProfile, Archivo,\
     Materia
 from alephuba import settings
 from alephuba.aleph.fields import ReCaptchaField
+from django.forms.widgets import Textarea
 
 def is_valid_isbn10(isbn):
     if len(isbn) != 10:
@@ -108,6 +109,10 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+class ContactoForm(forms.Form):
+    tema = forms.CharField()
+    mensaje = forms.CharField(widget=Textarea())
 
 class BusquedaRapidaForm(forms.Form):
     qs_documento = forms.CharField()

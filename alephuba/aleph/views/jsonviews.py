@@ -27,13 +27,17 @@ def vote_on_document(request, document_pk, vote):
 
 
 def validate_isbn(request):
+    
     isbn = request.POST['isbn'].upper().strip().replace('-', '')
+    result = {'valid' : True, 'autor' : '', 'titulo' : ''}
     
-    valid = not isbn or is_valid_isbn10(isbn) or is_valid_isbn13(isbn)
-    
-    result = {'valid' : valid}
-    if valid:
-        result['autor'], result['titulo'] = get_author_and_title(isbn)
+    if isbn:
+        valid = is_valid_isbn10(isbn) or is_valid_isbn13(isbn)
+
+        result['valid'] = valid
+
+        if valid:
+            result['autor'], result['titulo'] = get_author_and_title(isbn)
     
     return HttpResponse(json.dumps(result), mimetype='application/json')
 
