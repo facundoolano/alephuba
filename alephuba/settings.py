@@ -114,7 +114,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'alephuba.aleph.login_required_middleware.LoginRequiredMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -153,7 +153,7 @@ INSTALLED_APPS = (
     'alertas',
     
     'south',
-    'debug_toolbar',
+    #'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -179,9 +179,9 @@ LOGGING = {
     }
 }
 
-DEBUG_TOOLBAR_CONFIG = {
-    'INTERCEPT_REDIRECTS': False,
-}
+#DEBUG_TOOLBAR_CONFIG = {
+#    'INTERCEPT_REDIRECTS': False,
+#}
 
 TINYMCE_DEFAULT_CONFIG = {
     'theme': "advanced",

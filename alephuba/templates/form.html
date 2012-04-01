@@ -1,7 +1,10 @@
 <form class="ui-formwizard ui-helper-reset ui-widget ui-widget-content ui-corner-all" action="" {{enctype|default:''}} method="{{ method|default:'post' }}">{% csrf_token %}
    	<fieldset class="ui-corner-all">
-		
 		{% if form.errors %}<span class="form_error">Por favor, corrija los errores indicados.</span>{% endif %}
+		
+		
+		{% if form.non_field_errors %}<span>{{ form.non_field_errors }}</span>{% endif %}
+		
 		{% for field in form %}
 		<div class="field_container" id="{{ field.name}}_container">
 			<p class="form-item"><label {% if not field.field.required %} class="optional"{% endif %}for="id_{{ field.name}}">{{ field.label }}:</label></p>
@@ -9,7 +12,7 @@
 			<p>{{field}}</p>
 			{% else %}<p class="form-item">{{field}}</p>{% endif %}
 			
-			{% if field.errors %}<p>{% for error in field.errors %}<span class="form_error">{{ error }}<br/></span>{% endfor %}</p>{% endif %}
+			{% if field.errors %}{% for error in field.errors %}<span class="form_error">{{ error }}<br/></span>{% endfor %}{% endif %}
 			{% if field.help_text %}<p>{{field.help_text}}</p>{% endif %}
 		</div>
 			{% endfor %}
