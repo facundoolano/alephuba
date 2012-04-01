@@ -35,7 +35,7 @@
 	<tbody>
 		{% for archivo in archivos %}
 			<tr {% cycle 'class="odd"' '' %}>
-				<td><a href="#" target="_blank">{{ archivo.documento.titulo|truncatechars:35  }}</a></td>
+				<td><a href="{% url documento archivo.documento.pk %}">{{ archivo.documento.titulo|truncatechars:35  }}</a></td>
 				<td>{{ archivo.subido_por }}</td>
 			</tr>
 		{% endfor %}
