@@ -9,6 +9,24 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         
+        orm.Departamento.objects.create(codigo="63", nombre="Química")
+        orm.Departamento.objects.create(codigo="61", nombre="Matemática")
+        orm.Departamento.objects.create(codigo="76", nombre="Ingeniería Química")
+        orm.Departamento.objects.create(codigo="73", nombre="Ingeniería Naval")
+        orm.Departamento.objects.create(codigo="67", nombre="Ingeniería Mecánica")
+        orm.Departamento.objects.create(codigo="78", nombre="Idiomas")
+        orm.Departamento.objects.create(codigo="69", nombre="Hidráulica")
+        orm.Departamento.objects.create(codigo="71", nombre="Gestión Industrial")
+        orm.Departamento.objects.create(codigo="68", nombre="Transporte")
+        orm.Departamento.objects.create(codigo="62", nombre="Física")
+        orm.Departamento.objects.create(codigo="64", nombre="Estabilidad")
+        orm.Departamento.objects.create(codigo="65", nombre="Electrotecnia")
+        orm.Departamento.objects.create(codigo="66", nombre="Electrónica")
+        orm.Departamento.objects.create(codigo="74", nombre="Construcciones y Estructuras")
+        orm.Departamento.objects.create(codigo="75", nombre="Computación")
+        orm.Departamento.objects.create(codigo="70", nombre="Agrimensura")
+        orm.Departamento.objects.create(codigo="CBC", nombre="CBC")
+        
         for materia in orm.Materia.objects.all():
             codigo = materia.codigo.split('.')[0]
             deptos = orm.Departamento.objects.filter(codigo=codigo)
