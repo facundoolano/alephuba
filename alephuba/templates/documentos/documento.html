@@ -63,7 +63,11 @@
 				<p><label>Idioma:</label> {{ documento.get_idioma_display }}</p>
 
 				<p><label>Tipo de documento:</label> {{ documento.get_tipo_display }}</p>
-				{% if documento.isbn %}<p><label>ISBN:</label> {{ documento.isbn }}</p>{% endif %}
+				{% if documento.isbn %}
+					<p><label>ISBN:</label> {{ documento.isbn }} 
+						{% if documento.olid %}<a style="font-size: 10px;" href="http://openlibrary.org/books/{{documento.olid}}/" target="_blank">(Ver en Open Library)</a>{% endif %}
+					</p>
+				{% endif %}
 				
 				<div id="star"></div>
 				<p>Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).</p>

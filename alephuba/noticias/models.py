@@ -1,7 +1,5 @@
 from django.db import models
 from tinymce import models as tinymce_models
-from django.db.models.signals import post_save
-from alephuba.aleph.models import Documento
 from django.core.urlresolvers import reverse
 
 class Entrada(models.Model):
