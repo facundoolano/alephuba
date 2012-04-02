@@ -1,6 +1,6 @@
 from django.contrib import admin
 from alephuba.aleph.models import Carrera, Materia, Documento, UserProfile, Vote,\
-    Archivo
+    Archivo, Departamento
 
 class MateriaAdmin(admin.ModelAdmin):
     list_display = ('codigo', 'nombre')
@@ -20,6 +20,7 @@ class VoteAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'document__titulo']
 
 admin.site.register(Carrera)
+admin.site.register(Departamento)
 admin.site.register(Materia, MateriaAdmin)
 admin.site.register(Documento, DocumentoAdmin)
 admin.site.register(Archivo, ArchivoAdmin)

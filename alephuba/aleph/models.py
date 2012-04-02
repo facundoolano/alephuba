@@ -40,12 +40,21 @@ class Carrera(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+class Departamento(models.Model):
+    codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
+    nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     
+    def __unicode__(self):
+        return u'%s %s' % (self.codigo, self.nombre)
+
 class Materia(models.Model):
     objects = DocRelatedManager()
     
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
-    carrera = models.ForeignKey(Carrera, blank=True, null=True)
+    
+    carrera = models.ManyToManyField(Carrera, blank=True, null=True)
+    departamento = models.ForeignKey(Departamento, blank=True, null=True)
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
     
     class Meta:
