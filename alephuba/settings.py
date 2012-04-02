@@ -111,6 +111,7 @@ LOGIN_EXEMPT_URLS = (
  r'^$',
  r'^registracion/',
  r'^media/',
+ r'^cuentas/password/'
 ) 
 
 INTERNAL_IPS = ('127.0.0.1',)

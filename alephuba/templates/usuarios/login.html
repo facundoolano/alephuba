@@ -9,7 +9,7 @@
 	<p>Ya te encuentras logeado.</p>
 {% else %}
 	<div class="text">
-	<p>Bienvenido a <b>aleph uba</b>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
+		<p>Bienvenido a <strong>Aleph UBA</strong>, el punto donde convergen, sin superposición, todos los documentos. Del universo (?).</p>
 	</div>
 	
 	<h3>Ingresar</h3>
@@ -20,6 +20,7 @@
 		
 	<div class="text">
 		<p><a href="{% url registracion %}">¿No estás registrado?</a></p>
+		<p><a href="{% url django.contrib.auth.views.password_reset %}">¿Olvidaste tu contraseña?</a></p>
 	</div>
 {% endif%}
 

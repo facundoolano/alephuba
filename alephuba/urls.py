@@ -32,6 +32,11 @@ urlpatterns = patterns('',
     url(r'^acerca/$', TemplateView.as_view(template_name='acerca.html'), name='acerca'),
     url(r'^contacto/$', views.contacto, name='contacto'),
     
+    url(r'^cuentas/password/reset/$', 'django.contrib.auth.views.password_reset', {'post_reset_redirect' : '/cuentas/password/reset/done/'}),
+    url(r'^cuentas/password/reset/done/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^cuentas/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', {'post_reset_redirect' : '/cuentas/password/done/'}),
+    url(r'^cuentas/password/done/$', 'django.contrib.auth.views.password_reset_complete'),
+
     #SOLO PARA DESARROLLO    
     (r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
