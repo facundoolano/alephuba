@@ -105,7 +105,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/login/'
 
 LOGIN_EXEMPT_URLS = (
  r'^$',

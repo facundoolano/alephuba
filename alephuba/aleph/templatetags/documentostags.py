@@ -12,9 +12,11 @@ DOCUMENT_MAP = {
     'GEJ' : 'guia.png'
 }
 
+DEFAULT_DOCUMENT_IMAGE = 'blank.jpg'
+
 @register.filter
 def book_cover(documento, arg=False):
-    img_src = '{media}img/tipos_documentos/'.format(media=MEDIA_URL) + DOCUMENT_MAP[documento.tipo]
+    img_src = '{media}img/tipos_documentos/'.format(media=MEDIA_URL) + DOCUMENT_MAP.get(documento.tipo, DEFAULT_DOCUMENT_IMAGE)
     olid = False
     
     if documento.olid:
@@ -27,7 +29,7 @@ def book_cover(documento, arg=False):
     return img_src
     
 
-DEFAULT = 'empty.png'
+DEFAULT_FILE_ICON = 'empty.png'
 EXTENSION_MAP = {'pdf' : 'pdf.png', 
                  'ps' : 'pdf.png', 
                  'doc' : 'doc.png', 
@@ -47,7 +49,7 @@ EXTENSION_MAP = {'pdf' : 'pdf.png',
 
 @register.filter
 def file_icon(archivo, arg=False):
-    img_file = EXTENSION_MAP.get(archivo.extension, DEFAULT)
+    img_file = EXTENSION_MAP.get(archivo.extension, DEFAULT_FILE_ICON)
     
     return '{media}img/icons/{file}'.format(media=MEDIA_URL, file=img_file)
 
