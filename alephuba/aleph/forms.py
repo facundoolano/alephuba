@@ -39,7 +39,7 @@ class ArchivoBaseForm(forms.ModelForm):
                 raise forms.ValidationError(
                         """El archivo no puede superar los 100mb.""")
             
-            file_type = doc_file.name.split('.')[-1]
+            file_type = doc_file.name.split('.')[-1].lower()
             if file_type not in settings.UPLOAD_TYPES:
                 raise forms.ValidationError("""Formato no permitido.""")
         
