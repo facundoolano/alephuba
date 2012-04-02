@@ -51,8 +51,7 @@ class Materia(models.Model):
     
     nombre = models.CharField(max_length=NOMBRE_MAX_LENGTH)
     
-    #FIXME cambiar a many to many
-    carrera = models.ForeignKey(Carrera, blank=True, null=True)
+    carrera = models.ManyToManyField(Carrera, blank=True, null=True)
     departamento = models.ForeignKey(Departamento, blank=True, null=True)
     codigo = models.CharField(max_length=CODIGO_MATERIA_MAX_LENGTH, unique=True)
     
