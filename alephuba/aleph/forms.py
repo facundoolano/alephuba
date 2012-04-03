@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 from alephuba.aleph.models import Documento, Carrera, UserProfile, Archivo,\
-    Materia
+    Materia, Departamento
 from alephuba import settings
 from alephuba.aleph.fields import ReCaptchaField
 from django.forms.widgets import Textarea
@@ -129,6 +129,10 @@ class BusquedaMateriaForm(forms.Form):
                                                   ('CAR', 'Carreras')), required=False)
     carreras = forms.ModelChoiceField(queryset=Carrera.objects.con_documentos(), 
                                       required=False, empty_label='')
+    
+    departamento = forms.ModelChoiceField(queryset=Departamento.objects.order_by('codigo'), 
+                                      required=False, empty_label='Todos')
+    
     materias = forms.ModelChoiceField(queryset=Materia.objects.con_documentos(),
                                       required=False, empty_label='')
     

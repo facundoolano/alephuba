@@ -17,6 +17,11 @@
 			<p>{{ form.carreras }}</p>
 			</div>
 			
+			<div id="filtro_depto">
+			<p><label class="optional" for="id_departamento">{{ form.departamento.label }}:</label></p>
+			<p>{{ form.departamento }}</p>
+			</div>
+			
 			<div id="filtro_materias">
 			<p><label class="optional" for="id_materias">{{ form.materias.label }}:</label></p>
 			<p>{{ form.materias }}</p>
@@ -64,6 +69,11 @@ border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 		$('#id_materias').change(function(){
 			get_pagina(1);
 		})
+		$('#id_departamento').change(function(){
+			setComboOption('#id_materias', '', '');
+			get_pagina(1);
+			update_materias();
+		})
 		$('#id_carreras').change(function(){
 			get_pagina(1);
 		})
@@ -83,12 +93,25 @@ border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 			setComboOption('#id_carreras', '', '');
 			$('#filtro_carreras').hide();
 			$('#filtro_materias').show();
+			$('#filtro_depto').show();
+			$('#id_departamento').val('');
 		} else if ($('#id_buscar').val() == 'CAR') {
 			setComboOption('#id_materias', '', '');
 			$('#filtro_materias').hide();
+			$('#filtro_depto').hide();
 			$('#filtro_carreras').show();
+			$('#id_departamento').val('');
 		}
 		
+	}
+	
+	function update_materias(){
+		$.get('{% url get_materias %}', {'departamento' : $('#id_departamento').val()}, function(data){
+			$('#id_materias').empty();
+			for (var i=0; i < data.length; i++){
+				$("<option value='" + data[i].id + "'>" + data[i].codigo + ' ' + data[i].nombre + "</option>").appendTo($('#id_materias'))
+			}
+		}, "json");
 	}
 	
 	function get_pagina(page) {
@@ -96,6 +119,7 @@ border:1px solid #CCCCCC; height:15px; font-size: 11px; vertical-align: middle;
 		//necesario para que codifique bien la lista de valores
 		data = {
 				'materias' : $('#id_materias').val(),
+				'departamento' : $('#id_departamento').val(),
 				'carreras' : $('#id_carreras').val(),
 				'page' : page,}
 		

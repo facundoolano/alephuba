@@ -21,7 +21,9 @@ urlpatterns = patterns('',
             url(r'^autocomplete_autor/', jsonviews.autocomplete_autor, name='autocomplete_autor'),
             url(r'^(?P<document_pk>\d+)/vote/(?P<vote>(\d+|\d+\.\d{1}))$', jsonviews.vote_on_document),
             url(r'^isbn/', jsonviews.validate_isbn, name='validate_isbn'),
+            url(r'^get_materias/', jsonviews.get_materias, name='get_materias'),
             
             url(r'^upload_error/', TemplateView.as_view(template_name='documentos/upload_error.html'), name='upload_error'),
           
 )
+

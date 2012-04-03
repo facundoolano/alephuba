@@ -66,7 +66,7 @@ class DocumentoList(ListView):
     """
     
     template_name = 'documentos/documento_list.html'
-    paginate_by=5
+    paginate_by=10
     
     def get_queryset(self):
         doc = self.request.GET.get('qs_documento') 
@@ -78,7 +78,7 @@ class DocumentoPorMateriaList(ListView):
     """
     
     template_name = 'documentos/busqueda_materia.html'
-    paginate_by=5
+    paginate_by=10
     
     def get_context_data(self, **kwargs):
 
@@ -94,9 +94,14 @@ class DocumentoPorMateriaList(ListView):
         
         carrera = form.cleaned_data['carreras']
         materia = form.cleaned_data['materias']
+        depto = form.cleaned_data['departamento']
         
         if materia:
             return models.Documento.objects.filter(materia=materia)
+        
+        elif depto:
+            return models.Documento.objects.filter(materia__departamento=depto)
+        
         elif carrera:
             return models.Documento.objects.filter(carrera=carrera)
         

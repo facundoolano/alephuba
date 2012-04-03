@@ -503,15 +503,19 @@ tr .actions {
 
 
 #filtro_buscar {
-	width: 30%;
+	width: 18%;
 	float:left;
 	}
 
-#filtro_materias,#filtro_carreras {
-	width :70%;
-	float:right;
-}
+#filtro_depto {
+	float: left;
+	width :32%;
+	}
 
+#filtro_materias, #filtro_carreras {
+	float:left;
+	width :50%;
+	}
 
 li {
 	text-align: left;
