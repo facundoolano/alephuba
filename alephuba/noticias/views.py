@@ -16,7 +16,7 @@ class NoticiasView(ListView):
         context = super(NoticiasView, self).get_context_data(**kwargs)
         
         archivos = Archivo.objects.order_by('-fecha_subida')[:5]
-        usuarios = User.objects.values('username').annotate(Count('archivo')).order_by('-archivo__count')[:5]
+        usuarios = User.objects.values('username').annotate(Count('archivo')).exclude(username='admin').order_by('-archivo__count')[:5]
         
         context.update({'archivos' : archivos, 'usuarios' : usuarios})
         
