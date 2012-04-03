@@ -65,7 +65,7 @@
 	<div id="wrapper">
     	<div id="heading">
 	    	<div id="logo">
-	    		<h1><a href="{% url home %}">Aleph UBA</a></h1>
+	    		<a href="{% url home %}"><img width="138" height="50" alt="logo" src="{{ MEDIA_URL }}img/logo.png"></img></a>
 	    	</div>
 
 	    	{% if user.is_authenticated %}<div id="user_menu">Hola, <b>{{ user.username }}</b>. | <a href="{% url mi_cuenta %}">Mi cuenta</a> | {% if user.is_staff %}<a href="{% url admin:index %}">Admin</a> | {% endif %}<a href="{% url logout %}">Cerrar sesión</a></div>{% endif %}
