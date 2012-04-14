@@ -10,9 +10,7 @@
 		function on_cover_error(source) {
 			$(source).unbind("error").attr("src", "{{ MEDIA_URL }}img/tipos_documentos/libro.png");
 		}
-	</script>
-	
-	<script type="text/javascript">
+
 		$(function() {
 			
 			$('#star').raty({
@@ -34,6 +32,10 @@
 				    	  }
 				    });
 				},
+			});
+
+			$('.link_descarga').mousedown(function() {
+			    $.ajax({url: "descarga", dataType: 'json'});
 			});
 		});
 	</script>
@@ -69,6 +71,8 @@
 					</p>
 				{% endif %}
 				
+				<p><label>Cantidad de descargas:</label> {{ cantidad_descargas }}</p>
+
 				<div id="star"></div>
 				<p>Valoracion: <b>{{ promedio_rating }}/5</b> ({{ cantidad_votos }} voto{{ cantidad_votos|pluralize }}).</p>
 			</div>
@@ -94,7 +98,7 @@
 	<tbody>
 		{% for archivo in documento.archivo_set.all %}
 			<tr {% cycle 'class="odd"' '' %}>
-				<td><a href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
+				<td><a class="link_descarga" href="{{ archivo.link  }}" target="_blank">{{ archivo.link  }}</a></td>
 				<td class="icon-td"><img src="{{ archivo|file_icon }}" title="{{archivo.extension|default:''}}"/></td>
 				<td>{% if archivo.tamanio %}{{ archivo.tamanio|filesizeformat }}{% endif %}</td>
 				<td>{{ archivo.subido_por }}</td>

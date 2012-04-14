@@ -123,6 +123,13 @@ class Documento(models.Model):
     def __unicode__(self):
         return self.titulo
 
+class DescargaDocumento(models.Model):
+    documento = models.ForeignKey(Documento, related_name='descargas')
+    usuario = models.ForeignKey(AuthUser)
+    fecha = models.DateField(auto_now_add=True)
+
+    def __unicode__(self):
+        return u"%s : %s" % (self.documento.titulo, self.usuario.username)
 
 class Archivo(models.Model):
     """ Un archivo descargable correspondiente a un documento. """

@@ -20,7 +20,7 @@ from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
 from django.core.mail.message import EmailMessage
 from random import shuffle
-from alephuba.aleph.models import EXTENSION_MAX_LENGTH
+from alephuba.aleph.models import EXTENSION_MAX_LENGTH, DescargaDocumento
 import requests
 
 #FIXME usar class based form view
@@ -147,6 +147,7 @@ class DocumentoDetail(DetailView):
         context['usuario_ya_voto'] = usuario_voto
         context['promedio_rating'] = str(round(informacion[0], 1)) # casteo feo, pero necesario
         context['cantidad_votos'] = informacion[1]
+        context['cantidad_descargas'] = DescargaDocumento.objects.filter(documento=documento).count()
         
         return context
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from alephuba.aleph.models import Carrera, Materia, Documento, UserProfile, Vote,\
-    Archivo, Departamento
+    Archivo, Departamento, DescargaDocumento
 
 class MateriaAdmin(admin.ModelAdmin):
     list_display = ('codigo', 'nombre')
@@ -26,4 +26,5 @@ admin.site.register(Documento, DocumentoAdmin)
 admin.site.register(Archivo, ArchivoAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Vote, VoteAdmin)
+admin.site.register(DescargaDocumento)
 

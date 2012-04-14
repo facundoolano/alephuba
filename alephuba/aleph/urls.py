@@ -20,6 +20,7 @@ urlpatterns = patterns('',
             url(r'^autocomplete/', jsonviews.autocomplete_documento, name='autocomplete_documento'),
             url(r'^autocomplete_autor/', jsonviews.autocomplete_autor, name='autocomplete_autor'),
             url(r'^(?P<document_pk>\d+)/vote/(?P<vote>(\d+|\d+\.\d{1}))$', jsonviews.vote_on_document),
+            url(r'^(?P<document_pk>\d+)/descarga$', jsonviews.contar_descarga),
             url(r'^isbn/', jsonviews.validate_isbn, name='validate_isbn'),
             url(r'^get_materias/', jsonviews.get_materias, name='get_materias'),
             

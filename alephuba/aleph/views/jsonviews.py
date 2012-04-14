@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.utils import simplejson
 
-from alephuba.aleph.models import Documento, Vote, Materia
+from alephuba.aleph.models import Documento, Vote, Materia, DescargaDocumento
 from alephuba.lib.openlibrary import get_author_and_title
 from alephuba.aleph.forms import is_valid_isbn10, is_valid_isbn13
 import json
@@ -25,6 +25,15 @@ def vote_on_document(request, document_pk, vote):
 
     return HttpResponse(simplejson.dumps(sucess), mimetype='application/json')
 
+def contar_descarga(request, document_pk):
+
+    try:
+        documento = Documento.objects.get(pk=document_pk)
+        descarga = DescargaDocumento(usuario=request.user, documento=documento)
+        descarga.save()
+        return HttpResponse('sucess', mimetype='application/json')
+    except:
+        return HttpResponse('failure', mimetype='application/json')
 
 def get_materias(request):
     depto = int(request.GET['departamento'])
