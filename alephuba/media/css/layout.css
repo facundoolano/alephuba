@@ -537,6 +537,7 @@ li {
 .left {
 	float : left;
 	position : relative;
+	width : 80%;
 }
 
 .right {

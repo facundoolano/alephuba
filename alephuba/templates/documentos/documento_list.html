@@ -38,11 +38,7 @@
 		$.get('{% url buscar_update %}', data, update_pagina, "json");
 	}
 	
-	function update_pagina(data) {
-		$('#list_container').html(data.content);
-	}
-
-	$(function() {
+	function update_raty() {
 		$('.puntaje').each(function(index) {
 
 			var valor = $(this).text();
@@ -57,6 +53,15 @@
 				readOnly : true
 			});
 		});
+	}
+
+	function update_pagina(data) {
+		$('#list_container').html(data.content);
+		update_raty();
+	}
+
+	$(function() {
+		update_raty();
 	});
 
 </script>
