@@ -1,7 +1,7 @@
 {% load documentostags %}
 
 <table class="document_list aleph">
-    {% for documento in object_list %}
+    {% for documento, puntaje in object_list %}
 		<tr {% cycle '' 'class="odd"' %}>
 			<td>
 				<div>
@@ -11,12 +11,16 @@
 						{% endcomment %}
 					</div>
 					<div class="details">
-						<div class="title"><a href="{% url documento documento.pk %}">{{ documento.titulo }}</a></div>
-						{% if documento.autor %}{{ documento.autor }}<br/>{% endif %}
-						{% lista_materias documento %}
+						<div class="left">
+							<div class="title"><a href="{% url documento documento.pk %}">{{ documento.titulo }}</a></div>
+							{% if documento.autor %}{{ documento.autor }}<br/>{% endif %}
+							{% lista_materias documento %}
+						</div>
+						<div class="right">
+							<div class="puntaje">{{ puntaje }}</div>
+						</div>
 					</div> 
 					<div class="clear"></div>
-					
 				</div>
 			</td>
 		</tr>

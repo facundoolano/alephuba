@@ -533,3 +533,13 @@ li {
 	text-align: left;
 	width:auto;
 }
+
+.left {
+	float : left;
+	position : relative;
+}
+
+.right {
+	float : right;
+	position : relative;
+}

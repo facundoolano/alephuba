@@ -20,7 +20,7 @@ from alephuba.aleph.forms import DocumentoModelForm
 from django.core.urlresolvers import reverse
 from django.core.mail.message import EmailMessage
 from random import shuffle
-from alephuba.aleph.models import EXTENSION_MAX_LENGTH, DescargaDocumento
+from alephuba.aleph.models import EXTENSION_MAX_LENGTH, DescargaDocumento, Vote
 import requests
 
 #FIXME usar class based form view
@@ -69,8 +69,13 @@ class DocumentoList(ListView):
     paginate_by=10
     
     def get_queryset(self):
-        doc = self.request.GET.get('qs_documento') 
-        return models.Documento.objects.busqueda_rapida(doc)
+        termino = self.request.GET.get('qs_documento')
+
+        lista_documentos = models.Documento.objects.busqueda_rapida(termino)
+
+        promedio_documentos = Vote.objects.obtener_promedio_documentos(lista_documentos)
+
+        return zip(lista_documentos, promedio_documentos)
 
 class DocumentoPorMateriaList(ListView):
     """ 
@@ -97,16 +102,17 @@ class DocumentoPorMateriaList(ListView):
         depto = form.cleaned_data['departamento']
         
         if materia:
-            return models.Documento.objects.filter(materia=materia)
-        
+            lista_documentos = models.Documento.objects.filter(materia=materia)
         elif depto:
-            return models.Documento.objects.filter(materia__departamento=depto)
-        
+            lista_documentos = models.Documento.objects.filter(materia__departamento=depto)
         elif carrera:
-            return models.Documento.objects.filter(carrera=carrera)
+            lista_documentos = models.Documento.objects.filter(carrera=carrera)
+        else:
+            lista_documentos = models.Documento.objects.all()
+
+        promedio_documentos = Vote.objects.obtener_promedio_documentos(lista_documentos)
         
-        return models.Documento.objects.all()
-    
+        return zip(lista_documentos, promedio_documentos)
 
 class JSONResponseMixin(object):
     """

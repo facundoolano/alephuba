@@ -21,6 +21,9 @@
 {% endblock %}
 
 {% block extra_head %}
+
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.raty.min.js"></script>
+
 <script type="text/javascript">
 	
 	function on_cover_error(source) {
@@ -38,5 +41,23 @@
 	function update_pagina(data) {
 		$('#list_container').html(data.content);
 	}
+
+	$(function() {
+		$('.puntaje').each(function(index) {
+
+			var valor = $(this).text();
+			$(this).text('');
+
+			$(this).raty({
+				path : '{{ MEDIA_URL }}img/',
+				start : valor,
+				half :  true,
+				hintList : ['','','','',''],
+				noRatedMsg : 'documento sin votos',
+				readOnly : true
+			});
+		});
+	});
+
 </script>
 {% endblock %}

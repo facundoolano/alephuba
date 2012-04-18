@@ -147,7 +147,18 @@ class Archivo(models.Model):
 
 
 class VoteManager(models.Manager):
-     
+
+    def obtener_promedio_documentos(self, lista_documentos):
+
+        lista_promedios = []
+
+        for documento in lista_documentos:
+            resultado_query = self.filter(document=documento).aggregate(Avg('vote_value'))
+            promedio_votos = resultado_query['vote_value__avg']
+            lista_promedios.append(str(round(promedio_votos, 1)) if promedio_votos else '0.0')
+
+        return lista_promedios
+
     def obtener_informacion_documento(self, documento):
         informacion = self.filter(document=documento).aggregate(promedio_votos = Avg('vote_value'),
                                                                 cantidad_votos = Count('vote_value'))
@@ -157,11 +168,11 @@ class VoteManager(models.Manager):
         return (promedio_votos , informacion['cantidad_votos'])
     
     def usuario_ha_votado(self, user, documento):
-        if self.filter(user=user, document=documento):
+        if self.filter(user=user, document=documento).exists():
             return True
         
         return False
-    
+
     def try_record_vote(self, document_pk, user, vote_value):
         
         document = Documento.objects.get(pk=document_pk)
