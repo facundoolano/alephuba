@@ -40,17 +40,15 @@
 	
 	function update_raty() {
 		$('.puntaje').each(function(index) {
-
-			var valor = $(this).text();
-			$(this).text('');
-
 			$(this).raty({
 				path : '{{ MEDIA_URL }}img/',
-				start : valor,
 				half :  true,
 				hintList : ['','','','',''],
 				noRatedMsg : 'documento sin votos',
-				readOnly : true
+				readOnly : true,
+				start: function() {
+				    return $(this).attr('data-rating');
+				}
 			});
 		});
 	}
