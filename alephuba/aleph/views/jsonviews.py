@@ -6,6 +6,8 @@ from alephuba.lib.openlibrary import get_author_and_title
 from alephuba.aleph.forms import is_valid_isbn10, is_valid_isbn13
 import json
 
+from datetime import datetime
+
 def autocomplete_documento(request):
 
     termino = request.REQUEST['term'] + '*'
@@ -27,8 +29,12 @@ def vote_on_document(request, document_pk, vote):
 
 def contar_descarga(request, document_pk):
 
+    documento = Documento.objects.get(pk=document_pk)
+
+    if DescargaDocumento.objects.filter(usuario=request.user, documento=documento, fecha=datetime.now().date()).exists():
+        return HttpResponse('', mimetype='application/json')
+
     try:
-        documento = Documento.objects.get(pk=document_pk)
         descarga = DescargaDocumento(usuario=request.user, documento=documento)
         descarga.save()
         return HttpResponse('sucess', mimetype='application/json')
